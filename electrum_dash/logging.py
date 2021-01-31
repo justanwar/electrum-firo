@@ -42,14 +42,14 @@ class LogFormatterForConsole(logging.Formatter):
         return text
 
 
-# try to make console log lines short... no timestamp, short levelname, no "electrum_dash."
+# try to make console log lines short... no timestamp, short levelname, no "electrum_firo."
 console_formatter = LogFormatterForConsole(fmt="%(levelname).1s | %(name)s | %(message)s")
 
 
 def _shorten_name_of_logrecord(record: logging.LogRecord) -> logging.LogRecord:
     record = copy.copy(record)  # avoid mutating arg
     # strip the main module name from the logger name
-    if record.name.startswith("electrum_dash."):
+    if record.name.startswith("electrum_firo."):
         record.name = record.name[14:]
     # manual map to shorten common module names
     record.name = record.name.replace("interface.Interface", "interface", 1)
@@ -111,7 +111,7 @@ class TruncatingMemoryHandler(logging.handlers.MemoryHandler):
 
 
 def _delete_old_logs(path, keep=10):
-    files = sorted(list(pathlib.Path(path).glob("electrum_dash_log_*.log")), reverse=True)
+    files = sorted(list(pathlib.Path(path).glob("electrum_firo_log_*.log")), reverse=True)
     for f in files[keep:]:
         try:
             os.remove(str(f))
@@ -129,7 +129,7 @@ def _configure_file_logging(log_directory: pathlib.Path):
 
     timestamp = datetime.datetime.utcnow().strftime("%Y%m%dT%H%M%SZ")
     PID = os.getpid()
-    _logfile_path = log_directory / f"electrum_dash_log_{timestamp}_{PID}.log"
+    _logfile_path = log_directory / f"electrum_firo_log_{timestamp}_{PID}.log"
 
     file_handler = logging.FileHandler(_logfile_path, encoding='utf-8')
     file_handler.setFormatter(file_formatter)
@@ -267,7 +267,7 @@ electrum_logger.setLevel(logging.DEBUG)
 # --- External API
 
 def get_logger(name: str) -> logging.Logger:
-    if name.startswith("electrum_dash."):
+    if name.startswith("electrum_firo."):
         name = name[14:]
     return electrum_logger.getChild(name)
 

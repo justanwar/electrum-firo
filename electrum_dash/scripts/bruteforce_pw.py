@@ -28,11 +28,11 @@ from itertools import product
 from typing import Callable
 from functools import partial
 
-from electrum_dash.wallet import Wallet, Abstract_Wallet
-from electrum_dash.storage import WalletStorage
-from electrum_dash.wallet_db import WalletDB
-from electrum_dash.simple_config import SimpleConfig
-from electrum_dash.util import InvalidPassword
+from electrum_firo.wallet import Wallet, Abstract_Wallet
+from electrum_firo.storage import WalletStorage
+from electrum_firo.wallet_db import WalletDB
+from electrum_firo.simple_config import SimpleConfig
+from electrum_firo.util import InvalidPassword
 
 
 ALLOWED_CHARS = digits + ascii_uppercase + ascii_lowercase

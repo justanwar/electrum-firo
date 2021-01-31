@@ -42,14 +42,14 @@ from PyQt5.QtWidgets import (QApplication, QSystemTrayIcon, QWidget, QMenu,
 from PyQt5.QtCore import QObject, pyqtSignal, QTimer, Qt
 import PyQt5.QtCore as QtCore
 
-from electrum_dash.i18n import _, set_language
-from electrum_dash.plugin import run_hook
-from electrum_dash.base_wizard import GoBack
-from electrum_dash.util import (UserCancelled, profiler, send_exception_to_crash_reporter,
+from electrum_firo.i18n import _, set_language
+from electrum_firo.plugin import run_hook
+from electrum_firo.base_wizard import GoBack
+from electrum_firo.util import (UserCancelled, profiler, send_exception_to_crash_reporter,
                                 WalletFileException, BitcoinException, get_new_wallet_name)
-from electrum_dash.wallet import Wallet, Abstract_Wallet
-from electrum_dash.wallet_db import WalletDB
-from electrum_dash.logging import Logger
+from electrum_firo.wallet import Wallet, Abstract_Wallet
+from electrum_firo.wallet_db import WalletDB
+from electrum_firo.logging import Logger
 
 from .installwizard import InstallWizard, WalletAlreadyOpenInMemory
 from .dash_net_dialog import DashNetDialog
@@ -61,9 +61,9 @@ from .stylesheet_patcher import patch_qt_stylesheet
 from .exception_window import Exception_Hook
 
 if TYPE_CHECKING:
-    from electrum_dash.daemon import Daemon
-    from electrum_dash.simple_config import SimpleConfig
-    from electrum_dash.plugin import Plugins
+    from electrum_firo.daemon import Daemon
+    from electrum_firo.simple_config import SimpleConfig
+    from electrum_firo.plugin import Plugins
 
 
 class OpenFileEventFilter(QObject):
@@ -140,7 +140,7 @@ class ElectrumGui(Logger):
 
     def _init_tray(self):
         self.tray = QSystemTrayIcon(self.tray_icon(), None)
-        self.tray.setToolTip('Dash Electrum')
+        self.tray.setToolTip('Firo Electrum')
         self.tray.activated.connect(self.tray_activated)
         self.build_tray_menu()
         self.tray.show()
@@ -179,7 +179,7 @@ class ElectrumGui(Logger):
             submenu.addAction(_("Close"), window.close)
         m.addAction(_("Dark/Light"), self.toggle_tray_icon)
         m.addSeparator()
-        m.addAction(_("Exit Dash Electrum"), self.app.quit)
+        m.addAction(_("Exit Electrum Firo"), self.app.quit)
 
     def tray_icon(self):
         if self.dark_icon:

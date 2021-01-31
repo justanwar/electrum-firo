@@ -3,14 +3,14 @@
 import os
 import asyncio
 
-from electrum_dash.simple_config import SimpleConfig
-from electrum_dash import constants
-from electrum_dash.daemon import Daemon
-from electrum_dash.storage import WalletStorage
-from electrum_dash.wallet import Wallet, create_new_wallet
-from electrum_dash.wallet_db import WalletDB
-from electrum_dash.commands import Commands
-from electrum_dash.util import create_and_start_event_loop, log_exceptions
+from electrum_firo.simple_config import SimpleConfig
+from electrum_firo import constants
+from electrum_firo.daemon import Daemon
+from electrum_firo.storage import WalletStorage
+from electrum_firo.wallet import Wallet, create_new_wallet
+from electrum_firo.wallet_db import WalletDB
+from electrum_firo.commands import Commands
+from electrum_firo.util import create_and_start_event_loop, log_exceptions
 
 
 loop, stopping_fut, loop_thread = create_and_start_event_loop()

@@ -9,11 +9,11 @@ from PyQt5.QtWidgets import (QTabBar, QTextEdit, QStylePainter,
                              QVBoxLayout, QHBoxLayout, QLabel, QApplication,
                              QCheckBox)
 
-from electrum_dash import constants
-from electrum_dash.dash_tx import SPEC_TX_NAMES
-from electrum_dash.i18n import _
-from electrum_dash.network import deserialize_proxy
-from electrum_dash.version import ELECTRUM_VERSION
+from electrum_firo import constants
+from electrum_firo.dash_tx import SPEC_TX_NAMES
+from electrum_firo.i18n import _
+from electrum_firo.network import deserialize_proxy
+from electrum_firo.version import ELECTRUM_VERSION
 
 from .util import WindowModalDialog
 

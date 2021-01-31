@@ -13,13 +13,13 @@ from PyQt5.QtWidgets import (QLineEdit, QComboBox, QListWidget, QDoubleSpinBox,
                              QGroupBox, QCheckBox, QPushButton, QGridLayout,
                              QFileDialog, QWizard)
 
-from electrum_dash import constants
-from electrum_dash import dash_tx
-from electrum_dash.bitcoin import COIN, is_b58_address, b58_address_to_hash160
-from electrum_dash.dash_tx import TxOutPoint, service_to_ip_port
-from electrum_dash.protx import ProTxMN, ProTxService, ProRegTxExc
-from electrum_dash.util import bfh, bh2u, FILE_OWNER_MODE
-from electrum_dash.i18n import _
+from electrum_firo import constants
+from electrum_firo import dash_tx
+from electrum_firo.bitcoin import COIN, is_b58_address, b58_address_to_hash160
+from electrum_firo.dash_tx import TxOutPoint, service_to_ip_port
+from electrum_firo.protx import ProTxMN, ProTxService, ProRegTxExc
+from electrum_firo.util import bfh, bh2u, FILE_OWNER_MODE
+from electrum_firo.i18n import _
 
 from .util import MONOSPACE_FONT, icon_path, read_QIcon, ButtonsLineEdit
 

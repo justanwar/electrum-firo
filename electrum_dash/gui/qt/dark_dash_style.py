@@ -1,7 +1,7 @@
 """Dash look and feel (dark style)."""
 
 import os
-from electrum_dash.util import pkg_dir
+from electrum_firo.util import pkg_dir
 
 
 dash_stylesheet = """

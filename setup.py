@@ -46,8 +46,9 @@ if platform.system() in ['Linux', 'FreeBSD', 'DragonFly']:
         else:
             usr_share = os.path.expanduser('~/.local/share')
     data_files += [
-        (os.path.join(usr_share, 'applications/'), ['electrum-dash.desktop']),
-        (os.path.join(usr_share, icons_dirname), ['electrum_dash/gui/icons/electrum-dash.png']),
+        (os.path.join(usr_share, 'applications/'), ['electrum-firo.desktop']),
+        (os.path.join(usr_share, icons_dirname),
+            ['electrum_firo/gui/icons/electrum-dash.png']),
     ]
 
 extras_require = {
@@ -65,28 +66,27 @@ extras_require['fast'] = extras_require['crypto']
 
 
 setup(
-    name="Dash-Electrum",
+    name="Firo-Electrum",
     version=version.ELECTRUM_VERSION,
     python_requires='>={}'.format(MIN_PYTHON_VERSION),
     install_requires=requirements,
     extras_require=extras_require,
     packages=[
-        'electrum_dash',
-        'electrum_dash.qrreader',
-        'electrum_dash.gui',
-        'electrum_dash.gui.qt',
-        'electrum_dash.gui.qt.qrreader',
-        'electrum_dash.gui.qt.qrreader.qtmultimedia',
-        'electrum_dash.plugins',
-    ] + [('electrum_dash.plugins.'+pkg) for pkg in find_packages('electrum_dash/plugins')],
+        'electrum_firo',
+        'electrum_firo.gui',
+        'electrum_firo.gui.qt',
+        'electrum_firo.gui.qt.qrreader',
+        'electrum_firo.gui.qt.qrreader.qtmultimedia',
+        'electrum_firo.plugins',
+    ] + [('electrum_firo.plugins.'+pkg) for pkg in find_packages('electrum_firo/plugins')],
     package_dir={
-        'electrum_dash': 'electrum_dash'
+        'electrum_firo': 'electrum_firo'
     },
     # Note: MANIFEST.in lists what gets included in the tar.gz, and the
     # package_data kwarg lists what gets put in site-packages when pip installing the tar.gz.
     # By specifying include_package_data=True, MANIFEST.in becomes responsible for both.
     include_package_data=True,
-    scripts=['electrum_dash/electrum-dash'],
+    scripts=['electrum_firo/electrum-firo'],
     data_files=data_files,
     description="Lightweight Dashpay Wallet",
     maintainer="akhavr",

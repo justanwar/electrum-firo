@@ -27,9 +27,9 @@ from PyQt5.QtWidgets import (QPushButton, QLabel, QMessageBox, QHBoxLayout,
                              QMenu, QStyleOptionViewItem, QLayout, QLayoutItem,
                              QGraphicsEffect, QGraphicsScene, QGraphicsPixmapItem)
 
-from electrum_dash.i18n import _, languages
-from electrum_dash.util import FileImportFailed, FileExportFailed, make_aiohttp_session, resource_path
-from electrum_dash.invoices import PR_UNPAID, PR_PAID, PR_EXPIRED, PR_INFLIGHT, PR_UNKNOWN, PR_FAILED, PR_ROUTING, PR_UNCONFIRMED
+from electrum_firo.i18n import _, languages
+from electrum_firo.util import FileImportFailed, FileExportFailed, make_aiohttp_session, resource_path
+from electrum_firo.invoices import PR_UNPAID, PR_PAID, PR_EXPIRED, PR_INFLIGHT, PR_UNKNOWN, PR_FAILED, PR_ROUTING, PR_UNCONFIRMED
 
 if TYPE_CHECKING:
     from .main_window import ElectrumWindow
@@ -1039,7 +1039,7 @@ def export_meta_gui(electrum_window: 'ElectrumWindow', title, exporter):
     filename = getSaveFileName(
         parent=electrum_window,
         title=_("Select file to save your {}").format(title),
-        filename='electrum_dash_{}.json'.format(title),
+        filename='electrum_firo_{}.json'.format(title),
         filter=filter_,
         config=electrum_window.config,
     )

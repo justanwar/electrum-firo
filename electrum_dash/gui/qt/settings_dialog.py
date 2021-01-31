@@ -32,18 +32,18 @@ from PyQt5.QtWidgets import (QComboBox,  QTabWidget,
                              QVBoxLayout, QGridLayout, QLineEdit,
                              QPushButton, QWidget, QHBoxLayout)
 
-from electrum_dash.i18n import _, languages
-from electrum_dash import util, coinchooser, paymentrequest
-from electrum_dash.util import base_units_list
+from electrum_firo.i18n import _, languages
+from electrum_firo import util, coinchooser, paymentrequest
+from electrum_firo.util import base_units_list
 
-from electrum_dash.gui import messages
+from electrum_firo.gui import messages
 
 from .util import (ColorScheme, WindowModalDialog, HelpLabel, Buttons,
                    CloseButton)
 
 
 if TYPE_CHECKING:
-    from electrum_dash.simple_config import SimpleConfig
+    from electrum_firo.simple_config import SimpleConfig
     from .main_window import ElectrumWindow
 
 

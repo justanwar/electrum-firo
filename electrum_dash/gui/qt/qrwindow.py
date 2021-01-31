@@ -28,7 +28,7 @@ from PyQt5.QtWidgets import QHBoxLayout, QWidget
 
 from .qrcodewidget import QRCodeWidget
 
-from electrum_dash.i18n import _
+from electrum_firo.i18n import _
 
 
 class QR_Window(QWidget):

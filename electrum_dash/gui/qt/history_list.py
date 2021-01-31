@@ -42,21 +42,21 @@ from PyQt5.QtWidgets import (QMenu, QHeaderView, QLabel, QMessageBox,
                              QPushButton, QComboBox, QVBoxLayout, QCalendarWidget,
                              QGridLayout)
 
-from electrum_dash.gui import messages
-from electrum_dash.address_synchronizer import TX_HEIGHT_LOCAL
-from electrum_dash.dash_tx import PSTxTypes, SPEC_TX_NAMES
-from electrum_dash.i18n import _
-from electrum_dash.util import (block_explorer_URL, profiler, TxMinedInfo,
+from electrum_firo.gui import messages
+from electrum_firo.address_synchronizer import TX_HEIGHT_LOCAL
+from electrum_firo.dash_tx import PSTxTypes, SPEC_TX_NAMES
+from electrum_firo.i18n import _
+from electrum_firo.util import (block_explorer_URL, profiler, TxMinedInfo,
                                 timestamp_to_datetime, FILE_OWNER_MODE,
                                 Satoshis, format_time)
-from electrum_dash.logging import get_logger, Logger
+from electrum_firo.logging import get_logger, Logger
 
 from .util import (read_QIcon, MONOSPACE_FONT, Buttons, CancelButton, OkButton,
                    filename_field, MyTreeView, AcceptFileDragDrop, WindowModalDialog,
                    CloseButton, webopen, WWLabel, GetDataThread)
 
 if TYPE_CHECKING:
-    from electrum_dash.wallet import Abstract_Wallet
+    from electrum_firo.wallet import Abstract_Wallet
     from .main_window import ElectrumWindow
 
 
@@ -64,9 +64,9 @@ _logger = get_logger(__name__)
 
 
 try:
-    from electrum_dash.plot import plot_history, NothingToPlotException
+    from electrum_firo.plot import plot_history, NothingToPlotException
 except:
-    _logger.info("could not import electrum_dash.plot. This feature needs matplotlib to be installed.")
+    _logger.info("could not import electrum_firo.plot. This feature needs matplotlib to be installed.")
     plot_history = None
 
 # note: this list needs to be kept in sync with another in kivy
@@ -841,11 +841,11 @@ class HistoryList(MyTreeView, AcceptFileDragDrop):
         grid.addWidget(QLabel(self.format_date(start_date)), 1, 1)
         grid.addWidget(QLabel(self.format_date(end_date)), 1, 2)
         #
-        grid.addWidget(QLabel(_("Dash balance")), 2, 0)
+        grid.addWidget(QLabel(_("Firo balance")), 2, 0)
         grid.addWidget(QLabel(format_amount(start['BTC_balance'])), 2, 1)
         grid.addWidget(QLabel(format_amount(end['BTC_balance'])), 2, 2)
         #
-        grid.addWidget(QLabel(_("Dash Fiat price")), 3, 0)
+        grid.addWidget(QLabel(_("Firo Fiat price")), 3, 0)
         grid.addWidget(QLabel(format_fiat(start.get('BTC_fiat_price'))), 3, 1)
         grid.addWidget(QLabel(format_fiat(end.get('BTC_fiat_price'))), 3, 2)
         #
@@ -862,11 +862,11 @@ class HistoryList(MyTreeView, AcceptFileDragDrop):
         grid.addWidget(QLabel(format_fiat(end.get('unrealized_gains', ''))), 6, 2)
         #
         grid2 = QGridLayout()
-        grid2.addWidget(QLabel(_("Dash incoming")), 0, 0)
+        grid2.addWidget(QLabel(_("Firo incoming")), 0, 0)
         grid2.addWidget(QLabel(format_amount(flow['BTC_incoming'])), 0, 1)
         grid2.addWidget(QLabel(_("Fiat incoming")), 1, 0)
         grid2.addWidget(QLabel(format_fiat(flow.get('fiat_incoming'))), 1, 1)
-        grid2.addWidget(QLabel(_("Dash outgoing")), 2, 0)
+        grid2.addWidget(QLabel(_("Firo outgoing")), 2, 0)
         grid2.addWidget(QLabel(format_amount(flow['BTC_outgoing'])), 2, 1)
         grid2.addWidget(QLabel(_("Fiat outgoing")), 3, 0)
         grid2.addWidget(QLabel(format_fiat(flow.get('fiat_outgoing'))), 3, 1)
@@ -1082,7 +1082,7 @@ class HistoryList(MyTreeView, AcceptFileDragDrop):
         d = WindowModalDialog(self, _('Export History'))
         d.setMinimumSize(400, 200)
         vbox = QVBoxLayout(d)
-        defaultname = os.path.expanduser('~/electrum-dash-history.csv')
+        defaultname = os.path.expanduser('~/electrum-firo-history.csv')
         select_msg = _('Select file to export your wallet transactions to')
         hbox, filename_e, csv_button = filename_field(self, self.config, defaultname, select_msg)
         vbox.addLayout(hbox)
@@ -1099,7 +1099,7 @@ class HistoryList(MyTreeView, AcceptFileDragDrop):
         try:
             self.do_export_history(filename, csv_button.isChecked())
         except (IOError, os.error) as reason:
-            export_error_label = _("Dash Electrum was unable to produce a transaction export.")
+            export_error_label = _("Firo Electrum was unable to produce a transaction export.")
             self.parent.show_critical(export_error_label + "\n" + str(reason), title=_("Unable to export history"))
             return
         self.parent.show_message(_("Your wallet history has been successfully exported."))
@@ -1133,7 +1133,7 @@ class HistoryList(MyTreeView, AcceptFileDragDrop):
                 for line in lines:
                     transaction.writerow(line)
             else:
-                from electrum_dash.util import json_encode
+                from electrum_firo.util import json_encode
                 f.write(json_encode(txns))
         os.chmod(file_name, FILE_OWNER_MODE)
 

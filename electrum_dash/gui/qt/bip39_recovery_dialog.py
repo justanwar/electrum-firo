@@ -5,10 +5,10 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QGridLayout, QLabel, QListWidget, QListWidgetItem
 
-from electrum_dash.i18n import _
-from electrum_dash.network import Network
-from electrum_dash.bip39_recovery import account_discovery
-from electrum_dash.logging import get_logger
+from electrum_firo.i18n import _
+from electrum_firo.network import Network
+from electrum_firo.bip39_recovery import account_discovery
+from electrum_firo.logging import get_logger
 
 from .util import WindowModalDialog, MessageBoxMixin, TaskThread, Buttons, CancelButton, OkButton
 

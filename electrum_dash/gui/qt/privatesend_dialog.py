@@ -12,11 +12,11 @@ from PyQt5.QtWidgets import (QPlainTextEdit, QCheckBox, QSpinBox, QVBoxLayout,
                              QApplication, QWizardPage, QWizard, QRadioButton,
                              QButtonGroup, QGroupBox, QLineEdit, QComboBox)
 
-from electrum_dash import mnemonic
-from electrum_dash.dash_ps_util import (filter_log_line, PSLogSubCat, PSStates,
+from electrum_firo import mnemonic
+from electrum_firo.dash_ps_util import (filter_log_line, PSLogSubCat, PSStates,
                                         PS_DENOMS_VALS)
-from electrum_dash.i18n import _
-from electrum_dash.util import InvalidPassword
+from electrum_firo.i18n import _
+from electrum_firo.util import InvalidPassword
 
 from .installwizard import MSG_ENTER_PASSWORD
 from .util import (HelpLabel, MessageBoxMixin, read_QIcon, custom_message_box,

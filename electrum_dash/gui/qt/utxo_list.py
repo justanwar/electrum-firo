@@ -35,12 +35,12 @@ from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import (QAbstractItemView, QHeaderView, QComboBox,
                              QLabel, QMenu)
 
-from electrum_dash.i18n import _
-from electrum_dash.transaction import PartialTxInput
-from electrum_dash.dash_ps_util import (PSCoinRounds, sort_utxos_by_ps_rounds,
+from electrum_firo.i18n import _
+from electrum_firo.transaction import PartialTxInput
+from electrum_firo.dash_ps_util import (PSCoinRounds, sort_utxos_by_ps_rounds,
                                         ps_coin_rounds_str)
-from electrum_dash.logging import Logger
-from electrum_dash.util import profiler, format_time
+from electrum_firo.logging import Logger
+from electrum_firo.util import profiler, format_time
 
 from .util import MyTreeView, ColorScheme, MONOSPACE_FONT, EnterButton, GetDataThread
 
@@ -77,22 +77,19 @@ class KeystoreFilter(IntEnum):
 
 
 class UTXOColumns(IntEnum):
-    DATE = 0
-    OUTPOINT = 1
-    ADDRESS = 2
-    LABEL = 3
-    AMOUNT = 4
-    HEIGHT = 5
-    PS_ROUNDS = 6
-    KEYSTORE_TYPE = 7
+    OUTPOINT = 0
+    ADDRESS = 1
+    LABEL = 2
+    AMOUNT = 3
+    HEIGHT = 4
+    # PS_ROUNDS = 5
+    # KEYSTORE_TYPE = 6
 
 
 UTXOHeaders = {
     UTXOColumns.DATE: _('Date'),
     UTXOColumns.ADDRESS: _('Address'),
     UTXOColumns.LABEL: _('Label'),
-    UTXOColumns.PS_ROUNDS: _('PS Rounds'),
-    UTXOColumns.KEYSTORE_TYPE : _('Keystore'),
     UTXOColumns.AMOUNT: _('Amount'),
     UTXOColumns.HEIGHT: _('Height'),
     UTXOColumns.OUTPOINT: _('Output point'),
@@ -109,8 +106,6 @@ class UTXOModel(QAbstractItemModel, Logger):
         UTXOColumns.DATE: lambda x: x['prevout_timestamp'],
         UTXOColumns.ADDRESS: lambda x: x['address'],
         UTXOColumns.LABEL: lambda x: x['label'],
-        UTXOColumns.PS_ROUNDS: lambda x: x['ix'],
-        UTXOColumns.KEYSTORE_TYPE: lambda x: x['is_ps_ks'],
         UTXOColumns.AMOUNT: lambda x: x['balance'],
         UTXOColumns.HEIGHT: lambda x: x['height'],
         UTXOColumns.OUTPOINT: lambda x: x['outpoint'],
@@ -186,12 +181,16 @@ class UTXOModel(QAbstractItemModel, Logger):
         out_short = coin_item['out_short']
         label = coin_item['label']
         balance = coin_item['balance']
-        ps_rounds = coin_item['ps_rounds']
-        is_ps_ks = coin_item['is_ps_ks']
-        if ps_rounds is None:
-            ps_rounds = 'N/A'
-        else:
-            ps_rounds = ps_coin_rounds_str(ps_rounds)
+        # ps_rounds = coin_item['ps_rounds']
+        # is_ps_ks = coin_item['is_ps_ks']
+        # if ps_rounds is None:
+        #     ps_rounds = 'N/A'
+        # elif ps_rounds == PSCoinRounds.COLLATERAL:
+        #     ps_rounds = 'Collateral'
+        # elif ps_rounds == PSCoinRounds.OTHER:
+        #     ps_rounds = 'Other'
+        # else:
+        #     ps_rounds = str(ps_rounds)
         if (role == self.view.ROLE_CLIPBOARD_DATA
                 and col == UTXOColumns.OUTPOINT):
             return QVariant(outpoint)
@@ -209,9 +208,7 @@ class UTXOModel(QAbstractItemModel, Logger):
                 return QVariant(outpoint)
         elif role not in (Qt.DisplayRole, Qt.EditRole):
             if role == Qt.TextAlignmentRole:
-                if col in [UTXOColumns.DATE, UTXOColumns.AMOUNT,
-                           UTXOColumns.HEIGHT, UTXOColumns.PS_ROUNDS,
-                           UTXOColumns.KEYSTORE_TYPE]:
+                if col in [UTXOColumns.AMOUNT, UTXOColumns.HEIGHT]:
                     return QVariant(Qt.AlignRight | Qt.AlignVCenter)
                 else:
                     return QVariant(Qt.AlignVCenter)
@@ -236,10 +233,10 @@ class UTXOModel(QAbstractItemModel, Logger):
             return QVariant(balance)
         elif col == UTXOColumns.HEIGHT:
             return QVariant(height)
-        elif col == UTXOColumns.PS_ROUNDS:
-            return QVariant(ps_rounds)
-        elif col == UTXOColumns.KEYSTORE_TYPE:
-            return QVariant(_('PS Keystore') if is_ps_ks else _('Main'))
+        # elif col == UTXOColumns.PS_ROUNDS:
+        #     return QVariant(ps_rounds)
+        # elif col == UTXOColumns.KEYSTORE_TYPE:
+        #     return QVariant(_('PS Keystore') if is_ps_ks else _('Main'))
         else:
             return QVariant()
 
@@ -250,23 +247,20 @@ class UTXOModel(QAbstractItemModel, Logger):
         show_ps = self.view.show_ps
         show_ps_ks = self.view.show_ps_ks
         w = self.wallet
-        if self.view.config.get('show_utxo_time', False):
-            get_utxos = partial(w.get_utxos, prevout_timestamp=True)
-        else:
-            get_utxos = w.get_utxos
-        if show_ps == PSStateFilter.ALL:
-            utxos = get_utxos(include_ps=True)
-        elif show_ps == PSStateFilter.PS:
-            utxos = get_utxos(min_rounds=PSCoinRounds.COLLATERAL)
-        elif show_ps == PSStateFilter.PS_OTHER:
-            utxos = get_utxos(min_rounds=PSCoinRounds.MINUSINF)
-            utxos = [c for c in utxos if c.ps_rounds <= PSCoinRounds.OTHER]
-        else:  # Regular
-            utxos = get_utxos()
-        if show_ps_ks == KeystoreFilter.PS_KS:
-            utxos = [c for c in utxos if c.is_ps_ks]
-        elif show_ps_ks == KeystoreFilter.MAIN:
-            utxos = [c for c in utxos if not c.is_ps_ks]
+        # if show_ps == PSStateFilter.ALL:
+        #     utxos = w.get_utxos(include_ps=True)
+        # elif show_ps == PSStateFilter.PS:
+        #     utxos = w.get_utxos(min_rounds=PSCoinRounds.COLLATERAL)
+        # elif show_ps == PSStateFilter.PS_OTHER:
+        #     utxos = w.get_utxos(min_rounds=PSCoinRounds.MINUSINF)
+        #     utxos = [c for c in utxos if c.ps_rounds <= PSCoinRounds.OTHER]
+        # else:  # Regular
+        #     utxos = w.get_utxos()
+        # if show_ps_ks == KeystoreFilter.PS_KS:
+        #     utxos = [c for c in utxos if c.is_ps_ks]
+        # elif show_ps_ks == KeystoreFilter.MAIN:
+        #     utxos = [c for c in utxos if not c.is_ps_ks]
+        utxos = w.get_utxos()
         utxos.sort(key=sort_utxos_by_ps_rounds)
         self.view._maybe_reset_spend_list(utxos)
         self.view._utxo_dict = {}
@@ -292,8 +286,8 @@ class UTXOModel(QAbstractItemModel, Logger):
                 'height': utxo.block_height,
                 'coinbase': utxo.is_coinbase_output(),
                 'islock': utxo.islock,
-                'ps_rounds': utxo.ps_rounds,
-                'is_ps_ks': utxo.is_ps_ks,
+                #'ps_rounds': utxo.ps_rounds,
+                #'is_ps_ks': utxo.is_ps_ks,
                 # append model fields
                 'ix': i,
                 'outpoint': outpoint,
@@ -363,8 +357,8 @@ class UTXOList(MyTreeView):
     _spend_set: Optional[Set[str]]  # coins selected by the user to spend from
     _utxo_dict: Dict[str, PartialTxInput]  # coin outpoint -> coin
 
-    filter_columns = [UTXOColumns.ADDRESS, UTXOColumns.PS_ROUNDS,
-                      UTXOColumns.KEYSTORE_TYPE, UTXOColumns.LABEL,
+    filter_columns = [UTXOColumns.ADDRESS,
+                      UTXOColumns.LABEL,
                       UTXOColumns.OUTPOINT]
     stretch_column = UTXOColumns.LABEL
 
@@ -381,13 +375,11 @@ class UTXOList(MyTreeView):
         header = self.header()
         header.setDefaultAlignment(Qt.AlignCenter)
         header.setStretchLastSection(False)
-        header.setSortIndicator(UTXOColumns.PS_ROUNDS, Qt.AscendingOrder)
+        # header.setSortIndicator(UTXOColumns.PS_ROUNDS, Qt.AscendingOrder)
         self.setSortingEnabled(True)
         for col in UTXOColumns:
             if col == self.stretch_column:
                 header.setSectionResizeMode(col, QHeaderView.Stretch)
-            elif col == UTXOColumns.PS_ROUNDS:
-                header.setSectionResizeMode(col, QHeaderView.Fixed)
             else:
                 header.setSectionResizeMode(col, QHeaderView.ResizeToContents)
 

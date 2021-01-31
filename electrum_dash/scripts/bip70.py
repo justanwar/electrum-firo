@@ -4,10 +4,10 @@
 
 import tlslite
 
-from electrum_dash.transaction import Transaction
-from electrum_dash import paymentrequest
-from electrum_dash import paymentrequest_pb2 as pb2
-from electrum_dash.bitcoin import address_to_script
+from electrum_firo.transaction import Transaction
+from electrum_firo import paymentrequest
+from electrum_firo import paymentrequest_pb2 as pb2
+from electrum_firo.bitcoin import address_to_script
 
 chain_file = 'mychain.pem'
 cert_file = 'mycert.pem'

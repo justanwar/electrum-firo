@@ -1,10 +1,10 @@
 from PyQt5.QtWidgets import QFileDialog
 
-from electrum_dash.i18n import _
-from electrum_dash.plugin import run_hook
-from electrum_dash.simple_config import SimpleConfig
-from electrum_dash.util import UserFacingException
-from electrum_dash.logging import Logger
+from electrum_firo.i18n import _
+from electrum_firo.plugin import run_hook
+from electrum_firo.simple_config import SimpleConfig
+from electrum_firo.util import UserFacingException
+from electrum_firo.logging import Logger
 
 from .util import ButtonsTextEdit, MessageBoxMixin, ColorScheme, getOpenFileName
 from .qrreader import scan_qrcode
