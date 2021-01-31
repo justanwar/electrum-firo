@@ -247,7 +247,7 @@ class DashNet(Logger):
 
     def read_conf(self):
         config = self.config
-        self.run_dash_net = config.get('run_dash_net', True)
+        self.run_dash_net = config.get('run_dash_net', False)
         self.dash_peers = self.config.get('dash_peers', [])
         if self.is_cmd_dash_peers:
             self.use_static_peers = True
@@ -445,7 +445,7 @@ class DashNet(Logger):
     @log_exceptions
     async def set_parameters(self):
         proxy = self.network.proxy
-        run_dash_net = self.config.get('run_dash_net', True)
+        run_dash_net = self.config.get('run_dash_net', False)
         if not self.is_cmd_dash_peers:
             dash_peers = self.config.get('dash_peers', [])
             use_static_peers = self.config.get('dash_use_static_peers', False)

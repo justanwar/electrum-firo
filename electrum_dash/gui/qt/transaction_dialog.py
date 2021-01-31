@@ -39,15 +39,15 @@ from PyQt5.QtWidgets import (QDialog, QLabel, QPushButton, QHBoxLayout, QVBoxLay
 import qrcode
 from qrcode import exceptions
 
-from electrum_dash.simple_config import SimpleConfig
-from electrum_dash.util import quantize_feerate
-from electrum_dash.bitcoin import base_encode, NLOCKTIME_BLOCKHEIGHT_MAX
-from electrum_dash.dash_tx import SPEC_TX_NAMES
-from electrum_dash.i18n import _
-from electrum_dash.plugin import run_hook
-from electrum_dash import simple_config
-from electrum_dash.transaction import SerializationError, Transaction, PartialTransaction, PartialTxInput
-from electrum_dash.logging import get_logger
+from electrum_firo.simple_config import SimpleConfig
+from electrum_firo.util import quantize_feerate
+from electrum_firo.bitcoin import base_encode, NLOCKTIME_BLOCKHEIGHT_MAX
+from electrum_firo.dash_tx import SPEC_TX_NAMES
+from electrum_firo.i18n import _
+from electrum_firo.plugin import run_hook
+from electrum_firo import simple_config
+from electrum_firo.transaction import SerializationError, Transaction, PartialTransaction, PartialTxInput
+from electrum_firo.logging import get_logger
 
 from .dash_qt import ExtraPayloadWidget
 from .util import (MessageBoxMixin, read_QIcon, Buttons, icon_path,
@@ -282,7 +282,7 @@ class BaseTxDialog(QDialog, MessageBoxMixin):
         tx = copy.deepcopy(self.tx)
         tx.add_info_from_wallet(self.wallet, include_xpubs=True)
         # log warning if PSBT_*_BIP32_DERIVATION fields cannot be filled with full path due to missing info
-        from electrum_dash.keystore import Xpub
+        from electrum_firo.keystore import Xpub
         def is_ks_missing_info(ks):
             return (isinstance(ks, Xpub) and (ks.get_root_fingerprint() is None
                                               or ks.get_derivation_prefix() is None))

@@ -9,7 +9,7 @@ mv $BUILD_DIR/x11_hash $WINEPREFIX/drive_c/
 
 mv $BUILD_DIR/libsecp256k1 $WINEPREFIX/drive_c/
 
-cd $WINEPREFIX/drive_c/electrum-dash
+cd $WINEPREFIX/drive_c/electrum-firo
 
 rm -rf build
 rm -rf dist/electrum-dash
@@ -29,7 +29,7 @@ wine python -m pip install --no-dependencies --no-warn-script-location \
     -r contrib/deterministic-build/requirements-build-wine.txt
 
 wine pyinstaller --clean -y \
-    --name electrum-dash-$DASH_ELECTRUM_VERSION.exe \
+    --name electrum-firo-$DASH_ELECTRUM_VERSION.exe \
     deterministic.spec
 
 if [[ $WINEARCH == win32 ]]; then

@@ -540,7 +540,7 @@ class Daemon(Logger):
             gui_name = 'qt'
         self.logger.info(f'launching GUI: {gui_name}')
         try:
-            gui = __import__('electrum_dash.gui.' + gui_name, fromlist=['electrum_dash'])
+            gui = __import__('electrum_firo.gui.' + gui_name, fromlist=['electrum_firo'])
             self.gui_object = gui.ElectrumGui(config, self, plugins)
             self.gui_object.main()
         except BaseException as e:

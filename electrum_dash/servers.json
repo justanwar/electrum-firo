@@ -1,22 +1,26 @@
 {
-    "electrumx-mainnet.dash.org": {
+    "electrumx.firo.org": {
         "pruning": "-",
         "s": "50002",
+        "t": "50001",
         "version": "1.4"
     },
-    "electrum.dash.siampm.com": {
+    "electrumx01.firo.org": {
         "pruning": "-",
         "s": "50002",
+        "t": "50001",
         "version": "1.4"
     },
-    "drk.p2pay.com": {
+    "electrumx02.firo.org": {
         "pruning": "-",
         "s": "50002",
+        "t": "50001",
         "version": "1.4"
-     },
-    "hyhwaxmckqakwjde.onion": {
+    },
+    "electrumx03.firo.org": {
         "pruning": "-",
         "s": "50002",
+        "t": "50001",
         "version": "1.4"
     }
 }

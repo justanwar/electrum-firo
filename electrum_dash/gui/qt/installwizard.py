@@ -16,12 +16,12 @@ from PyQt5.QtWidgets import (QWidget, QDialog, QLabel, QHBoxLayout, QMessageBox,
                              QVBoxLayout, QLineEdit, QFileDialog, QPushButton,
                              QGridLayout, QSlider, QScrollArea, QApplication)
 
-from electrum_dash.wallet import Wallet, Abstract_Wallet
-from electrum_dash.storage import WalletStorage, StorageReadWriteError
-from electrum_dash.util import UserCancelled, InvalidPassword, WalletFileException, get_new_wallet_name
-from electrum_dash.base_wizard import BaseWizard, HWD_SETUP_DECRYPT_WALLET, GoBack, ReRunDialog
-from electrum_dash.network import Network
-from electrum_dash.i18n import _
+from electrum_firo.wallet import Wallet, Abstract_Wallet
+from electrum_firo.storage import WalletStorage, StorageReadWriteError
+from electrum_firo.util import UserCancelled, InvalidPassword, WalletFileException, get_new_wallet_name
+from electrum_firo.base_wizard import BaseWizard, HWD_SETUP_DECRYPT_WALLET, GoBack, ReRunDialog
+from electrum_firo.network import Network
+from electrum_firo.i18n import _
 
 from .seed_dialog import SeedLayout, KeysLayout
 from .network_dialog import NetworkChoiceLayout
@@ -29,11 +29,11 @@ from .util import (MessageBoxMixin, Buttons, icon_path, ChoicesLayout, WWLabel,
                    InfoButton, char_width_in_lineedit, PasswordLineEdit)
 from .password_dialog import PasswordLayout, PasswordLayoutForHW, PW_NEW
 from .bip39_recovery_dialog import Bip39RecoveryDialog
-from electrum_dash.plugin import run_hook, Plugins
+from electrum_firo.plugin import run_hook, Plugins
 
 if TYPE_CHECKING:
-    from electrum_dash.simple_config import SimpleConfig
-    from electrum_dash.wallet_db import WalletDB
+    from electrum_firo.simple_config import SimpleConfig
+    from electrum_firo.wallet_db import WalletDB
     from . import ElectrumGui
 
 

@@ -30,17 +30,17 @@ import PyQt5.QtCore as QtCore
 from PyQt5.QtWidgets import (QWidget, QLabel, QPushButton, QTextEdit,
                              QMessageBox, QHBoxLayout, QVBoxLayout)
 
-from electrum_dash.i18n import _
-from electrum_dash.base_crash_reporter import BaseCrashReporter
-from electrum_dash.logging import Logger
-from electrum_dash import constants
-from electrum_dash.network import Network
+from electrum_firo.i18n import _
+from electrum_firo.base_crash_reporter import BaseCrashReporter
+from electrum_firo.logging import Logger
+from electrum_firo import constants
+from electrum_firo.network import Network
 
 from .util import MessageBoxMixin, read_QIcon, WaitingDialog
 
 if TYPE_CHECKING:
-    from electrum_dash.simple_config import SimpleConfig
-    from electrum_dash.wallet import Abstract_Wallet
+    from electrum_firo.simple_config import SimpleConfig
+    from electrum_firo.wallet import Abstract_Wallet
 
 
 class Exception_Window(BaseCrashReporter, QWidget, MessageBoxMixin, Logger):

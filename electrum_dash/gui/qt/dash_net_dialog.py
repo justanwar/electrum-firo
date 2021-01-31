@@ -8,10 +8,10 @@ from PyQt5.QtWidgets import (QGridLayout, QDialog, QVBoxLayout, QCheckBox,
                              QTabWidget, QWidget, QLabel, QSpinBox, QLineEdit,
                              QTreeWidget, QTreeWidgetItem, QMenu, QHeaderView)
 
-from electrum_dash import constants
-from electrum_dash.dash_net import MIN_PEERS_LIMIT, MAX_PEERS_LIMIT
-from electrum_dash.i18n import _
-from electrum_dash.logging import get_logger
+from electrum_firo import constants
+from electrum_firo.dash_net import MIN_PEERS_LIMIT, MAX_PEERS_LIMIT
+from electrum_firo.i18n import _
+from electrum_firo.logging import get_logger
 
 from .util import Buttons, CloseButton
 

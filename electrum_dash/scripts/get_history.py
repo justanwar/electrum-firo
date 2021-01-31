@@ -3,10 +3,10 @@
 import sys
 import asyncio
 
-from electrum_dash import bitcoin
-from electrum_dash.network import Network
-from electrum_dash.util import json_encode, print_msg, create_and_start_event_loop, log_exceptions
-from electrum_dash.simple_config import SimpleConfig
+from electrum_firo import bitcoin
+from electrum_firo.network import Network
+from electrum_firo.util import json_encode, print_msg, create_and_start_event_loop, log_exceptions
+from electrum_firo.simple_config import SimpleConfig
 
 
 try:

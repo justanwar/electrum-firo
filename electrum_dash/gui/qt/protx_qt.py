@@ -11,10 +11,10 @@ from PyQt5.QtWidgets import (QTabBar, QTabWidget, QWidget, QLabel, QPushButton,
                              QHBoxLayout, QVBoxLayout, QDialog, QGridLayout,
                              QTextEdit, QMenu)
 
-from electrum_dash import util
-from electrum_dash.dash_tx import SPEC_PRO_REG_TX
-from electrum_dash.protx import ProRegTxExc, ProTxManagerExc
-from electrum_dash.i18n import _
+from electrum_firo import util
+from electrum_firo.dash_tx import SPEC_PRO_REG_TX
+from electrum_firo.protx import ProRegTxExc, ProTxManagerExc
+from electrum_firo.i18n import _
 
 from .dash_qt import VTabBar
 from .protx_wizards import Dip3MasternodeWizard, Dip3FileWizard

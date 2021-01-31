@@ -603,16 +603,16 @@ class Interface(Logger):
             res = await self.session.send_request('blockchain.block.headers', [index * 2016, size])
         finally:
             self._requested_chunks.discard(index)
-        assert_dict_contains_field(res, field_name='count')
-        assert_dict_contains_field(res, field_name='hex')
-        assert_dict_contains_field(res, field_name='max')
-        assert_non_negative_integer(res['count'])
-        assert_non_negative_integer(res['max'])
-        assert_hex_str(res['hex'])
-        if len(res['hex']) != HEADER_SIZE * 2 * res['count']:
-            raise RequestCorrupted('inconsistent chunk hex and count')
-        if res['count'] != size:
-            raise RequestCorrupted(f"expected {size} headers but only got {res['count']}")
+        #assert_dict_contains_field(res, field_name='count')
+        #assert_dict_contains_field(res, field_name='hex')
+        #assert_dict_contains_field(res, field_name='max')
+        #assert_non_negative_integer(res['count'])
+        #assert_non_negative_integer(res['max'])
+        #assert_hex_str(res['hex'])
+        #if len(res['hex']) != HEADER_SIZE * 2 * res['count']:
+        #    raise RequestCorrupted('inconsistent chunk hex and count')
+        #if res['count'] != size:
+        #    raise RequestCorrupted(f"expected {size} headers but only got {res['count']}")
         conn = self.blockchain.connect_chunk(index, res['hex'])
         if not conn:
             return conn, 0

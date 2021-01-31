@@ -34,7 +34,7 @@ RUN apt-get update -q && \
 ENV PYTHON_VERSION=3.7.9 \
     PY_SHA=91923007b05005b5f9bd46f3b9172248aea5abc1543e8a636d59e629c3331b01 \
     LIBSECP_VERSION=dbd41db16a0e91b2566820898a3ab2d7dad4fe00 \
-    APPDIR=/var/build/appimage/electrum-dash.AppDir \
+    APPDIR=/var/build/appimage/electrum-firo.AppDir \
     PYTHON_FTP=https://www.python.org/ftp/python
 
 ENV PY_FILE=Python-$PYTHON_VERSION.tar.xz

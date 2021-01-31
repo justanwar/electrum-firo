@@ -8,23 +8,23 @@ import logging
 from decimal import Decimal
 from typing import TYPE_CHECKING
 
-import electrum_dash
-from electrum_dash import util
-from electrum_dash.util import format_satoshis
-from electrum_dash.bitcoin import is_address, COIN
-from electrum_dash.transaction import PartialTxOutput
-from electrum_dash.wallet import Wallet
-from electrum_dash.wallet_db import WalletDB
-from electrum_dash.storage import WalletStorage
-from electrum_dash.network import NetworkParameters, TxBroadcastError, BestEffortRequestFailed
-from electrum_dash.interface import ServerAddr
-from electrum_dash.logging import console_stderr_handler
-from electrum_dash.dash_tx import SPEC_TX_NAMES
+import electrum_firo
+from electrum_firo import util
+from electrum_firo.util import format_satoshis
+from electrum_firo.bitcoin import is_address, COIN
+from electrum_firo.transaction import PartialTxOutput
+from electrum_firo.wallet import Wallet
+from electrum_firo.wallet_db import WalletDB
+from electrum_firo.storage import WalletStorage
+from electrum_firo.network import NetworkParameters, TxBroadcastError, BestEffortRequestFailed
+from electrum_firo.interface import ServerAddr
+from electrum_firo.logging import console_stderr_handler
+from electrum_firo.dash_tx import SPEC_TX_NAMES
 
 if TYPE_CHECKING:
-    from electrum_dash.daemon import Daemon
-    from electrum_dash.simple_config import SimpleConfig
-    from electrum_dash.plugin import Plugins
+    from electrum_firo.daemon import Daemon
+    from electrum_firo.simple_config import SimpleConfig
+    from electrum_firo.plugin import Plugins
 
 
 _ = lambda x:x  # i18n
@@ -496,7 +496,7 @@ class ElectrumGui:
                         self.show_message("Error:" + server_str + "\nIn doubt, type \"auto-connect\"")
                         return False
             if out.get('server') or out.get('proxy'):
-                proxy = electrum_dash.network.deserialize_proxy(out.get('proxy')) if out.get('proxy') else proxy_config
+                proxy = electrum_firo.network.deserialize_proxy(out.get('proxy')) if out.get('proxy') else proxy_config
                 net_params = NetworkParameters(server=server_addr,
                                                proxy=proxy,
                                                auto_connect=auto_connect)

@@ -48,15 +48,15 @@ from PyQt5.QtWidgets import (QMessageBox, QComboBox, QSystemTrayIcon, QTabWidget
                              QWidget, QSizePolicy, QStatusBar, QToolTip, QDialog,
                              QMenu, QAction, QStackedWidget, QToolButton)
 
-import electrum_dash
-from electrum_dash import (keystore, ecc, constants, util, bitcoin, commands,
+import electrum_firo
+from electrum_firo import (keystore, ecc, constants, util, bitcoin, commands,
                            paymentrequest)
-from electrum_dash.base_crash_reporter import BaseCrashReporter
-from electrum_dash.bitcoin import COIN, is_address
-from electrum_dash.dash_tx import DashTxError, PSCoinRounds
-from electrum_dash.plugin import run_hook, BasePlugin
-from electrum_dash.i18n import _
-from electrum_dash.util import (format_time,
+from electrum_firo.base_crash_reporter import BaseCrashReporter
+from electrum_firo.bitcoin import COIN, is_address
+from electrum_firo.dash_tx import DashTxError, PSCoinRounds
+from electrum_firo.plugin import run_hook, BasePlugin
+from electrum_firo.i18n import _
+from electrum_firo.util import (format_time,
                                 UserCancelled, profiler,
                                 bh2u, bfh, InvalidPassword,
                                 UserFacingException,
@@ -64,18 +64,18 @@ from electrum_dash.util import (format_time,
                                 InvalidBitcoinURI, NotEnoughFunds, FILE_OWNER_MODE,
                                 NoDynamicFeeEstimates, MultipleSpendMaxTxOutputs,
                                 DASH_BIP21_URI_SCHEME, PAY_BIP21_URI_SCHEME)
-from electrum_dash.invoices import PR_TYPE_ONCHAIN, PR_DEFAULT_EXPIRATION_WHEN_CREATING, Invoice
-from electrum_dash.invoices import PR_PAID, PR_FAILED, pr_expiration_values, OnchainInvoice
-from electrum_dash.transaction import (Transaction, PartialTxInput,
+from electrum_firo.invoices import PR_TYPE_ONCHAIN, PR_DEFAULT_EXPIRATION_WHEN_CREATING, Invoice
+from electrum_firo.invoices import PR_PAID, PR_FAILED, pr_expiration_values, OnchainInvoice
+from electrum_firo.transaction import (Transaction, PartialTxInput,
                                        PartialTransaction, PartialTxOutput)
-from electrum_dash.util import AddTransactionException
-from electrum_dash.wallet import (Multisig_Wallet, Abstract_Wallet,
+from electrum_firo.util import AddTransactionException
+from electrum_firo.wallet import (Multisig_Wallet, Abstract_Wallet,
                                   sweep_preparations, InternalAddressCorruption)
-from electrum_dash.version import ELECTRUM_VERSION
-from electrum_dash.network import Network, TxBroadcastError, BestEffortRequestFailed, UntrustedServerReturnedError
-from electrum_dash.exchange_rate import FxThread
-from electrum_dash.simple_config import SimpleConfig
-from electrum_dash.logging import Logger
+from electrum_firo.version import ELECTRUM_VERSION
+from electrum_firo.network import Network, TxBroadcastError, BestEffortRequestFailed, UntrustedServerReturnedError
+from electrum_firo.exchange_rate import FxThread
+from electrum_firo.simple_config import SimpleConfig
+from electrum_firo.logging import Logger
 
 from .exception_window import Exception_Hook
 from .amountedit import AmountEdit, BTCAmountEdit, FreezableLineEdit, FeerateEdit
@@ -356,10 +356,10 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
                                              'ps-state-changes'])
 
         # If the option hasn't been set yet
-        if config.get('check_updates') is None:
-            choice = self.question(title="Dash Electrum - " + _("Enable update check"),
-                                   msg=_("For security reasons we advise that you always use the latest version of Dash Electrum.") + " " +
-                                       _("Would you like to be notified when there is a newer version of Dash Electrum available?"))
+        if config.get('check_updates', False) is None:
+            choice = self.question(title="Firo Electrum - " + _("Enable update check"),
+                                   msg=_("For security reasons we advise that you always use the latest version of Firo Electrum.") + " " +
+                                       _("Would you like to be notified when there is a newer version of Firo Electrum available?"))
             config.set_key('check_updates', bool(choice), save=True)
 
         if config.get('check_updates', False):
@@ -367,7 +367,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
             # to prevent GC from getting in our way.
             def on_version_received(v):
                 if UpdateCheck.is_newer(v):
-                    self.update_check_button.setText(_("Update to Dash Electrum {} is available").format(v))
+                    self.update_check_button.setText(_("Update to Firo Electrum {} is available").format(v))
                     self.update_check_button.clicked.connect(lambda: self.show_update_check(v))
                     self.update_check_button.show()
             self._update_check_thread = UpdateCheckThread()
@@ -682,7 +682,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
             self.setGeometry(100, 100, 840, 400)
 
     def watching_only_changed(self):
-        name = "Dash Electrum Testnet" if constants.net.TESTNET else "Dash Electrum"
+        name = "Firo Electrum Testnet" if constants.net.TESTNET else "Firo Electrum"
         title = '%s %s  -  %s' % (name, ELECTRUM_VERSION,
                                         self.wallet.basename())
         extra = [self.wallet.db.get('wallet_type', '?')]
@@ -700,8 +700,8 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
         if self.wallet.is_watching_only() and watch_only_warn:
             msg = ' '.join([
                 _("This wallet is watching-only."),
-                _("This means you will not be able to spend Dash coins with it."),
-                _("Make sure you own the seed phrase or the private keys, before you request Dash coins to be sent to this wallet.")
+                _("This means you will not be able to spend Firo coins with it."),
+                _("Make sure you own the seed phrase or the private keys, before you request Firo coins to be sent to this wallet.")
             ])
             cb = QCheckBox(_("Don't show this again."))
             def on_cb(x):
@@ -723,7 +723,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
         msg = ''.join([
             _("You are in testnet mode."), ' ',
             _("Testnet coins are worthless."), '\n',
-            _("Testnet is separate from the main Dash network. It is used for testing.")
+            _("Testnet is separate from the main Firo network. It is used for testing.")
         ])
         cb = QCheckBox(_("Don't show this again."))
         cb_checked = False
@@ -773,7 +773,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
         try:
             new_path = self.wallet.save_backup()
         except BaseException as reason:
-            self.show_critical(_("Dash Electrum was unable to copy your wallet file to the specified location.") + "\n" + str(reason), title=_("Unable to create backup"))
+            self.show_critical(_("Firo Electrum was unable to copy your wallet file to the specified location.") + "\n" + str(reason), title=_("Unable to create backup"))
             return
         if new_path:
             msg = _("A copy of your wallet file was created in")+" '%s'" % str(new_path)
@@ -882,8 +882,8 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
 
         wallet_menu.addSeparator()
 
-        wallet_menu.addAction(_('PrivateSend'),
-                              lambda: show_ps_dialog_or_wizard(self))
+        # wallet_menu.addAction(_('PrivateSend'),
+        #                       lambda: show_ps_dialog_or_wizard(self))
 
         tools_menu = menubar.addMenu(_("&Tools"))  # type: QMenu
         preferences_action = tools_menu.addAction(_("Preferences"), self.settings_dialog)  # type: QAction
@@ -894,7 +894,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
             # Hence, this menu item will be at a "uniform location re macOS processes"
             preferences_action.setMenuRole(QAction.PreferencesRole)  # make sure OS recognizes it as preferences
             # Add another preferences item, to also have a "uniform location for Electrum between different OSes"
-            tools_menu.addAction(_("Dash Electrum preferences"), self.settings_dialog)
+            tools_menu.addAction(_("Firo Electrum preferences"), self.settings_dialog)
 
         tools_menu.addAction(_("&Network"), self.gui_object.show_network_dialog).setEnabled(bool(self.network))
         tools_menu.addAction(_("&Plugins"), self.plugins_dialog)
@@ -916,9 +916,9 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
         help_menu = menubar.addMenu(_("&Help"))
         help_menu.addAction(_("&About"), self.show_about)
         help_menu.addAction(_("&Check for updates"), self.show_update_check)
-        help_menu.addAction(_("&Official website"), lambda: webopen("https://electrum.dash.org"))
+        help_menu.addAction(_("&Official website"), lambda: webopen("https://firo.org"))
         help_menu.addSeparator()
-        help_menu.addAction(_("&Documentation"), lambda: webopen("https://docs.dash.org/en/stable/wallets/index.html#dash-electrum-wallet")).setShortcut(QKeySequence.HelpContents)
+        help_menu.addAction(_("&Documentation"), lambda: webopen("https://firo.org/guide/")).setShortcut(QKeySequence.HelpContents)
         self._auto_crash_reports = QAction(_("&Automated Crash Reports"), self, checkable=True)
         self._auto_crash_reports.setChecked(self.config.get(BaseCrashReporter.config_key, default=False))
         self._auto_crash_reports.triggered.connect(self.auto_crash_reports)
@@ -942,13 +942,13 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
             self.show_error(_('No donation address for this server'))
 
     def show_about(self):
-        QMessageBox.about(self, "Dash Electrum",
+        QMessageBox.about(self, "Firo Electrum",
                           (_("Version")+" %s" % ELECTRUM_VERSION + "\n\n" +
-                           _("Electrum's focus is speed, with low resource usage and simplifying Dash.") + " " +
+                           _("Electrum's focus is speed, with low resource usage and simplifying Firo.") + " " +
                            _("You do not need to perform regular backups, because your wallet can be "
                               "recovered from a secret phrase that you can memorize or write on paper.") + " " +
                            _("Startup times are instant because it operates in conjunction with high-performance "
-                              "servers that handle the most complicated parts of the Dash system.") + "\n\n" +
+                              "servers that handle the most complicated parts of the Firo system.") + "\n\n" +
                            _("Uses icons from the Icons8 icon pack (icons8.com).")))
 
     def show_update_check(self, version=None):
@@ -958,10 +958,10 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
         msg = ' '.join([
             _("Please report any bugs as issues on github:<br/>"),
             f'''<a href="{constants.GIT_REPO_ISSUES_URL}">{constants.GIT_REPO_ISSUES_URL}</a><br/><br/>''',
-            _("Before reporting a bug, upgrade to the most recent version of Dash Electrum (latest release or git HEAD), and include the version number in your report."),
+            _("Before reporting a bug, upgrade to the most recent version of Firo Electrum (latest release or git HEAD), and include the version number in your report."),
             _("Try to explain not only what the bug is, but how it occurs.")
          ])
-        self.show_message(msg, title="Dash Electrum - " + _("Reporting Bugs"), rich_text=True)
+        self.show_message(msg, title="Firo Electrum - " + _("Reporting Bugs"), rich_text=True)
 
     def notify_transactions(self):
         if self.tx_notification_queue.qsize() == 0:
@@ -1001,9 +1001,9 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
         if self.tray:
             try:
                 # this requires Qt 5.9
-                self.tray.showMessage("Dash Electrum", message, read_QIcon("electrum_dark_icon"), 20000)
+                self.tray.showMessage("Firo Electrum", message, read_QIcon("electrum_dark_icon"), 20000)
             except TypeError:
-                self.tray.showMessage("Dash Electrum", message, QSystemTrayIcon.Information, 20000)
+                self.tray.showMessage("Firo Electrum", message, QSystemTrayIcon.Information, 20000)
 
 
 
@@ -1244,8 +1244,8 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
         msg = ' '.join([
             _('Expiration date of your request.'),
             _('This information is seen by the recipient if you send them a signed payment request.'),
-            _('Expired requests have to be deleted manually from your list, in order to free the corresponding Dash addresses.'),
-            _('The Dash address never expires and will always be part of this Dash Electrum wallet.'),
+            _('Expired requests have to be deleted manually from your list, in order to free the corresponding Firo addresses.'),
+            _('The Firo address never expires and will always be part of this Firo Electrum wallet.'),
         ])
         grid.addWidget(HelpLabel(_('Expires after'), msg), 2, 0)
         grid.addWidget(self.expires_combo, 2, 1)
@@ -1476,7 +1476,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
         self.amount_e = BTCAmountEdit(self.get_decimal_point)
         self.payto_e = PayToEdit(self)
         msg = _('Recipient of the funds.') + '\n\n'\
-              + _('You may enter a Dash address, a label from your list of contacts (a list of completions will be proposed), or an alias (email-like address that forwards to a Dash address)')
+              + _('You may enter a Firo address, a label from your list of contacts (a list of completions will be proposed), or an alias (email-like address that forwards to a Firo address)')
         payto_label = HelpLabel(_('Pay to'), msg)
         grid.addWidget(payto_label, 1, 0)
         grid.addWidget(self.payto_e, 1, 1, 1, -1)
@@ -1506,8 +1506,8 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
 
         self.ps_cb = QCheckBox(_('PrivateSend'))
         self.ps_cb.stateChanged.connect(self.on_ps_cb)
-        self.ps_cb.setVisible(True)
-        grid.addWidget(self.ps_cb, 3, 1)
+        self.ps_cb.setVisible(False)
+        # grid.addWidget(self.ps_cb, 3, 1)
 
         self.av_amnt = BTCAmountEdit(self.get_decimal_point)
         self.av_amnt.setEnabled(False)
@@ -1549,7 +1549,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
         self.extra_payload = ExtraPayloadWidget(self)
         self.extra_payload.hide()
         msg = _('Extra payload.') + '\n\n'\
-              + _('Dash DIP2 Special Transaction extra payload.')
+              + _('Firo DIP2 Special Transaction extra payload.')
         self.extra_payload_label = HelpLabel(_('Extra payload'), msg)
         self.extra_payload_label.hide()
         grid.addWidget(self.extra_payload_label, 9, 0)
@@ -1654,7 +1654,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
 
         for o in outputs:
             if o.scriptpubkey is None:
-                self.show_error(_('Dash Address is None'))
+                self.show_error(_('Firo Address is None'))
                 return True
             if o.value is None:
                 self.show_error(_('Invalid Amount'))
@@ -2274,7 +2274,8 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
         self.utxo_model.set_view(self.utxo_list)
         l.setObjectName("utxo_container")
         toolbar = l.create_toolbar(self.config)
-        toolbar_shown = bool(self.config.get('show_toolbar_utxos', True))
+        # toolbar_shown = bool(self.config.get('show_toolbar_utxos', True))
+        toolbar_shown = False
         l.show_toolbar(toolbar_shown)
         return self.create_list_tab(l, toolbar)
 
@@ -2398,7 +2399,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
             'plugins': self.gui_object.plugins,
             'window': self,
             'config': self.config,
-            'electrum': electrum_dash,
+            'electrum': electrum_firo,
             'daemon': self.gui_object.daemon,
             'util': util,
             'bitcoin': bitcoin,
@@ -2460,12 +2461,14 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
             self.dash_net_button = StatusBarButton(read_QIcon('dash_net_0.png'),
                                                    _('Dash Network'),
                                                    on_dash_net_status_button)
+            self.dash_net_button.hide()
             self.update_dash_net_status_btn()
             sb.addPermanentWidget(self.dash_net_button)
     
             self.ps_button = StatusBarButton(read_QIcon('privatesend.png'),
                                              '',
                                              lambda: show_ps_dialog_or_wizard(self))
+            self.ps_button.hide()
             self.update_ps_status_btn(False, False)
             sb.addPermanentWidget(self.ps_button)
 
@@ -2508,7 +2511,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
         self.password_button.setVisible(self.wallet.may_have_password())
 
     def change_password_dialog(self):
-        from electrum_dash.storage import StorageEncryptionVersion
+        from electrum_firo.storage import StorageEncryptionVersion
         if self.wallet.get_available_storage_encryption_version() == StorageEncryptionVersion.XPUB_PASSWORD:
             from .password_dialog import ChangePasswordDialogForHW
             d = ChangePasswordDialogForHW(self, self.wallet)
@@ -2740,7 +2743,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
                 "private key, and verifying with the corresponding public key. The "
                 "address you have entered does not have a unique public key, so these "
                 "operations cannot be performed.") + '\n\n' + \
-               _('The operation is undefined. Not just in Dash Electrum, but in general.')
+               _('The operation is undefined. Not just in Firo Electrum, but in general.')
 
     @protected
     @ps_ks_protected
@@ -2748,7 +2751,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
         address  = address.text().strip()
         message = message.toPlainText().strip()
         if not bitcoin.is_address(address):
-            self.show_message(_('Invalid Dash address.'))
+            self.show_message(_('Invalid Firo address.'))
             return
         if self.wallet.is_watching_only():
             self.show_message(_('This is a watching-only wallet.'))
@@ -2779,7 +2782,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
         address  = address.text().strip()
         message = message.toPlainText().strip().encode('utf-8')
         if not bitcoin.is_address(address):
-            self.show_message(_('Invalid Dash address.'))
+            self.show_message(_('Invalid Firo address.'))
             return
         try:
             # This can throw on invalid base64
@@ -2912,15 +2915,15 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
         return d.run()
 
     def tx_from_text(self, data: Union[str, bytes]) -> Union[None, 'PartialTransaction', 'Transaction']:
-        from electrum_dash.transaction import tx_from_any
+        from electrum_firo.transaction import tx_from_any
         try:
             return tx_from_any(data)
         except BaseException as e:
-            self.show_critical(_("Dash Electrum was unable to parse your transaction") + ":\n" + repr(e))
+            self.show_critical(_("Firo Electrum was unable to parse your transaction") + ":\n" + repr(e))
             return
 
     def read_tx_from_qrcode(self):
-        from electrum_dash import qrscanner
+        from electrum_firo import qrscanner
         try:
             data = qrscanner.scan_barcode(self.config.get_video_device())
         except BaseException as e:
@@ -2949,7 +2952,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
             with open(fileName, "rb") as f:
                 file_content = f.read()  # type: Union[str, bytes]
         except (ValueError, IOError, os.error) as reason:
-            self.show_critical(_("Dash Electrum was unable to open your transaction file") + "\n" + str(reason),
+            self.show_critical(_("Firo Electrum was unable to open your transaction file") + "\n" + str(reason),
                                title=_("Unable to read file or no transaction found"))
             return
         return self.tx_from_text(file_content)
@@ -2968,7 +2971,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
             self.show_transaction(tx)
 
     def do_process_from_txid(self):
-        from electrum_dash import transaction
+        from electrum_firo import transaction
         txid, ok = QInputDialog.getText(self, _('Lookup transaction'), _('Transaction ID') + ':')
         if ok and txid:
             txid = str(txid).strip()
@@ -3009,7 +3012,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
         e.setReadOnly(True)
         vbox.addWidget(e)
 
-        defaultname = 'electrum-dash-private-keys.csv'
+        defaultname = 'electrum-firo-private-keys.csv'
         select_msg = _('Select file to export your private keys to')
         hbox, filename_e, csv_button = filename_field(self, self.config, defaultname, select_msg)
         vbox.addLayout(hbox)
@@ -3071,7 +3074,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
             self.do_export_privkeys(filename, private_keys, csv_button.isChecked())
         except (IOError, os.error) as reason:
             txt = "\n".join([
-                _("Dash Electrum was unable to produce a private key-export."),
+                _("Firo Electrum was unable to produce a private key-export."),
                 str(reason)
             ])
             self.show_critical(txt, title=_("Unable to create csv"))
@@ -3246,7 +3249,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
             self.fx.trigger_update()
         run_hook('close_settings_dialog')
         if d.need_restart:
-            self.show_warning(_('Please restart Dash Electrum to activate the new GUI settings'), title=_('Success'))
+            self.show_warning(_('Please restart Firo Electrum to activate the new GUI settings'), title=_('Success'))
 
     def closeEvent(self, event):
         psman = self.wallet.psman
@@ -3308,7 +3311,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
         self.gui_object.close_window(self)
 
     def plugins_dialog(self):
-        self.pluginsdialog = d = WindowModalDialog(self, _('Dash Electrum Plugins'))
+        self.pluginsdialog = d = WindowModalDialog(self, _('Firo Electrum Plugins'))
 
         plugins = self.gui_object.plugins
 
@@ -3402,6 +3405,6 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
         self.showing_cert_mismatch_error = True
         self.show_critical(title=_("Certificate mismatch"),
                            msg=_("The SSL certificate provided by the main server did not match the fingerprint passed in with the --serverfingerprint option.") + "\n\n" +
-                               _("Dash Electrum will now exit."))
+                               _("Firo Electrum will now exit."))
         self.showing_cert_mismatch_error = False
         self.close()

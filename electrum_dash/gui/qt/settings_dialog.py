@@ -31,18 +31,18 @@ from PyQt5.QtWidgets import (QComboBox,  QTabWidget,
                              QVBoxLayout, QGridLayout, QLineEdit,
                              QPushButton, QWidget)
 
-from electrum_dash.i18n import _
-from electrum_dash import util, coinchooser, paymentrequest
-from electrum_dash.util import base_units_list
+from electrum_firo.i18n import _
+from electrum_firo import util, coinchooser, paymentrequest
+from electrum_firo.util import base_units_list
 
 from .util import (ColorScheme, WindowModalDialog, HelpLabel, Buttons,
                    CloseButton)
 
-from electrum_dash.i18n import languages
-from electrum_dash import qrscanner
+from electrum_firo.i18n import languages
+from electrum_firo import qrscanner
 
 if TYPE_CHECKING:
-    from electrum_dash.simple_config import SimpleConfig
+    from electrum_firo.simple_config import SimpleConfig
     from .main_window import ElectrumWindow
 
 

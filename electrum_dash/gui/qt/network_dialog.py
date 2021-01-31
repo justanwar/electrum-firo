@@ -34,17 +34,17 @@ from PyQt5.QtWidgets import (QTreeWidget, QTreeWidgetItem, QMenu, QGridLayout, Q
                              QTabWidget, QWidget, QLabel)
 from PyQt5.QtGui import QFontMetrics
 
-from electrum_dash.i18n import _
-from electrum_dash import constants, blockchain, util
-from electrum_dash.interface import ServerAddr, PREFERRED_NETWORK_PROTOCOL
-from electrum_dash.network import Network
-from electrum_dash.logging import get_logger
+from electrum_firo.i18n import _
+from electrum_firo import constants, blockchain, util
+from electrum_firo.interface import ServerAddr, PREFERRED_NETWORK_PROTOCOL
+from electrum_firo.network import Network
+from electrum_firo.logging import get_logger
 
 from .util import (Buttons, CloseButton, HelpButton, read_QIcon, char_width_in_lineedit,
                    PasswordLineEdit)
 
 if TYPE_CHECKING:
-    from electrum_dash.simple_config import SimpleConfig
+    from electrum_firo.simple_config import SimpleConfig
 
 
 _logger = get_logger(__name__)
@@ -258,7 +258,7 @@ class NetworkChoiceLayout(object):
 
         grid.addWidget(self.tor_cb, 1, 0, 1, 3)
         grid.addWidget(self.proxy_cb, 2, 0, 1, 3)
-        grid.addWidget(HelpButton(_('Proxy settings apply to all connections: with Dash Electrum servers, but also with third-party services.')), 2, 4)
+        grid.addWidget(HelpButton(_('Proxy settings apply to all connections: with Firo Electrum servers, but also with third-party services.')), 2, 4)
         grid.addWidget(self.proxy_mode, 4, 1)
         grid.addWidget(self.proxy_host, 4, 2)
         grid.addWidget(self.proxy_port, 4, 3)
@@ -272,7 +272,7 @@ class NetworkChoiceLayout(object):
         # Blockchain Tab
         grid = QGridLayout(blockchain_tab)
         msg =  ' '.join([
-            _("Dash Electrum connects to several nodes in order to download block headers and find out the longest blockchain."),
+            _("Firo Electrum connects to several nodes in order to download block headers and find out the longest blockchain."),
             _("This blockchain is used to verify the transactions sent by your transaction server.")
         ])
         self.status_label = QLabel('')
@@ -285,8 +285,8 @@ class NetworkChoiceLayout(object):
         self.autoconnect_cb.clicked.connect(self.set_server)
         self.autoconnect_cb.clicked.connect(self.update)
         msg = ' '.join([
-            _("If auto-connect is enabled, Dash Electrum will always use a server that is on the longest blockchain."),
-            _("If it is disabled, you have to choose a server you want to use. Dash Electrum will warn you if your server is lagging.")
+            _("If auto-connect is enabled, Firo Electrum will always use a server that is on the longest blockchain."),
+            _("If it is disabled, you have to choose a server you want to use. Firo Electrum will warn you if your server is lagging.")
         ])
         grid.addWidget(self.autoconnect_cb, 1, 0, 1, 3)
         grid.addWidget(HelpButton(msg), 1, 4)
@@ -294,7 +294,7 @@ class NetworkChoiceLayout(object):
         self.server_e = QLineEdit()
         self.server_e.setFixedWidth(fixed_width_hostname + fixed_width_port)
         self.server_e.editingFinished.connect(self.set_server)
-        msg = _("Dash Electrum sends your wallet addresses to a single server, in order to receive your transaction history.")
+        msg = _("Firo Electrum sends your wallet addresses to a single server, in order to receive your transaction history.")
         grid.addWidget(QLabel(_('Server') + ':'), 2, 0)
         grid.addWidget(self.server_e, 2, 1, 1, 3)
         grid.addWidget(HelpButton(msg), 2, 4)

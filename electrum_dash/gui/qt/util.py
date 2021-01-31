@@ -25,9 +25,9 @@ from PyQt5.QtWidgets import (QPushButton, QLabel, QMessageBox, QHBoxLayout,
                              QHeaderView, QApplication, QToolTip, QTreeWidget, QStyledItemDelegate,
                              QMenu)
 
-from electrum_dash.i18n import _, languages
-from electrum_dash.util import FileImportFailed, FileExportFailed, make_aiohttp_session, resource_path
-from electrum_dash.invoices import PR_UNPAID, PR_PAID, PR_EXPIRED, PR_INFLIGHT, PR_UNKNOWN, PR_FAILED, PR_ROUTING
+from electrum_firo.i18n import _, languages
+from electrum_firo.util import FileImportFailed, FileExportFailed, make_aiohttp_session, resource_path
+from electrum_firo.invoices import PR_UNPAID, PR_PAID, PR_EXPIRED, PR_INFLIGHT, PR_UNKNOWN, PR_FAILED, PR_ROUTING
 
 if TYPE_CHECKING:
     from .main_window import ElectrumWindow
@@ -984,7 +984,7 @@ def import_meta_gui(electrum_window, title, importer, on_success):
 def export_meta_gui(electrum_window, title, exporter):
     filter_ = "JSON (*.json);;All files (*)"
     filename = electrum_window.getSaveFileName(_("Select file to save your {}").format(title),
-                                               'electrum_dash_{}.json'.format(title), filter_)
+                                               'electrum_firo_{}.json'.format(title), filter_)
     if not filename:
         return
     try:

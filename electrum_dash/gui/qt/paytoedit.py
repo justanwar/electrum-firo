@@ -31,11 +31,11 @@ from typing import NamedTuple, Sequence, Optional, List, TYPE_CHECKING
 from PyQt5.QtWidgets import QLineEdit
 from PyQt5.QtGui import QFontMetrics, QFont
 
-from electrum_dash import bitcoin
-from electrum_dash.util import bfh, DASH_BIP21_URI_SCHEME, PAY_BIP21_URI_SCHEME
-from electrum_dash.transaction import PartialTxOutput
-from electrum_dash.bitcoin import opcodes, construct_script
-from electrum_dash.logging import Logger
+from electrum_firo import bitcoin
+from electrum_firo.util import bfh, DASH_BIP21_URI_SCHEME, PAY_BIP21_URI_SCHEME
+from electrum_firo.transaction import PartialTxOutput
+from electrum_firo.bitcoin import opcodes, construct_script
+from electrum_firo.logging import Logger
 
 from .qrtextedit import ScanQRTextEdit
 from .completion_text_edit import CompletionTextEdit

@@ -6,16 +6,16 @@ import time
 import colorama
 from colorama import Fore, Style
 
-from electrum_dash import util
-from electrum_dash import WalletStorage, Wallet
-from electrum_dash.wallet_db import WalletDB
-from electrum_dash.util import format_satoshis
-from electrum_dash.bitcoin import is_address, COIN
-from electrum_dash.transaction import PartialTxOutput
-from electrum_dash.network import TxBroadcastError, BestEffortRequestFailed
-from electrum_dash.logging import console_stderr_handler
-from electrum_dash.dash_ps import filter_log_line, PSLogSubCat
-from electrum_dash.dash_tx import SPEC_TX_NAMES
+from electrum_firo import util
+from electrum_firo import WalletStorage, Wallet
+from electrum_firo.wallet_db import WalletDB
+from electrum_firo.util import format_satoshis
+from electrum_firo.bitcoin import is_address, COIN
+from electrum_firo.transaction import PartialTxOutput
+from electrum_firo.network import TxBroadcastError, BestEffortRequestFailed
+from electrum_firo.logging import console_stderr_handler
+from electrum_firo.dash_ps import filter_log_line, PSLogSubCat
+from electrum_firo.dash_tx import SPEC_TX_NAMES
 
 _ = lambda x:x  # i18n
 
