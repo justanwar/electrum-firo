@@ -45,6 +45,7 @@ from .verifier import SPV
 from .i18n import _
 
 
+IS_ANDROID = 'ANDROID_DATA' in os.environ
 MN_LIST_INSTANCE = None
 DEFAULT_MN_LIST = {'protx_height': 0, 'llmq_height': 0,
                    'protx_mns': {}, 'sml_hashes': {},  # SML entries and hashes
@@ -106,8 +107,9 @@ class MNList(Logger):
                        else config)
         self.network = network
         self.dash_net = network.dash_net
-        self.dash_net_enabled = config.get('run_dash_net', True)
+        self.dash_net_enabled = config.get('run_dash_net', False)
         self.load_mns = config.get('protx_load_mns', True)
+        self.load_mns = False if IS_ANDROID else self.load_mns
 
         self.recent_list_lock = threading.Lock()
         self.recent_list = recent_list = self._read_recent_list()

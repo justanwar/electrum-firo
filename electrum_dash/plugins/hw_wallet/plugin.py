@@ -27,21 +27,21 @@
 from typing import TYPE_CHECKING, Dict, List, Union, Tuple, Sequence, Optional, Type, Iterable, Any
 from functools import partial
 
-from electrum_dash.plugin import (BasePlugin, hook, Device, DeviceMgr,
+from electrum_firo.plugin import (BasePlugin, hook, Device, DeviceMgr,
                                   DeviceInfo, assert_runs_in_hwd_thread,
                                   runs_in_hwd_thread)
-from electrum_dash.i18n import _
-from electrum_dash.bitcoin import is_address, opcodes
-from electrum_dash.util import bfh, versiontuple, UserFacingException
-from electrum_dash.transaction import TxOutput, Transaction, PartialTransaction, PartialTxInput, PartialTxOutput
-from electrum_dash.bip32 import BIP32Node
-from electrum_dash.storage import get_derivation_used_for_hw_device_encryption
-from electrum_dash.keystore import Xpub, Hardware_KeyStore
+from electrum_firo.i18n import _
+from electrum_firo.bitcoin import is_address, opcodes
+from electrum_firo.util import bfh, versiontuple, UserFacingException
+from electrum_firo.transaction import TxOutput, Transaction, PartialTransaction, PartialTxInput, PartialTxOutput
+from electrum_firo.bip32 import BIP32Node
+from electrum_firo.storage import get_derivation_used_for_hw_device_encryption
+from electrum_firo.keystore import Xpub, Hardware_KeyStore
 
 if TYPE_CHECKING:
     import threading
-    from electrum_dash.wallet import Abstract_Wallet
-    from electrum_dash.base_wizard import BaseWizard
+    from electrum_firo.wallet import Abstract_Wallet
+    from electrum_firo.base_wizard import BaseWizard
 
 
 class HW_PluginBase(BasePlugin):

@@ -1,4 +1,4 @@
-from electrum_dash.plugin import hook
+from electrum_firo.plugin import hook
 from .safe_t import SafeTPlugin
 from ..hw_wallet import CmdLineHandler
 

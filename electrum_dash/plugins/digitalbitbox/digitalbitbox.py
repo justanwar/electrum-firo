@@ -16,21 +16,21 @@ import sys
 import time
 import copy
 
-from electrum_dash.crypto import sha256d, EncodeAES_base64, EncodeAES_bytes, DecodeAES_bytes, hmac_oneshot
-from electrum_dash.bitcoin import public_key_to_p2pkh
-from electrum_dash.bip32 import BIP32Node, convert_bip32_intpath_to_strpath, is_all_public_derivation
-from electrum_dash import ecc
-from electrum_dash.ecc import msg_magic
-from electrum_dash.wallet import Standard_Wallet
-from electrum_dash import constants
-from electrum_dash.transaction import Transaction, PartialTransaction, PartialTxInput
-from electrum_dash.i18n import _
-from electrum_dash.keystore import Hardware_KeyStore
-from electrum_dash.util import to_string, UserCancelled, UserFacingException, bfh
-from electrum_dash.base_wizard import ScriptTypeNotSupported, HWD_SETUP_NEW_WALLET
-from electrum_dash.network import Network
-from electrum_dash.logging import get_logger
-from electrum_dash.plugin import runs_in_hwd_thread, run_in_hwd_thread
+from electrum_firo.crypto import sha256d, EncodeAES_base64, EncodeAES_bytes, DecodeAES_bytes, hmac_oneshot
+from electrum_firo.bitcoin import public_key_to_p2pkh
+from electrum_firo.bip32 import BIP32Node, convert_bip32_intpath_to_strpath, is_all_public_derivation
+from electrum_firo import ecc
+from electrum_firo.ecc import msg_magic
+from electrum_firo.wallet import Standard_Wallet
+from electrum_firo import constants
+from electrum_firo.transaction import Transaction, PartialTransaction, PartialTxInput
+from electrum_firo.i18n import _
+from electrum_firo.keystore import Hardware_KeyStore
+from electrum_firo.util import to_string, UserCancelled, UserFacingException, bfh
+from electrum_firo.base_wizard import ScriptTypeNotSupported, HWD_SETUP_NEW_WALLET
+from electrum_firo.network import Network
+from electrum_firo.logging import get_logger
+from electrum_firo.plugin import runs_in_hwd_thread, run_in_hwd_thread
 
 from ..hw_wallet import HW_PluginBase, HardwareClientBase
 

@@ -43,12 +43,12 @@ except ImportError:
 # minimum required version for kivy
 kivy.require('1.8.0')
 
-from electrum_dash.logging import Logger
+from electrum_firo.logging import Logger
 
 if TYPE_CHECKING:
-    from electrum_dash.simple_config import SimpleConfig
-    from electrum_dash.daemon import Daemon
-    from electrum_dash.plugin import Plugins
+    from electrum_firo.simple_config import SimpleConfig
+    from electrum_firo.daemon import Daemon
+    from electrum_firo.plugin import Plugins
 
 
 

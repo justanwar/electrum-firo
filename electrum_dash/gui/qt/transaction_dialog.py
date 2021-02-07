@@ -602,7 +602,7 @@ class BaseTxDialog(QDialog, MessageBoxMixin):
         cursor = i_text.textCursor()
         for txin in self.tx.inputs():
             if txin.is_coinbase_input():
-                cursor.insertText('coinbase')
+                cursor.insertText(self.get_coinbase_tx_type(x))
             else:
                 prevout_hash = txin.prevout.txid.hex()
                 prevout_n = txin.prevout.out_idx
@@ -705,6 +705,14 @@ class BaseTxDialog(QDialog, MessageBoxMixin):
         # set visibility after parenting can be determined by Qt
         self.locktime_final_label.setVisible(self.finalized)
         self.locktime_setter_widget.setVisible(not self.finalized)
+
+    def get_coinbase_tx_type(self, tx):
+        result = 'Coinbase'
+        if tx.prevout.out_idx != 0xffffffff:
+            result = 'Sigma'
+        if tx.script_sig and tx.script_sig[0] == 199: # 199 == 0xC7
+            result = 'Lelantus'
+        return result
 
     def set_title(self):
         self.setWindowTitle(_("Create transaction") if not self.finalized else _("Transaction"))

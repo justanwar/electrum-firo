@@ -2,16 +2,16 @@ import traceback
 import sys
 from typing import NamedTuple, Any, Optional, Dict, Union, List, Tuple, TYPE_CHECKING
 
-from electrum_dash.util import bfh, bh2u, versiontuple, UserCancelled, UserFacingException
-from electrum_dash.bip32 import BIP32Node, convert_bip32_path_to_list_of_uint32 as parse_path
-from electrum_dash import constants
-from electrum_dash.dash_tx import to_varbytes, serialize_extra_payload
-from electrum_dash.i18n import _
-from electrum_dash.plugin import Device, runs_in_hwd_thread
-from electrum_dash.transaction import Transaction, PartialTransaction, PartialTxInput, PartialTxOutput
-from electrum_dash.keystore import Hardware_KeyStore
-from electrum_dash.base_wizard import ScriptTypeNotSupported, HWD_SETUP_NEW_WALLET
-from electrum_dash.logging import get_logger
+from electrum_firo.util import bfh, bh2u, versiontuple, UserCancelled, UserFacingException
+from electrum_firo.bip32 import BIP32Node, convert_bip32_path_to_list_of_uint32 as parse_path
+from electrum_firo import constants
+from electrum_firo.dash_tx import to_varbytes, serialize_extra_payload
+from electrum_firo.i18n import _
+from electrum_firo.plugin import Device, runs_in_hwd_thread
+from electrum_firo.transaction import Transaction, PartialTransaction, PartialTxInput, PartialTxOutput
+from electrum_firo.keystore import Hardware_KeyStore
+from electrum_firo.base_wizard import ScriptTypeNotSupported, HWD_SETUP_NEW_WALLET
+from electrum_firo.logging import get_logger
 
 from ..hw_wallet import HW_PluginBase
 from ..hw_wallet.plugin import (is_any_tx_output_on_change_branch, trezor_validate_op_return_output_and_get_data,
@@ -120,7 +120,8 @@ class TrezorPlugin(HW_PluginBase):
     keystore_class = TrezorKeyStore
     minimum_library = (0, 12, 0)
     maximum_library = (0, 13)
-    SUPPORTED_XTYPES = ('standard', )
+    #SUPPORTED_XTYPES = ('standard', )
+    SUPPORTED_XTYPES = ('standard', 'p2wpkh-p2sh', 'p2wpkh', 'p2wsh-p2sh', 'p2wsh')
     DEVICE_IDS = (TREZOR_PRODUCT_KEY,)
 
     MAX_LABEL_LEN = 32
@@ -375,7 +376,10 @@ class TrezorPlugin(HW_PluginBase):
             txinputtype = TxInputType()
             if txin.is_coinbase_input():
                 prev_hash = b"\x00"*32
-                prev_index = 0xffffffff  # signed int -1
+                if txin['scriptSig'].startswith('c4') and txin['prevout_n'] == 0xffffffff:
+                    prev_index = 1
+                else:
+                    prev_index = txin['prevout_n']
             else:
                 if for_sig:
                     assert isinstance(tx, PartialTransaction)

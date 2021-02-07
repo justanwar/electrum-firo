@@ -42,16 +42,16 @@ from PyQt5.QtCore import QObject, pyqtSignal, QThread
 from PyQt5.QtWidgets import (QVBoxLayout, QLabel, QGridLayout, QLineEdit,
                              QInputDialog)
 
-from electrum_dash.gui.qt.util import (EnterButton, Buttons, CloseButton, OkButton,
+from electrum_firo.gui.qt.util import (EnterButton, Buttons, CloseButton, OkButton,
                                        WindowModalDialog)
-from electrum_dash.gui.qt.main_window import ElectrumWindow
+from electrum_firo.gui.qt.main_window import ElectrumWindow
 
-from electrum_dash.plugin import BasePlugin, hook
-from electrum_dash.paymentrequest import PaymentRequest
-from electrum_dash.i18n import _
-from electrum_dash.logging import Logger
-from electrum_dash.wallet import Abstract_Wallet
-from electrum_dash.invoices import OnchainInvoice
+from electrum_firo.plugin import BasePlugin, hook
+from electrum_firo.paymentrequest import PaymentRequest
+from electrum_firo.i18n import _
+from electrum_firo.logging import Logger
+from electrum_firo.wallet import Abstract_Wallet
+from electrum_firo.invoices import OnchainInvoice
 
 
 class Processor(threading.Thread, Logger):
@@ -180,7 +180,7 @@ class Plugin(BasePlugin):
         menu.addAction(_("Send via e-mail"), lambda: self.send(window, addr))
 
     def send(self, window: ElectrumWindow, addr):
-        from electrum_dash import paymentrequest
+        from electrum_firo import paymentrequest
         req = window.wallet.receive_requests.get(addr)
         if not isinstance(req, OnchainInvoice):
             window.show_error("Only on-chain requests are supported.")

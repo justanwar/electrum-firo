@@ -7,11 +7,11 @@ from PyQt5.QtWidgets import (QVBoxLayout, QLabel, QGridLayout, QPushButton,
                              QLineEdit, QRadioButton, QCheckBox, QWidget,
                              QMessageBox, QFileDialog, QSlider, QTabWidget)
 
-from electrum_dash.gui.qt.util import (WindowModalDialog, WWLabel, Buttons, CancelButton,
+from electrum_firo.gui.qt.util import (WindowModalDialog, WWLabel, Buttons, CancelButton,
                                        OkButton, CloseButton, PasswordLineEdit, getOpenFileName)
-from electrum_dash.i18n import _
-from electrum_dash.plugin import hook
-from electrum_dash.util import bh2u
+from electrum_firo.i18n import _
+from electrum_firo.plugin import hook
+from electrum_firo.util import bh2u
 
 from ..hw_wallet.qt import QtHandlerBase, QtPluginBase
 from ..hw_wallet.plugin import only_hook_if_libraries_available

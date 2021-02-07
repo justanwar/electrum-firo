@@ -3,10 +3,10 @@ from functools import partial
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QInputDialog, QLabel, QVBoxLayout, QLineEdit
 
-from electrum_dash.i18n import _
-from electrum_dash.plugin import hook
-from electrum_dash.wallet import Standard_Wallet
-from electrum_dash.gui.qt.util import WindowModalDialog
+from electrum_firo.i18n import _
+from electrum_firo.plugin import hook
+from electrum_firo.wallet import Standard_Wallet
+from electrum_firo.gui.qt.util import WindowModalDialog
 
 from .ledger import LedgerPlugin, Ledger_Client
 from ..hw_wallet.qt import QtHandlerBase, QtPluginBase

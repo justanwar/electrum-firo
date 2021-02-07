@@ -324,6 +324,7 @@ class Network(Logger, NetworkRetryManager[ServerAddr]):
         # locks
         self.restart_lock = asyncio.Lock()
         self.bhi_lock = asyncio.Lock()
+        self.callback_lock = threading.Lock()
         self.recent_servers_lock = threading.RLock()       # <- re-entrant
         self.interfaces_lock = threading.Lock()            # for mutating/iterating self.interfaces
         # protx code locks
@@ -1210,9 +1211,14 @@ class Network(Logger, NetworkRetryManager[ServerAddr]):
             if base_height == 0:  # on protx diff first allowed height is 1
                 base_height = 1
             if height > activation_height:
-                height = activation_height + 1
+        #        height = activation_height + 1
+        #elif height - base_height > CHUNK_SIZE:
+        #    height = mn_list.calc_max_height(base_height, height)
+                height = activation_height // CHUNK_SIZE + 1
+                height = height * CHUNK_SIZE - 1
         elif height - base_height > CHUNK_SIZE:
-            height = mn_list.calc_max_height(base_height, height)
+            height = (base_height + CHUNK_SIZE) // CHUNK_SIZE + 1
+            height = height * CHUNK_SIZE - 1
 
         try:
             params = (base_height, height)
@@ -1372,7 +1378,7 @@ class Network(Logger, NetworkRetryManager[ServerAddr]):
         """
         self._jobs = jobs or []
         asyncio.run_coroutine_threadsafe(self._start(), self.asyncio_loop)
-        self.dash_net.start()
+        # self.dash_net.start()
         self.mn_list.start()
 
     @log_exceptions
@@ -1394,6 +1400,18 @@ class Network(Logger, NetworkRetryManager[ServerAddr]):
         if not full_shutdown:
             util.trigger_callback('network_updated')
 
+<<<<<<< HEAD
+=======
+    def stop(self):
+        assert self._loop_thread != threading.current_thread(), 'must not be called from network thread'
+        self.mn_list.stop()
+        fut = asyncio.run_coroutine_threadsafe(self._stop(full_shutdown=True), self.asyncio_loop)
+        try:
+            fut.result(timeout=2)
+        except (concurrent.futures.TimeoutError, concurrent.futures.CancelledError): pass
+        # self.dash_net.stop()
+
+>>>>>>> Masternodes and plugins
     async def _ensure_there_is_a_main_interface(self):
         if self.is_connected():
             return
