@@ -325,6 +325,7 @@ class Network(Logger, NetworkRetryManager[ServerAddr]):
         # locks
         self.restart_lock = asyncio.Lock()
         self.bhi_lock = asyncio.Lock()
+        self.callback_lock = threading.Lock()
         self.recent_servers_lock = threading.RLock()       # <- re-entrant
         self.interfaces_lock = threading.Lock()            # for mutating/iterating self.interfaces
         # protx code locks
@@ -625,7 +626,7 @@ class Network(Logger, NetworkRetryManager[ServerAddr]):
                 await self.switch_to_interface(server)
             else:
                 await self.switch_lagging_interface()
-        await self.dash_net.set_parameters()
+        # await self.dash_net.set_parameters()
 
     @log_exceptions
     async def restart(self):
@@ -1175,9 +1176,14 @@ class Network(Logger, NetworkRetryManager[ServerAddr]):
             if base_height == 0:  # on protx diff first allowed height is 1
                 base_height = 1
             if height > activation_height:
-                height = activation_height + 1
+        #        height = activation_height + 1
+        #elif height - base_height > CHUNK_SIZE:
+        #    height = mn_list.calc_max_height(base_height, height)
+                height = activation_height // CHUNK_SIZE + 1
+                height = height * CHUNK_SIZE - 1
         elif height - base_height > CHUNK_SIZE:
-            height = mn_list.calc_max_height(base_height, height)
+            height = (base_height + CHUNK_SIZE) // CHUNK_SIZE + 1
+            height = height * CHUNK_SIZE - 1
 
         try:
             params = (base_height, height)
@@ -1196,7 +1202,7 @@ class Network(Logger, NetworkRetryManager[ServerAddr]):
             err = f'request_protx_diff(), params={params}: cancelled'
         except Exception as e:
             err = f'request_protx_diff(), params={params}: {repr(e)}'
-        self.trigger_callback('protx-diff', {'error': err,
+        util.trigger_callback('protx-diff', {'error': err,
                                              'result': res,
                                              'params': params})
 
@@ -1336,7 +1342,7 @@ class Network(Logger, NetworkRetryManager[ServerAddr]):
         """
         self._jobs = jobs or []
         asyncio.run_coroutine_threadsafe(self._start(), self.asyncio_loop)
-        self.dash_net.start()
+        # self.dash_net.start()
         self.mn_list.start()
 
     @log_exceptions
@@ -1360,7 +1366,7 @@ class Network(Logger, NetworkRetryManager[ServerAddr]):
         try:
             fut.result(timeout=2)
         except (concurrent.futures.TimeoutError, concurrent.futures.CancelledError): pass
-        self.dash_net.stop()
+        # self.dash_net.stop()
 
     async def _ensure_there_is_a_main_interface(self):
         if self.is_connected():

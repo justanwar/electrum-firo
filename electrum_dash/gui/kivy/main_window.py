@@ -9,20 +9,20 @@ import threading
 import asyncio
 from typing import TYPE_CHECKING, Optional, Union, Callable, Sequence
 
-from electrum_dash.dash_ps import (PSPossibleDoubleSpendError,
+from electrum_firo.dash_ps import (PSPossibleDoubleSpendError,
                                    PSSpendToPSAddressesError)
-from electrum_dash.storage import WalletStorage, StorageReadWriteError
-from electrum_dash.wallet_db import WalletDB
-from electrum_dash.wallet import Wallet, InternalAddressCorruption, Abstract_Wallet
-from electrum_dash.plugin import run_hook
-from electrum_dash import util
-from electrum_dash.util import (profiler, InvalidPassword, send_exception_to_crash_reporter,
+from electrum_firo.storage import WalletStorage, StorageReadWriteError
+from electrum_firo.wallet_db import WalletDB
+from electrum_firo.wallet import Wallet, InternalAddressCorruption, Abstract_Wallet
+from electrum_firo.plugin import run_hook
+from electrum_firo import util
+from electrum_firo.util import (profiler, InvalidPassword, send_exception_to_crash_reporter,
                            format_satoshis, format_satoshis_plain, format_fee_satoshis)
-from electrum_dash.invoices import PR_PAID, PR_FAILED
-from electrum_dash import blockchain
-from electrum_dash.network import Network, TxBroadcastError, BestEffortRequestFailed
-from electrum_dash.interface import PREFERRED_NETWORK_PROTOCOL, ServerAddr
-from electrum_dash.logging import Logger
+from electrum_firo.invoices import PR_PAID, PR_FAILED
+from electrum_firo import blockchain
+from electrum_firo.network import Network, TxBroadcastError, BestEffortRequestFailed
+from electrum_firo.interface import PREFERRED_NETWORK_PROTOCOL, ServerAddr
+from electrum_firo.logging import Logger
 from .i18n import _
 from . import KIVY_GUI_PATH
 
@@ -39,10 +39,10 @@ from kivy.lang import Builder
 from .uix.dialogs.password_dialog import OpenWalletDialog, ChangePasswordDialog, PincodeDialog
 
 ## lazy imports for factory so that widgets can be used in kv
-#Factory.register('InstallWizard', module='electrum_dash.gui.kivy.uix.dialogs.installwizard')
-#Factory.register('InfoBubble', module='electrum_dash.gui.kivy.uix.dialogs')
-#Factory.register('OutputList', module='electrum_dash.gui.kivy.uix.dialogs')
-#Factory.register('OutputItem', module='electrum_dash.gui.kivy.uix.dialogs')
+#Factory.register('InstallWizard', module='electrum_firo.gui.kivy.uix.dialogs.installwizard')
+#Factory.register('InfoBubble', module='electrum_firo.gui.kivy.uix.dialogs')
+#Factory.register('OutputList', module='electrum_firo.gui.kivy.uix.dialogs')
+#Factory.register('OutputItem', module='electrum_firo.gui.kivy.uix.dialogs')
 
 from .uix.dialogs.installwizard import InstallWizard
 from .uix.dialogs import InfoBubble, crash_reporter
@@ -61,14 +61,14 @@ notification = app = ref = None
 
 # register widget cache for keeping memory down timeout to forever to cache
 # the data
-Cache.register('electrum_dash_widgets', timeout=0)
+Cache.register('electrum_firo_widgets', timeout=0)
 
 from kivy.uix.screenmanager import Screen
 from kivy.uix.tabbedpanel import TabbedPanel
 from kivy.uix.label import Label
 from kivy.core.clipboard import Clipboard
 
-Factory.register('TabbedCarousel', module='electrum_dash.gui.kivy.uix.screens')
+Factory.register('TabbedCarousel', module='electrum_firo.gui.kivy.uix.screens')
 
 # Register fonts without this you won't be able to use bold/italic...
 # inside markup.
@@ -82,14 +82,14 @@ Label.register(
 )
 
 
-from electrum_dash.util import (NoDynamicFeeEstimates, NotEnoughFunds,
+from electrum_firo.util import (NoDynamicFeeEstimates, NotEnoughFunds,
                                 DASH_BIP21_URI_SCHEME, PAY_BIP21_URI_SCHEME)
 
 if TYPE_CHECKING:
     from . import ElectrumGui
-    from electrum_dash.simple_config import SimpleConfig
-    from electrum_dash.plugin import Plugins
-    from electrum_dash.paymentrequest import PaymentRequest
+    from electrum_firo.simple_config import SimpleConfig
+    from electrum_firo.plugin import Plugins
+    from electrum_firo.paymentrequest import PaymentRequest
 
 
 ATLAS_ICON = f'atlas://{KIVY_GUI_PATH}/theming/light/%s'
@@ -424,7 +424,7 @@ class ElectrumWindow(App, Logger):
             self.send_screen.do_clear()
 
     def on_qr(self, data):
-        from electrum_dash.bitcoin import is_address
+        from electrum_firo.bitcoin import is_address
         data = data.strip()
         if is_address(data):
             self.set_URI(data)
@@ -435,7 +435,7 @@ class ElectrumWindow(App, Logger):
             self.set_URI(data)
             return
         # try to decode transaction
-        from electrum_dash.transaction import tx_from_any
+        from electrum_firo.transaction import tx_from_any
         try:
             tx = tx_from_any(data)
         except:
@@ -798,13 +798,13 @@ class ElectrumWindow(App, Logger):
 
         #setup lazy imports for mainscreen
         Factory.register('AnimatedPopup',
-                         module='electrum_dash.gui.kivy.uix.dialogs')
+                         module='electrum_firo.gui.kivy.uix.dialogs')
         Factory.register('QRCodeWidget',
-                         module='electrum_dash.gui.kivy.uix.qrcodewidget')
+                         module='electrum_firo.gui.kivy.uix.qrcodewidget')
 
         # preload widgets. Remove this if you want to load the widgets on demand
-        #Cache.append('electrum_dash_widgets', 'AnimatedPopup', Factory.AnimatedPopup())
-        #Cache.append('electrum_dash_widgets', 'QRCodeWidget', Factory.QRCodeWidget())
+        #Cache.append('electrum_firo_widgets', 'AnimatedPopup', Factory.AnimatedPopup())
+        #Cache.append('electrum_firo_widgets', 'QRCodeWidget', Factory.QRCodeWidget())
 
         # load and focus the ui
         self.root.manager = self.root.ids['manager']
@@ -1046,7 +1046,7 @@ class ElectrumWindow(App, Logger):
             self._trigger_update_status()
 
     def get_max_amount(self, is_ps=False):
-        from electrum_dash.transaction import PartialTxOutput
+        from electrum_firo.transaction import PartialTxOutput
         if run_hook('abort_send', self):
             return ''
         min_rounds = None if not is_ps else self.wallet.psman.mix_rounds

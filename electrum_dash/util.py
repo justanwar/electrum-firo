@@ -575,16 +575,16 @@ def xor_bytes(a: bytes, b: bytes) -> bytes:
 
 
 def user_dir():
-    if "DASH_ELECTRUMDIR" in os.environ:
-        return os.environ["DASH_ELECTRUMDIR"]
+    if "FIRO_ELECTRUMDIR" in os.environ:
+        return os.environ["FIRO_ELECTRUMDIR"]
     elif 'ANDROID_DATA' in os.environ:
         return android_data_dir()
     elif os.name == 'posix':
-        return os.path.join(os.environ["HOME"], ".electrum-dash")
+        return os.path.join(os.environ["HOME"], ".electrum-firo")
     elif "APPDATA" in os.environ:
-        return os.path.join(os.environ["APPDATA"], "Electrum-DASH")
+        return os.path.join(os.environ["APPDATA"], "Electrum-FIRO")
     elif "LOCALAPPDATA" in os.environ:
-        return os.path.join(os.environ["LOCALAPPDATA"], "Electrum-DASH")
+        return os.path.join(os.environ["LOCALAPPDATA"], "Electrum-FIRO")
     else:
         #raise Exception("No home directory found in environment variables.")
         return

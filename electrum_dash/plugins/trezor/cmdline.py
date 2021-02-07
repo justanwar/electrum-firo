@@ -1,6 +1,6 @@
-from electrum_dash.plugin import hook
-from electrum_dash.i18n import _
-from electrum_dash.util import print_stderr
+from electrum_firo.plugin import hook
+from electrum_firo.i18n import _
+from electrum_firo.util import print_stderr
 from .trezor import TrezorPlugin, PASSPHRASE_ON_DEVICE
 from ..hw_wallet import CmdLineHandler
 

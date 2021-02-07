@@ -4,21 +4,21 @@ import sys
 import traceback
 from typing import Optional, Tuple
 
-from electrum_dash import constants
-from electrum_dash import ecc
-from electrum_dash import bip32
-from electrum_dash.crypto import hash_160
-from electrum_dash.bitcoin import (int_to_hex, var_int, b58_address_to_hash160,
+from electrum_firo import constants
+from electrum_firo import ecc
+from electrum_firo import bip32
+from electrum_firo.crypto import hash_160
+from electrum_firo.bitcoin import (int_to_hex, var_int, b58_address_to_hash160,
                                    hash160_to_b58_address)
-from electrum_dash.bip32 import BIP32Node, convert_bip32_intpath_to_strpath
-from electrum_dash.i18n import _
-from electrum_dash.keystore import Hardware_KeyStore
-from electrum_dash.transaction import Transaction, PartialTransaction, PartialTxInput, PartialTxOutput
-from electrum_dash.wallet import Standard_Wallet
-from electrum_dash.util import bfh, bh2u, versiontuple, UserFacingException
-from electrum_dash.base_wizard import ScriptTypeNotSupported
-from electrum_dash.logging import get_logger
-from electrum_dash.plugin import runs_in_hwd_thread, Device
+from electrum_firo.bip32 import BIP32Node, convert_bip32_intpath_to_strpath
+from electrum_firo.i18n import _
+from electrum_firo.keystore import Hardware_KeyStore
+from electrum_firo.transaction import Transaction, PartialTransaction, PartialTxInput, PartialTxOutput
+from electrum_firo.wallet import Standard_Wallet
+from electrum_firo.util import bfh, bh2u, versiontuple, UserFacingException
+from electrum_firo.base_wizard import ScriptTypeNotSupported
+from electrum_firo.logging import get_logger
+from electrum_firo.plugin import runs_in_hwd_thread, Device
 
 from ..hw_wallet import HW_PluginBase, HardwareClientBase
 from ..hw_wallet.plugin import is_any_tx_output_on_change_branch, validate_op_return_output, LibraryFoundButUnusable
@@ -140,7 +140,7 @@ class btchip_dash(btchip):
             # Dash DIP2 extra data: By appending data to the 'lockTime' transfer we force the device into the
             # BTCHIP_TRANSACTION_PROCESS_EXTRA mode, which gives us the opportunity to sneak with an additional
             # data block.
-            if len(transaction.extra_data) > 255 - len(transaction.lockTime):
+            if False and len(transaction.extra_data) > 255 - len(transaction.lockTime):
                 # for now the size should be sufficient
                 raise Exception('The size of the DIP2 extra data block has exceeded the limit.')
 
@@ -625,8 +625,14 @@ class LedgerPlugin(HW_PluginBase):
                    (0x2581, 0x3b7c), # HW.1 ledger production
                    (0x2581, 0x4b7c), # HW.1 ledger test
                    (0x2c97, 0x0000), # Blue
+                   (0x2c97, 0x0011), # Blue app-bitcoin >= 1.5.1
+                   (0x2c97, 0x0015), # Blue app-bitcoin >= 1.5.1
                    (0x2c97, 0x0001), # Nano-S
+                   (0x2c97, 0x1011), # Nano-S app-bitcoin >= 1.5.1
+                   (0x2c97, 0x1015), # Nano-S app-bitcoin >= 1.5.1
                    (0x2c97, 0x0004), # Nano-X
+                   (0x2c97, 0x4011), # Nano-X app-bitcoin >= 1.5.1
+                   (0x2c97, 0x4015), # Nano-X app-bitcoin >= 1.5.1
                    (0x2c97, 0x0005), # RFU
                    (0x2c97, 0x0006), # RFU
                    (0x2c97, 0x0007), # RFU

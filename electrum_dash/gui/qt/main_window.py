@@ -277,7 +277,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
         add_optional_tab(tabs, self.addresses_tab, read_QIcon("tab_addresses.png"), _("&Addresses"), "addresses")
         add_optional_tab(tabs, self.utxo_tab, read_QIcon("tab_coins.png"), _("Co&ins"), "utxo")
         add_optional_tab(tabs, self.contacts_tab, read_QIcon("tab_contacts.png"), _("Con&tacts"), "contacts")
-        add_optional_tab(tabs, self.dip3_tab, read_QIcon("tab_dip3.png"), _("&DIP3"), "dip3")
+        add_optional_tab(tabs, self.dip3_tab, read_QIcon("tab_dip3.png"), _("&Evo"), "evo")
         add_optional_tab(tabs, self.console_tab, read_QIcon("tab_console.png"), _("Con&sole"), "console")
 
         tabs.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
@@ -1188,7 +1188,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
         l.searchable_list = l
         l.setObjectName("history_container")
         toolbar = l.create_toolbar(self.config)
-        toolbar_shown = bool(self.config.get('show_toolbar_history', False))
+        toolbar_shown = bool(self.config.get('show_toolbar_history', True))
         l.show_toolbar(toolbar_shown)
         return self.create_list_tab(l, toolbar)
 
@@ -2263,9 +2263,10 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
         self.address_model.set_view(self.address_list)
         l.setObjectName("addresses_container")
         toolbar = l.create_toolbar(self.config)
-        toolbar_shown = bool(self.config.get('show_toolbar_addresses', True))
+        # toolbar_shown = bool(self.config.get('show_toolbar_addresses', True))
+        toolbar_shown = False
         l.show_toolbar(toolbar_shown)
-        return self.create_list_tab(l, toolbar)
+        return self.create_list_tab(l, None)
 
     def create_utxo_tab(self):
         from .utxo_list import UTXOModel, UTXOList
@@ -2277,7 +2278,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
         # toolbar_shown = bool(self.config.get('show_toolbar_utxos', True))
         toolbar_shown = False
         l.show_toolbar(toolbar_shown)
-        return self.create_list_tab(l, toolbar)
+        return self.create_list_tab(l, None)
 
     def create_contacts_tab(self):
         from .contact_list import ContactList

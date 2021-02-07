@@ -3,15 +3,15 @@ import traceback
 import sys
 from typing import NamedTuple, Any, Optional, Dict, Union, List, Tuple, TYPE_CHECKING
 
-from electrum_dash.util import bfh, bh2u, versiontuple, UserCancelled, UserFacingException
-from electrum_dash.bip32 import BIP32Node
-from electrum_dash import constants
-from electrum_dash.dash_tx import to_varbytes, serialize_extra_payload
-from electrum_dash.i18n import _
-from electrum_dash.plugin import Device, runs_in_hwd_thread
-from electrum_dash.transaction import Transaction, PartialTransaction, PartialTxInput, PartialTxOutput
-from electrum_dash.keystore import Hardware_KeyStore
-from electrum_dash.base_wizard import ScriptTypeNotSupported
+from electrum_firo.util import bfh, bh2u, versiontuple, UserCancelled, UserFacingException
+from electrum_firo.bip32 import BIP32Node
+from electrum_firo import constants
+from electrum_firo.dash_tx import to_varbytes, serialize_extra_payload
+from electrum_firo.i18n import _
+from electrum_firo.plugin import Device, runs_in_hwd_thread
+from electrum_firo.transaction import Transaction, PartialTransaction, PartialTxInput, PartialTxOutput
+from electrum_firo.keystore import Hardware_KeyStore
+from electrum_firo.base_wizard import ScriptTypeNotSupported
 
 from ..hw_wallet import HW_PluginBase
 from ..hw_wallet.plugin import (is_any_tx_output_on_change_branch, trezor_validate_op_return_output_and_get_data,

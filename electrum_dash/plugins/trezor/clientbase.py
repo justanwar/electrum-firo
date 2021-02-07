@@ -1,14 +1,14 @@
 import time
 from struct import pack
 
-from electrum_dash import ecc
-from electrum_dash.i18n import _
-from electrum_dash.util import UserCancelled, UserFacingException
-from electrum_dash.keystore import bip39_normalize_passphrase
-from electrum_dash.bip32 import BIP32Node, convert_bip32_path_to_list_of_uint32 as parse_path
-from electrum_dash.logging import Logger
-from electrum_dash.plugin import runs_in_hwd_thread
-from electrum_dash.plugins.hw_wallet.plugin import OutdatedHwFirmwareException, HardwareClientBase
+from electrum_firo import ecc
+from electrum_firo.i18n import _
+from electrum_firo.util import UserCancelled, UserFacingException
+from electrum_firo.keystore import bip39_normalize_passphrase
+from electrum_firo.bip32 import BIP32Node, convert_bip32_path_to_list_of_uint32 as parse_path
+from electrum_firo.logging import Logger
+from electrum_firo.plugin import runs_in_hwd_thread
+from electrum_firo.plugins.hw_wallet.plugin import OutdatedHwFirmwareException, HardwareClientBase
 
 from trezorlib.client import TrezorClient, PASSPHRASE_ON_DEVICE
 from trezorlib.exceptions import TrezorFailure, Cancelled, OutdatedFirmwareError

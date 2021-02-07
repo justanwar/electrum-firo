@@ -8,13 +8,13 @@ from typing import TYPE_CHECKING
 
 from PyQt5.QtWidgets import (QComboBox, QGridLayout, QLabel, QPushButton)
 
-from electrum_dash.plugin import BasePlugin, hook
-from electrum_dash.gui.qt.util import WaitingDialog, EnterButton, WindowModalDialog, read_QIcon
-from electrum_dash.i18n import _
-from electrum_dash.logging import get_logger
+from electrum_firo.plugin import BasePlugin, hook
+from electrum_firo.gui.qt.util import WaitingDialog, EnterButton, WindowModalDialog, read_QIcon
+from electrum_firo.i18n import _
+from electrum_firo.logging import get_logger
 
 if TYPE_CHECKING:
-    from electrum_dash.gui.qt.transaction_dialog import TxDialog
+    from electrum_firo.gui.qt.transaction_dialog import TxDialog
 
 
 _logger = get_logger(__name__)

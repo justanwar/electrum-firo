@@ -32,21 +32,21 @@ from PyQt5.QtCore import QObject, pyqtSignal
 from PyQt5.QtWidgets import QPushButton
 import certifi
 
-from electrum_dash import util, keystore, ecc, crypto
-from electrum_dash import transaction
-from electrum_dash.transaction import Transaction, PartialTransaction, tx_from_any
-from electrum_dash.bip32 import BIP32Node
-from electrum_dash.plugin import BasePlugin, hook
-from electrum_dash.i18n import _
-from electrum_dash.wallet import Multisig_Wallet, Abstract_Wallet
-from electrum_dash.util import bh2u, bfh
+from electrum_firo import util, keystore, ecc, crypto
+from electrum_firo import transaction
+from electrum_firo.transaction import Transaction, PartialTransaction, tx_from_any
+from electrum_firo.bip32 import BIP32Node
+from electrum_firo.plugin import BasePlugin, hook
+from electrum_firo.i18n import _
+from electrum_firo.wallet import Multisig_Wallet, Abstract_Wallet
+from electrum_firo.util import bh2u, bfh
 
-from electrum_dash.gui.qt.transaction_dialog import show_transaction, TxDialog
-from electrum_dash.gui.qt.util import WaitingDialog
+from electrum_firo.gui.qt.transaction_dialog import show_transaction, TxDialog
+from electrum_firo.gui.qt.util import WaitingDialog
 
 if TYPE_CHECKING:
-    from electrum_dash.gui.qt import ElectrumGui
-    from electrum_dash.gui.qt.main_window import ElectrumWindow
+    from electrum_firo.gui.qt import ElectrumGui
+    from electrum_firo.gui.qt.main_window import ElectrumWindow
 
 
 ca_path = certifi.where()

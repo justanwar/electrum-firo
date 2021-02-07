@@ -2,14 +2,14 @@ import time
 from struct import pack
 from typing import Optional
 
-from electrum_dash import ecc
-from electrum_dash.i18n import _
-from electrum_dash.util import UserCancelled
-from electrum_dash.keystore import bip39_normalize_passphrase
-from electrum_dash.bip32 import BIP32Node, convert_bip32_path_to_list_of_uint32
-from electrum_dash.logging import Logger
-from electrum_dash.plugin import runs_in_hwd_thread
-from electrum_dash.plugins.hw_wallet.plugin import HardwareClientBase, HardwareHandlerBase
+from electrum_firo import ecc
+from electrum_firo.i18n import _
+from electrum_firo.util import UserCancelled
+from electrum_firo.keystore import bip39_normalize_passphrase
+from electrum_firo.bip32 import BIP32Node, convert_bip32_path_to_list_of_uint32
+from electrum_firo.logging import Logger
+from electrum_firo.plugin import runs_in_hwd_thread
+from electrum_firo.plugins.hw_wallet.plugin import HardwareClientBase, HardwareHandlerBase
 
 
 class GuiMixin(object):
