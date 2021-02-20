@@ -313,7 +313,9 @@ class AddressSynchronizer(Logger):
             # BUT we track is_mine inputs in a txn, and during subsequent calls
             # of add_transaction tx, we might learn of more-and-more inputs of
             # being is_mine, as we roll the gap_limit forward
-            is_coinbase = tx.inputs()[0].is_coinbase_input()
+
+            # prevent lelantus transasctions stored as cb.
+            is_coinbase = tx.inputs()[0].is_coinbase_input() and not tx.inputs()[0].is_lelantus_input()
             tx_height = self.get_tx_height(tx_hash).height
             if not allow_unrelated:
                 # note that during sync, if the transactions are not properly sorted,

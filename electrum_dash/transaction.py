@@ -205,6 +205,9 @@ class TxInput:
         self.nsequence = nsequence
         self._is_coinbase_output = is_coinbase_output
 
+    def is_lelantus_input(self) -> bool:
+        return self.script_sig and self.script_sig[0] == 199
+
     def is_coinbase_input(self) -> bool:
         """Whether this is the input of a coinbase tx."""
         return self.prevout.is_coinbase()

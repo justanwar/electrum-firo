@@ -596,13 +596,13 @@ class Dip3TabWidget(QTabWidget):
 
         state = self.mn_list.protx_state
         if state == self.mn_list.DIP3_DISABLED:
-            return _('Evo Masternodes is currently disabled.')
+            return _('Masternodes is currently disabled.')
 
         count = len(self.mn_list.protx_mns)
         connected = self.gui.network.is_connected()
         loading = connected and self.mn_list.protx_loading
         ready = _('Loading') if loading else _('Found')
-        return (_('%s %s registered Evo Masternodes.') % (ready, count))
+        return (_('%s %s registered Masternodes.') % (ready, count))
 
     def update_registered_label(self):
         self.reg_label.setText(self.registered_label())
@@ -611,20 +611,20 @@ class Dip3TabWidget(QTabWidget):
         mns = self.manager.mns
         count = len(mns)
         mn_str = _('Masternode') if count == 1 else _('Masternodes')
-        def_label_str = _('Wallet contains %s Evo %s.') % (count, mn_str)
+        def_label_str = _('Wallet contains %s %s.') % (count, mn_str)
 
         if not self.mn_list:
             return def_label_str
 
         state = self.mn_list.protx_state
         if state == self.mn_list.DIP3_DISABLED:
-            return (_('Evo Masternodes is currently disabled.'))
+            return (_('Masternodes is currently disabled.'))
 
         connected = self.gui.network.is_connected()
         loading = connected and self.mn_list.protx_loading
         if loading:
             height = self.mn_list.protx_height
-            return (_('Loading Evo data at Height: %s.') % height)
+            return (_('Loading data at Height: %s.') % height)
 
         return def_label_str
 
@@ -1128,10 +1128,10 @@ class Dip3MNInfoDialog(QDialog):
 
         if self.mn:
             self.protx_hash = self.mn.protx_hash
-            self.setWindowTitle(_('%s Evo Masternode Info') % alias)
+            self.setWindowTitle(_('%s Masternode Info') % alias)
         elif protx_hash:
             self.protx_hash = protx_hash
-            self.setWindowTitle(_('%s... Evo Masternode Info')
+            self.setWindowTitle(_('%s... Masternode Info')
                                 % protx_hash[:32])
 
         if self.mn_list and self.protx_hash:
