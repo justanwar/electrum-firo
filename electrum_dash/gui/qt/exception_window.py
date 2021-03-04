@@ -52,7 +52,7 @@ class Exception_Window(BaseCrashReporter, QWidget, MessageBoxMixin, Logger):
         self.config = config
 
         QWidget.__init__(self)
-        self.setWindowTitle('Dash Electrum - ' + _('An Error Occurred'))
+        self.setWindowTitle('Firo Electrum - ' + _('An Error Occurred'))
         self.setMinimumSize(600, 300)
 
         Logger.__init__(self)
@@ -189,6 +189,6 @@ class Exception_Hook(QObject, Logger):
 
     @classmethod
     def show_need_restart_msg(cls, parent):
-        parent.show_warning(_('Please restart Dash Electrum to activate'
+        parent.show_warning(_('Please restart Firo Electrum to activate'
                               ' new crash reporter settings'),
                             title=_('Success'))

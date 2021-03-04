@@ -9,7 +9,7 @@ mv $BUILD_DIR/x11_hash $WINEPREFIX/drive_c/
 
 mv $BUILD_DIR/libsecp256k1 $WINEPREFIX/drive_c/
 
-cd $WINEPREFIX/drive_c/electrum-firo
+cd $WINEPREFIX/drive_c/electrum-dash
 
 rm -rf build
 rm -rf dist/electrum-dash

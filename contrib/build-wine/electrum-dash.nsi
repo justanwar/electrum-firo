@@ -7,11 +7,11 @@
 ;--------------------------------
 ;Variables
 
-  !define PRODUCT_NAME "Dash Electrum"
-  !define PRODUCT_NAME_NO_SPACE "Dash-Electrum"
-  !define PREV_PROD_NAME "Electrum-DASH"
-  !define PREV_PROD_NAME2 "Dash-Electrum"
-  !define PRODUCT_WEB_SITE "https://github.com/akhavr/electrum-dash"
+  !define PRODUCT_NAME "Firo Electrum"
+  !define PRODUCT_NAME_NO_SPACE "Firo-Electrum"
+  !define PREV_PROD_NAME "Electrum-FIRO"
+  !define PREV_PROD_NAME2 "Firo-Electrum"
+  !define PRODUCT_WEB_SITE "https://github.com/firoorg"
   !define PRODUCT_PUBLISHER "Electrum Technologies GmbH"
   !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
   !define PREV_PROD_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PREV_PROD_NAME}"
@@ -133,7 +133,7 @@ Section "${PRODUCT_NAME}" SectionDE
     Delete "$SMPROGRAMS\${PREV_PROD_NAME}\*.*"
     RMDir  "$SMPROGRAMS\${PREV_PROD_NAME}"
 
-    DeleteRegKey HKCU "Software\Classes\dash"
+    DeleteRegKey HKCU "Software\Classes\firo"
     DeleteRegKey HKCU "Software\${PREV_PROD_NAME}"
     DeleteRegKey HKCU "${PREV_PROD_UNINST_KEY}"
   ${EndIf}
@@ -148,7 +148,7 @@ Section "${PRODUCT_NAME}" SectionDE
     Delete "$SMPROGRAMS\${PREV_PROD_NAME2}\*.*"
     RMDir  "$SMPROGRAMS\${PREV_PROD_NAME2}"
 
-    DeleteRegKey HKCU "Software\Classes\dash"
+    DeleteRegKey HKCU "Software\Classes\firo"
     DeleteRegKey HKCU "Software\${PREV_PROD_NAME2}"
     DeleteRegKey HKCU "${PREV_PROD_UNINST_KEY2}"
   ${EndIf}
@@ -171,21 +171,21 @@ Section "${PRODUCT_NAME}" SectionDE
 
   ;Create desktop shortcut
   DetailPrint "Creating desktop shortcut..."
-  CreateShortCut "$DESKTOP\${PRODUCT_NAME}.lnk" "$INSTDIR\electrum-dash-${PRODUCT_VERSION}.exe" ""
+  CreateShortCut "$DESKTOP\${PRODUCT_NAME}.lnk" "$INSTDIR\electrum-firo-${PRODUCT_VERSION}.exe" ""
 
   ;Create start-menu items
   DetailPrint "Creating start-menu items..."
   CreateDirectory "$SMPROGRAMS\${PRODUCT_NAME}"
   CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk" "$INSTDIR\Uninstall.exe" "" "$INSTDIR\Uninstall.exe" 0
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk" "$INSTDIR\electrum-dash-${PRODUCT_VERSION}.exe" "" "$INSTDIR\electrum-dash-${PRODUCT_VERSION}.exe" 0
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME} Testnet.lnk" "$INSTDIR\electrum-dash-${PRODUCT_VERSION}.exe" "--testnet" "$INSTDIR\electrum-dash-${PRODUCT_VERSION}.exe" 0
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk" "$INSTDIR\electrum-firo-${PRODUCT_VERSION}.exe" "" "$INSTDIR\electrum-firo-${PRODUCT_VERSION}.exe" 0
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME} Testnet.lnk" "$INSTDIR\electrum-firo-${PRODUCT_VERSION}.exe" "--testnet" "$INSTDIR\electrum-firo-${PRODUCT_VERSION}.exe" 0
 
 
   ;Links dash: URI's to Electrum
-  WriteRegStr HKCU "Software\Classes\dash" "" "URL:dash Protocol"
-  WriteRegStr HKCU "Software\Classes\dash" "URL Protocol" ""
-  WriteRegStr HKCU "Software\Classes\dash" "DefaultIcon" "$\"$INSTDIR\electrum-dash.ico, 0$\""
-  WriteRegStr HKCU "Software\Classes\dash\shell\open\command" "" "$\"$INSTDIR\electrum-dash-${PRODUCT_VERSION}.exe$\" $\"%1$\""
+  ;WriteRegStr HKCU "Software\Classes\dash" "" "URL:dash Protocol"
+  ;WriteRegStr HKCU "Software\Classes\dash" "URL Protocol" ""
+  ;WriteRegStr HKCU "Software\Classes\dash" "DefaultIcon" "$\"$INSTDIR\electrum-dash.ico, 0$\""
+  ;WriteRegStr HKCU "Software\Classes\dash\shell\open\command" "" "$\"$INSTDIR\electrum-dash-${PRODUCT_VERSION}.exe$\" $\"%1$\""
 
   ;Adds an uninstaller possibility to Windows Uninstall or change a program section
   WriteRegStr HKCU "${PRODUCT_UNINST_KEY}" "DisplayName" "$(^Name)"
@@ -210,7 +210,7 @@ SectionEnd
 
 ;--------------------------------
 ;Descriptions
-LangString DESC_DE ${LANG_ENGLISH} "Dash Electrum Wallet"
+LangString DESC_DE ${LANG_ENGLISH} "Firo Electrum Wallet"
 LangString DESC_TOR ${LANG_ENGLISH} "The Tor Project Socks Proxy"
 
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
@@ -230,7 +230,7 @@ Section "Uninstall"
   Delete "$SMPROGRAMS\${PRODUCT_NAME}\*.*"
   RMDir  "$SMPROGRAMS\${PRODUCT_NAME}"
   
-  DeleteRegKey HKCU "Software\Classes\dash"
+  DeleteRegKey HKCU "Software\Classes\firo"
   DeleteRegKey HKCU "Software\${PRODUCT_NAME}"
   DeleteRegKey HKCU "${PRODUCT_UNINST_KEY}"
 SectionEnd

@@ -34,8 +34,8 @@ fi
 
 BUILD_DIST_DIR=build/electrum-dash/dist
 BUILD_BIN_DIR=build/electrum-dash/bin
-NAME=Dash-Electrum
-TNAME=Dash-Electrum-Testnet
+NAME=Firo-Electrum
+TNAME=Firo-Electrum-Testnet
 DEB_NAME=electrum-dash
 APK_NAME=Electrum_DASH
 APK_TNAME=Electrum_DASH_Testnet
@@ -59,7 +59,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     sudo rm -rf build
     mkdir -p build && cp contrib/dash/travis/* ./build/
     ./build/before_install-linux.sh
-    ./build/before_install-linux-apk.sh
+    #./build/before_install-linux-apk.sh
     ./build/travis-build-linux.sh
     cp ${BUILD_DIST_DIR}/${NAME}-${DASH_ELECTRUM_VERSION}.tar.gz \
         dist/
@@ -128,63 +128,63 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
         echo Skip deb packages build
     fi
 
-    # Build mainnet release apk
-    if [[ -n $IS_RELEASE ]]; then
-        sudo rm -rf build
-        mkdir -p build && cp contrib/dash/travis/* ./build/
-        export ELECTRUM_MAINNET=true
-        ./build/travis-build-linux-apk.sh
-        cp ${BUILD_BIN_DIR}/${APK_NAME}-$DASH_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$UAPK_TAIL \
-            dist/
-    fi
+    ## Build mainnet release apk
+    #if [[ -n $IS_RELEASE ]]; then
+    #    sudo rm -rf build
+    #    mkdir -p build && cp contrib/dash/travis/* ./build/
+    #    export ELECTRUM_MAINNET=true
+    #    ./build/travis-build-linux-apk.sh
+    #    cp ${BUILD_BIN_DIR}/${APK_NAME}-$DASH_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$UAPK_TAIL \
+    #        dist/
+    #fi
 
-    # Build testnet release apk
+    ## Build testnet release apk
+    #sudo rm -rf build
+    #mkdir -p build && cp contrib/dash/travis/* ./build/
+    #export ELECTRUM_MAINNET=false
+    #./build/travis-build-linux-apk.sh
+    #cp ${BUILD_BIN_DIR}/${APK_TNAME}-$DASH_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$UAPK_TAIL \
+    #    dist/
+
     sudo rm -rf build
-    mkdir -p build && cp contrib/dash/travis/* ./build/
-    export ELECTRUM_MAINNET=false
-    ./build/travis-build-linux-apk.sh
-    cp ${BUILD_BIN_DIR}/${APK_TNAME}-$DASH_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$UAPK_TAIL \
-        dist/
 
-    sudo rm -rf build
+    #read_jks_storepass
 
-    read_jks_storepass
+    ## Sign mainnet apk
+    #if [[ -n $IS_RELEASE ]]; then
+    #    jarsigner -verbose \
+    #        -tsa http://sha256timestamp.ws.symantec.com/sha256/timestamp \
+    #        -sigalg SHA1withRSA -digestalg SHA1 \
+    #        -sigfile dash-electrum \
+    #        -keystore ~/.jks/keystore \
+    #        -storepass:env JKS_STOREPASS \
+    #        -keypass:env JKS_KEYPASS \
+    #        dist/${APK_NAME}-$DASH_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$UAPK_TAIL \
+    #        electrum.dash.org
 
-    # Sign mainnet apk
-    if [[ -n $IS_RELEASE ]]; then
-        jarsigner -verbose \
-            -tsa http://sha256timestamp.ws.symantec.com/sha256/timestamp \
-            -sigalg SHA1withRSA -digestalg SHA1 \
-            -sigfile dash-electrum \
-            -keystore ~/.jks/keystore \
-            -storepass:env JKS_STOREPASS \
-            -keypass:env JKS_KEYPASS \
-            dist/${APK_NAME}-$DASH_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$UAPK_TAIL \
-            electrum.dash.org
+    #    zipalign -v 4 \
+    #        dist/${APK_NAME}-$DASH_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$UAPK_TAIL \
+    #        dist/${NAME}-$DASH_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$APK_TAIL \
 
-        zipalign -v 4 \
-            dist/${APK_NAME}-$DASH_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$UAPK_TAIL \
-            dist/${NAME}-$DASH_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$APK_TAIL \
+    #    rm dist/${APK_NAME}-$DASH_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$UAPK_TAIL
+    #fi
 
-        rm dist/${APK_NAME}-$DASH_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$UAPK_TAIL
-    fi
+    ## Sign testnet apk
+    #jarsigner -verbose \
+    #    -tsa http://sha256timestamp.ws.symantec.com/sha256/timestamp \
+    #    -sigalg SHA1withRSA -digestalg SHA1 \
+    #    -sigfile dash-electrum \
+    #    -keystore ~/.jks/keystore \
+    #    -storepass:env JKS_STOREPASS \
+    #    -keypass:env JKS_KEYPASS \
+    #    dist/${APK_TNAME}-$DASH_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$UAPK_TAIL \
+    #    electrum.dash.org
 
-    # Sign testnet apk
-    jarsigner -verbose \
-        -tsa http://sha256timestamp.ws.symantec.com/sha256/timestamp \
-        -sigalg SHA1withRSA -digestalg SHA1 \
-        -sigfile dash-electrum \
-        -keystore ~/.jks/keystore \
-        -storepass:env JKS_STOREPASS \
-        -keypass:env JKS_KEYPASS \
-        dist/${APK_TNAME}-$DASH_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$UAPK_TAIL \
-        electrum.dash.org
+    #zipalign -v 4 \
+    #    dist/${APK_TNAME}-$DASH_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$UAPK_TAIL \
+    #    dist/${TNAME}-$DASH_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$APK_TAIL \
 
-    zipalign -v 4 \
-        dist/${APK_TNAME}-$DASH_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$UAPK_TAIL \
-        dist/${TNAME}-$DASH_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$APK_TAIL \
-
-    rm dist/${APK_TNAME}-$DASH_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$UAPK_TAIL
+    #rm dist/${APK_TNAME}-$DASH_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$UAPK_TAIL
 else
     # Build macOS
     sudo rm -rf build

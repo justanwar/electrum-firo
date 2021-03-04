@@ -487,7 +487,7 @@ class Blockchain(Logger):
         if os.path.exists(path):
             return
         elif not os.path.exists(util.get_headers_dir(self.config)):
-            raise FileNotFoundError('Dash Electrum headers_dir does not exist. Was it deleted while running?')
+            raise FileNotFoundError('Firo Electrum headers_dir does not exist. Was it deleted while running?')
         else:
             raise FileNotFoundError('Cannot find headers file but headers_dir is there. Should be at {}'.format(path))
 
