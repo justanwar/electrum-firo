@@ -89,7 +89,7 @@ def show_transaction(tx: Transaction, *, parent: 'ElectrumWindow', desc=None, pr
         d = TxDialog(tx, parent=parent, desc=desc, prompt_if_unsaved=prompt_if_unsaved)
     except SerializationError as e:
         _logger.exception('unable to deserialize the transaction')
-        parent.show_critical(_("Dash Electrum was unable to deserialize the transaction:") + "\n" + str(e))
+        parent.show_critical(_("Firo Electrum was unable to deserialize the transaction:") + "\n" + str(e))
     else:
         d.bg_update(lambda x: d.update_and_show())
 
@@ -824,7 +824,7 @@ class PreviewTxDialog(BaseTxDialog, TxEditor):
 
         def feerounding_onclick():
             text = (self.feerounding_text + '\n\n' +
-                    _('To somewhat protect your privacy, Dash Electrum tries to create change with similar precision to other outputs.') + ' ' +
+                    _('To somewhat protect your privacy, Firo Electrum tries to create change with similar precision to other outputs.') + ' ' +
                     _('At most 100 duffs might be lost due to this rounding.') + ' ' +
                     _("You can disable this setting in '{}'.").format(_('Preferences')) + '\n' +
                     _('Also, dust is not kept as change, but added to the fee.'))

@@ -257,7 +257,7 @@ class CommandsServer(AuthenticatedServer):
             else:
                 response = "error: current GUI does not support multiple windows"
         else:
-            response = "Error: Dash Electrum is running in daemon mode. Please stop the daemon first."
+            response = "Error: Firo Electrum is running in daemon mode. Please stop the daemon first."
         return response
 
     async def run_cmdline(self, config_options):

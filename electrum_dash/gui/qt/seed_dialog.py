@@ -92,10 +92,10 @@ class SeedLayout(QVBoxLayout):
                 if self.seed_type == 'bip39':
                     msg = ' '.join([
                         '<b>' + _('Warning') + ':</b>  ',
-                        _('BIP39 seeds can be imported in Dash Electrum, so that users can access funds locked in other wallets.'),
+                        _('BIP39 seeds can be imported in Firo Electrum, so that users can access funds locked in other wallets.'),
                         _('However, we do not generate BIP39 seeds, because they do not meet our safety standard.'),
                         _('BIP39 seeds do not include a version number, which compromises compatibility with future software.'),
-                        _('We do not guarantee that BIP39 imports will always be supported in Dash Electrum.'),
+                        _('We do not guarantee that BIP39 imports will always be supported in Firo Electrum.'),
                     ])
                 elif self.seed_type == 'slip39':
                     msg = ' '.join([
@@ -372,8 +372,9 @@ class KeysLayout(QVBoxLayout):
 
 class SeedDialog(WindowModalDialog):
 
+
     def __init__(self, parent, seed, passphrase, *, config: 'SimpleConfig'):
-        WindowModalDialog.__init__(self, parent, ('Dash Electrum - ' + _('Seed')))
+        WindowModalDialog.__init__(self, parent, ('Firo Electrum - ' + _('Seed')))
         self.setMinimumWidth(400)
         vbox = QVBoxLayout(self)
         title =  _("Your wallet generation seed is:")

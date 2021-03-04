@@ -21,7 +21,7 @@ pushd $PROJECT_ROOT
 source $CONTRIB/dash/travis/electrum_dash_version_env.sh
 popd
 VERSION=$DASH_ELECTRUM_VERSION
-APPIMAGE="$DISTDIR/Dash-Electrum-$VERSION-x86_64.AppImage"
+APPIMAGE="$DISTDIR/Firo-Electrum-$VERSION-x86_64.AppImage"
 
 . "$CONTRIB"/build_tools_util.sh
 
@@ -49,6 +49,7 @@ git clone "https://github.com/squashfskit/squashfskit.git" "$BUILDDIR/squashfski
 )
 MKSQUASHFS="$BUILDDIR/squashfskit/squashfs-tools/mksquashfs"
 
+cp -r --preserve=links /var/build/appimage/electrum-dash.AppDir/* $APPDIR/
 
 appdir_python() {
   env \
@@ -56,9 +57,7 @@ appdir_python() {
     LD_LIBRARY_PATH="$APPDIR/usr/lib:$APPDIR/usr/lib/x86_64-linux-gnu${LD_LIBRARY_PATH+:$LD_LIBRARY_PATH}" \
     "$APPDIR/usr/bin/python3.7" "$@"
 }
-
 python='appdir_python'
-
 
 info "installing pip."
 "$python" -m ensurepip
@@ -96,7 +95,7 @@ cp "/usr/lib/x86_64-linux-gnu/libzbar.so.0" "$APPDIR/usr/lib/libzbar.so.0"
 
 
 info "desktop integration."
-cp "$PROJECT_ROOT/electrum-dash.desktop" "$APPDIR/electrum-firo.desktop"
+cp "$PROJECT_ROOT/electrum-firo.desktop" "$APPDIR/electrum-firo.desktop"
 cp "$PROJECT_ROOT/electrum_dash/gui/icons/electrum-dash.png" "$APPDIR/electrum-firo.png"
 
 

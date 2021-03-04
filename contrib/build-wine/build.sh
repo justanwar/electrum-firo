@@ -19,7 +19,7 @@ export host_strip="${GCC_TRIPLET_HOST}-strip"
 
 mv $BUILD_DIR/zbarw $WINEPREFIX/drive_c/
 
-cd $WINEPREFIX/drive_c/electrum-firo
+cd $WINEPREFIX/drive_c/electrum-dash
 
 rm -rf build
 rm -rf dist/electrum-dash

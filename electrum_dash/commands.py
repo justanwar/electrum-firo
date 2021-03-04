@@ -535,7 +535,7 @@ class Commands:
 
     @command('n')
     async def getmerkle(self, txid, height):
-        """Get Merkle branch of a transaction included in a block. Dash Electrum
+        """Get Merkle branch of a transaction included in a block. Firo Electrum
         uses this to verify transactions (Simple Payment Verification)."""
         return await self.network.get_merkle_for_transaction(txid, int(height))
 
@@ -546,7 +546,7 @@ class Commands:
 
     @command('')
     async def version(self):
-        """Return the version of Dash Electrum."""
+        """Return the version of Firo Electrum."""
         from .version import ELECTRUM_VERSION
         return ELECTRUM_VERSION
 

@@ -19,8 +19,8 @@ from electrum_firo.network import Network
 
 
 class UpdateCheck(QDialog, Logger):
-    url = "https://raw.githubusercontent.com/akhavr/electrum-dash/master/.latest-version"
-    download_url = "https://github.com/akhavr/electrum-dash/releases"
+    url = "https://raw.githubusercontent.com/firoorg/electrum-firo/master/.latest-version"
+    download_url = "https://github.com/firoorg/electrum-firo/releases"
 
 
     VERSION_ANNOUNCEMENT_SIGNING_KEYS = (
@@ -29,7 +29,7 @@ class UpdateCheck(QDialog, Logger):
 
     def __init__(self, *, latest_version=None):
         QDialog.__init__(self)
-        self.setWindowTitle('Dash Electrum - ' + _('Update Check'))
+        self.setWindowTitle('Firo Electrum - ' + _('Update Check'))
         self.content = QVBoxLayout()
         self.content.setContentsMargins(*[10]*4)
 
@@ -88,10 +88,10 @@ class UpdateCheck(QDialog, Logger):
                 self.detail_label.setText(_("You can download the new version from {}.").format(url))
             else:
                 self.heading_label.setText('<h2>' + _("Already up to date") + '</h2>')
-                self.detail_label.setText(_("You are already on the latest version of Dash Electrum."))
+                self.detail_label.setText(_("You are already on the latest version of Firo Electrum."))
         else:
             self.heading_label.setText('<h2>' + _("Checking for updates...") + '</h2>')
-            self.detail_label.setText(_("Please wait while Dash Electrum checks for available updates."))
+            self.detail_label.setText(_("Please wait while Firo Electrum checks for available updates."))
 
 
 class UpdateCheckThread(QThread, Logger):

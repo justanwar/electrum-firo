@@ -339,7 +339,7 @@ def configure_logging(config):
 
     from . import ELECTRUM_VERSION
     from .constants import GIT_REPO_URL
-    _logger.info(f"Dash Electrum version: {ELECTRUM_VERSION} - "
+    _logger.info(f"Firo Electrum version: {ELECTRUM_VERSION} - "
                  f"https://electrum.dash.org - {GIT_REPO_URL}")
     _logger.info(f"Python version: {sys.version}. On platform: {describe_os_version()}")
     _logger.info(f"Logging to file: {str(_logfile_path)}")

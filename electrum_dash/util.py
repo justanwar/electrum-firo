@@ -472,7 +472,7 @@ def assert_datadir_available(config_path):
         return
     else:
         raise FileNotFoundError(
-            'Dash Electrum datadir does not exist. Was it deleted while running?' + '\n' +
+            'Firo Electrum datadir does not exist. Was it deleted while running?' + '\n' +
             'Should be at {}'.format(path))
 
 
@@ -854,6 +854,7 @@ def block_explorer_URL(config: 'SimpleConfig', kind: str, item: str) -> Optional
 # note: when checking against these, use .lower() to support case-insensitivity
 DASH_BIP21_URI_SCHEME = 'dash'
 PAY_BIP21_URI_SCHEME = 'pay'
+FIRO_BIP21_URI_SCHEME = 'zcoin'
 
 
 class InvalidBitcoinURI(Exception): pass
@@ -870,12 +871,12 @@ def parse_URI(uri: str, on_pr: Callable = None, *, loop=None) -> dict:
 
     if ':' not in uri:
         if not bitcoin.is_address(uri):
-            raise InvalidBitcoinURI("Not a Dash address")
+            raise InvalidBitcoinURI("Not a Firo address")
         return {'address': uri}
 
     u = urllib.parse.urlparse(uri)
-    if u.scheme not in [DASH_BIP21_URI_SCHEME, PAY_BIP21_URI_SCHEME]:
-        raise InvalidBitcoinURI("Not a Dash URI")
+    if u.scheme not in [FIRO_BIP21_URI_SCHEME]:
+        raise InvalidBitcoinURI("Not a Firo URI")
     address = u.path
 
     # python for android fails to parse query
@@ -897,7 +898,7 @@ def parse_URI(uri: str, on_pr: Callable = None, *, loop=None) -> dict:
             raise InvalidBitcoinURI(f'pay: scheme allowed only with "r" query')
     if address:
         if not bitcoin.is_address(address):
-            raise InvalidBitcoinURI(f"Invalid Dash address: {address}")
+            raise InvalidBitcoinURI(f"Invalid Firo address: {address}")
         out['address'] = address
     if 'amount' in out:
         am = out['amount']
@@ -970,7 +971,7 @@ def create_bip21_uri(addr, amount_sat: Optional[int], message: Optional[str],
         v = urllib.parse.quote(v)
         query.append(f"{k}={v}")
     p = urllib.parse.ParseResult(
-        scheme=DASH_BIP21_URI_SCHEME,
+        scheme=FIRO_BIP21_URI_SCHEME,
         netloc='',
         path=addr,
         params='',

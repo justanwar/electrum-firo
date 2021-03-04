@@ -23,42 +23,42 @@ hiddenimports += collect_submodules('websocket')
 hiddenimports.remove('safetlib.qt.pinmatrix')
 
 hiddenimports += [
-    'electrum_dash',
-    'electrum_dash.base_crash_reporter',
-    'electrum_dash.base_wizard',
-    'electrum_dash.plot',
-    'electrum_dash.qrscanner',
-    'electrum_dash.websockets',
-    'electrum_dash.gui.qt',
-    'electrum_dash.gui.qt.qrreader.qtmultimedia.camera_dialog',
+    'electrum_firo',
+    'electrum_firo.base_crash_reporter',
+    'electrum_firo.base_wizard',
+    'electrum_firo.plot',
+    'electrum_firo.qrscanner',
+    'electrum_firo.websockets',
+    'electrum_firo.gui.qt',
+    'electrum_firo.gui.qt.qrreader.qtmultimedia.camera_dialog',
     'PyQt5.sip',
     'PyQt5.QtPrintSupport',  # needed by Revealer
 
-    'electrum_dash.plugins',
+    'electrum_firo.plugins',
 
-    'electrum_dash.plugins.hw_wallet.qt',
+    'electrum_firo.plugins.hw_wallet.qt',
 
-    'electrum_dash.plugins.audio_modem.qt',
-    'electrum_dash.plugins.cosigner_pool.qt',
-    'electrum_dash.plugins.digitalbitbox.qt',
-    'electrum_dash.plugins.email_requests.qt',
-    'electrum_dash.plugins.keepkey.qt',
-    'electrum_dash.plugins.revealer.qt',
-    'electrum_dash.plugins.labels.qt',
-    'electrum_dash.plugins.scan_over_gap.qt',
-    'electrum_dash.plugins.trezor.qt',
-    'electrum_dash.plugins.safe_t.client',
-    'electrum_dash.plugins.safe_t.qt',
-    'electrum_dash.plugins.ledger.qt',
-    'electrum_dash.plugins.virtualkeyboard.qt',
+    'electrum_firo.plugins.audio_modem.qt',
+    'electrum_firo.plugins.cosigner_pool.qt',
+    'electrum_firo.plugins.digitalbitbox.qt',
+    'electrum_firo.plugins.email_requests.qt',
+    'electrum_firo.plugins.keepkey.qt',
+    'electrum_firo.plugins.revealer.qt',
+    'electrum_firo.plugins.labels.qt',
+    'electrum_firo.plugins.scan_over_gap.qt',
+    'electrum_firo.plugins.trezor.qt',
+    'electrum_firo.plugins.safe_t.client',
+    'electrum_firo.plugins.safe_t.qt',
+    'electrum_firo.plugins.ledger.qt',
+    'electrum_firo.plugins.virtualkeyboard.qt',
 ]
 
 datas = [
-    ('electrum_dash/checkpoints*.*', 'electrum_dash'),
-    ('electrum_dash/*.json', 'electrum_dash'),
-    ('electrum_dash/locale', 'electrum_dash/locale'),
-    ('electrum_dash/wordlist', 'electrum_dash/wordlist'),
-    ('electrum_dash/gui/icons', 'electrum_dash/gui/icons'),
+    ('electrum_firo/checkpoints*.*', 'electrum_firo'),
+    ('electrum_firo/*.json', 'electrum_firo'),
+#    ('electrum_dash/locale', 'electrum_dash/locale'),
+    ('electrum_firo/wordlist', 'electrum_firo/wordlist'),
+    ('electrum_firo/gui/icons', 'electrum_firo/gui/icons'),
     ('C:\\zbarw', '.'),
 ]
 
@@ -118,13 +118,13 @@ excludes += [
     'PyQt5.QtWinExtras',
 ]
 
-a = Analysis(['electrum-dash'],
+a = Analysis(['run-electrum-firo'],
              hiddenimports=hiddenimports,
              datas=datas,
              binaries=binaries,
              excludes=excludes,
              runtime_hooks=['pyi_runtimehook.py'])
-
+print("ANALYSIS PASSED")
 # http://stackoverflow.com/questions/19055089/
 for d in a.datas:
     if 'pyconfig' in d[0]:
@@ -161,7 +161,7 @@ exe = EXE(pyz,
           strip=False,
           upx=False,
           console=False,
-          icon='electrum_dash/gui/icons/electrum-dash.ico',
+          icon='electrum_firo/gui/icons/electrum-dash.ico',
           name=os.path.join('build\\pyi.win32\\electrum', cmdline_name))
 
 # exe with console output
@@ -172,7 +172,7 @@ conexe = EXE(pyz,
           strip=False,
           upx=False,
           console=True,
-          icon='electrum_dash/gui/icons/electrum-dash.ico',
+          icon='electrum_firo/gui/icons/electrum-dash.ico',
           name=os.path.join('build\\pyi.win32\\electrum',
                             'console-%s' % cmdline_name))
 

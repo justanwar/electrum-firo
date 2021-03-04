@@ -713,12 +713,12 @@ class BlsKeysWizardPage(QWizardPage):
 
         self.setTitle(_('BLS keys setup'))
         if start_id in parent.UPD_ENTER_PAGES:
-            self.setSubTitle(_('Regenerate BLS keypair, setup dashd'))
+            self.setSubTitle(_('Regenerate BLS keypair'))
             if not self.bls_priv.text():
                 self.bls_priv.setText(new_mn.bls_privk)
                 self.bls_pub.setText(new_mn.pubkey_operator)
         else:
-            self.setSubTitle(_('Generate BLS keypair, setup dashd'))
+            self.setSubTitle(_('Generate BLS keypair'))
 
         if not self.bls_priv.text():
             self.generate_bls_keypair()
@@ -739,10 +739,10 @@ class BlsKeysWizardPage(QWizardPage):
         bls_pubk_hex = bh2u(bls_pubk.serialize())
         self.bls_info_label.setText(_('BLS keypair generated. Before '
                                       'registering new Masternode copy next '
-                                      'line to ~/.dashcore/dash.conf and '
+                                      'line to ~/.firo/firo.conf and '
                                       'restart masternode:'))
         self.bls_info_label.show()
-        self.bls_info_edit.setText('masternodeblsprivkey=%s' % bls_privk_hex)
+        self.bls_info_edit.setText('znodeblsprivkey=%s' % bls_privk_hex)
         self.bls_info_edit.show()
         self.bls_pub.setText(bls_pubk_hex)
         self.bls_priv.setText(bls_privk_hex)

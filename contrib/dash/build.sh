@@ -7,8 +7,8 @@ ACTIONS_DIR="$SCRIPT_DIR/actions"
 TRAVIS_DIR="$SCRIPT_DIR/travis"
 BUILD_DIST_DIR="$REPO_DIR/dist"
 BUILD_BIN_DIR="$REPO_DIR/bin"
-NAME=Dash-Electrum
-TNAME=Dash-Electrum-Testnet
+NAME=Firo-Electrum
+TNAME=Firo-Electrum-Testnet
 DEB_NAME=electrum-dash
 APK_NAME=Electrum_DASH
 APK_TNAME=Electrum_DASH_Testnet
@@ -21,8 +21,17 @@ function build_sdist {
     mkdir -p build
     $ACTIONS_DIR/install-linux.sh
     $ACTIONS_DIR/script-linux.sh
+    cp ${BUILD_DIST_DIR}/${NAME}-${DASH_ELECTRUM_VERSION}.tar.gz \
+        dist/
+    cp ${BUILD_DIST_DIR}/${NAME}-${DASH_ELECTRUM_VERSION}.zip \
+        dist/
+    cp ${BUILD_DIST_DIR}/${NAME}-${DASH_ELECTRUM_VERSION}-x86_64.AppImage \
+        dist/
+    cp ${BUILD_DIST_DIR}/${NAME}-${DASH_ELECTRUM_VERSION}-setup-win32.exe \
+        dist/
+    cp ${BUILD_DIST_DIR}/${NAME}-${DASH_ELECTRUM_VERSION}-setup-win64.exe \
+        dist/
 }
-
 
 function build_ppa {
     # Build deb packages
@@ -105,6 +114,7 @@ function read_jks_storepass {
 
 
 function build_apk {
+    exit 0
     ./build/contrib/actions/before_install-linux-apk.sh
     export APP_ANDROID_ARCH=armeabi-v7a
     #export APP_ANDROID_ARCH=arm64-v8a
@@ -119,7 +129,6 @@ function build_apk {
             ${BUILD_DIST_DIR}
     fi
 
-    # Build testnet release apk
     sudo rm -rf build
     mkdir -p build && cp contrib/dash/travis/* ./build/
     export ELECTRUM_MAINNET=false
