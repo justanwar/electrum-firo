@@ -214,7 +214,7 @@ class SimpleConfig(Logger):
         base_unit = self.user_config.get('base_unit')
         if isinstance(base_unit, str):
             self._set_key_in_user_config('base_unit', None)
-            map_ = {'dash':8, 'mdash':5, 'udash':2, 'duffs':0, 'sat':0}
+            map_ = {'FIRO':8, 'mFIRO':5, 'bits':2, 'sat':0}
             decimal_point = map_.get(base_unit.lower())
             self._set_key_in_user_config('decimal_point', decimal_point)
 
@@ -454,14 +454,14 @@ class SimpleConfig(Logger):
         text is what we target: static fee / num blocks to confirm in / mempool depth
         tooltip is the corresponding estimate (e.g. num blocks for a static fee)
 
-        fee_rate is in duffs/kB
+        fee_rate is in sat/kB
         """
         if fee_per_kb is None:
             rate_str = 'unknown'
             fee_per_byte = None
         else:
             fee_per_byte = fee_per_kb/1000
-            rate_str = format_fee_satoshis(fee_per_kb) + ' duffs/kB'
+            rate_str = format_fee_satoshis(fee_per_kb) + ' sat/kB'
 
         if dyn:
             if mempool:
@@ -650,7 +650,7 @@ class SimpleConfig(Logger):
         return self.format_amount(amount) + ' '+ self.get_base_unit()
 
     def format_fee_rate(self, fee_rate):
-        return format_fee_satoshis(fee_rate, num_zeros=self.num_zeros) + ' duffs/kB'
+        return format_fee_satoshis(fee_rate, num_zeros=self.num_zeros) + ' sat/kB'
 
     def get_base_unit(self):
         return decimal_point_to_base_unit_name(self.decimal_point)

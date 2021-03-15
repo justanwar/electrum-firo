@@ -935,7 +935,7 @@ class Commands:
 
     @command('n')
     async def getfeerate(self, fee_method=None, fee_level=None):
-        """Return current suggested fee rate (in duffs/kvByte), according to config
+        """Return current suggested fee rate (in sat/kvByte), according to config
         settings or supplied parameters.
         """
         if fee_method is None:
@@ -1042,7 +1042,7 @@ command_options = {
     'nocheck':     (None, "Do not verify aliases"),
     'imax':        (None, "Maximum number of inputs"),
     'fee':         ("-f", "Transaction fee (absolute, in Dash)"),
-    'feerate':     (None, "Transaction fee rate (in duffs/kB)"),
+    'feerate':     (None, "Transaction fee rate (in sat/kB)"),
     'from_addr':   ("-F", "Source address (must be a wallet address; use sweep to spend from non-wallet address)."),
     'from_coins':  (None, "Source coins (must be in wallet; use sweep to spend from non-wallet address)."),
     'change_addr': ("-c", "Change address. Default is a spare address, or the source address if it's not in the wallet"),

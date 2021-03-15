@@ -5,6 +5,11 @@
     "CoinCap": [
         "USD"
     ],
+    "BitcoinAverage": [
+        "USD",
+        "EUR",
+        "PLN"
+    ],
     "CoinGecko": [
         "BTC",
         "EUR",
@@ -16,5 +21,13 @@
         "BTC",
         "USD",
         "EUR"
-    ]
+    ],
+    "CryptoCompare": [
+		"USD",
+		"EUR",
+		"THB",
+		"BTC",
+		"ETH"
+	]
+
 }

@@ -825,7 +825,7 @@ class PreviewTxDialog(BaseTxDialog, TxEditor):
         def feerounding_onclick():
             text = (self.feerounding_text + '\n\n' +
                     _('To somewhat protect your privacy, Firo Electrum tries to create change with similar precision to other outputs.') + ' ' +
-                    _('At most 100 duffs might be lost due to this rounding.') + ' ' +
+                    _('At most 100 sats might be lost due to this rounding.') + ' ' +
                     _("You can disable this setting in '{}'.").format(_('Preferences')) + '\n' +
                     _('Also, dust is not kept as change, but added to the fee.'))
             self.show_message(title=_('Fee rounding'), msg=text)
@@ -884,15 +884,15 @@ class PreviewTxDialog(BaseTxDialog, TxEditor):
                and (self.feerate_e.text() or self.feerate_e.hasFocus())
 
     def set_feerounding_text(self, num_satoshis_added):
-        self.feerounding_text = (_('Additional {} duffs are going to be added.')
+        self.feerounding_text = (_('Additional {} sats are going to be added.')
                                  .format(num_satoshis_added))
 
     def get_fee_estimator(self):
         if self.is_send_fee_frozen() and self.fee_e.get_amount() is not None:
             fee_estimator = self.fee_e.get_amount()
         elif self.is_send_feerate_frozen() and self.feerate_e.get_amount() is not None:
-            amount = self.feerate_e.get_amount()  # duffs/kB feerate
-            amount = 0 if amount is None else amount # duffs/kB feerate
+            amount = self.feerate_e.get_amount()  # sat/kB feerate
+            amount = 0 if amount is None else amount # sat/kB feerate
             fee_estimator = partial(
                 SimpleConfig.estimate_fee_for_feerate, amount)
         else:
