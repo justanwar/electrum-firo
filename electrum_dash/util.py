@@ -186,7 +186,7 @@ class Satoshis(object):
         return self
 
     def __repr__(self):
-        return f'Duffs({self.value})'
+        return f'Sat({self.value})'
 
     def __str__(self):
         # note: precision is truncated to satoshis here
@@ -696,7 +696,7 @@ def format_satoshis(
     return result
 
 
-FEERATE_PRECISION = 0  # num fractional decimal places for duffs/kB fee rates
+FEERATE_PRECISION = 0  # num fractional decimal places for sats/kB fee rates
 _feerate_quanta = Decimal(10) ** (-FEERATE_PRECISION)
 
 
@@ -769,6 +769,17 @@ def time_difference(distance_in_time, include_seconds):
 mainnet_block_explorers = {
     'firo.org': ('https://explorer.firo.org/',
                  {'tx': 'tx/', 'addr': 'address/'}),
+    'explorer.zcoin.io': ('https://explorer.zcoin.io',
+                        {'tx': '/tx/', 'addr': '/address/'}),
+    'blockbook.zcoin.io': ('https://blockbook.zcoin.io',
+                          {'tx': '/tx/', 'addr': '/address/'}),
+    'chainz.cryptoid.info': ('https://chainz.cryptoid.info/xzc',
+                        {'tx': '/tx.dws?', 'addr': '/address.dws?'}),
+    'CryptoCore': ('https://xzc.ccore.online',
+                        {'tx': '/transaction/', 'addr': '/address/'}),
+    'bchain.info': ('https://bchain.info/XZC',
+                        {'tx': '/tx/', 'addr': '/addr/'}),
+
     #'Insight.dash.org': ('https://insight.dash.org/insight/',
     #                     {'tx': 'tx/', 'addr': 'address/'}),
     #'system default': ('blockchain:/',

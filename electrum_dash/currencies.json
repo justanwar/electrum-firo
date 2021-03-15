@@ -4,24 +4,18 @@
         "EUR",
         "PLN"
     ],
-    "Bittrex": [
-        "BTC",
-        "ETH"
-    ],
-    "Poloniex": [
-        "BTC"
-    ],
-    "CoinMarketCap": [
-        "BTC",
-        "USD"
-    ],
-    "CoinCap": [
-        "USD"
-    ],
     "CoinGecko": [
         "BTC",
         "EUR",
         "USD",
         "PLN"
-    ]
+    ],
+    "CryptoCompare": [
+		"USD",
+		"EUR",
+		"THB",
+		"BTC",
+		"ETH"
+	]
+
 }

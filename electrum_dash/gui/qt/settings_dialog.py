@@ -118,7 +118,7 @@ class SettingsDialog(WindowModalDialog):
         # units
         units = base_units_list
         msg = (_('Base unit of your wallet.')
-               + '\n1 Dash = 1000 mDash. 1 mDash = 1000 uDash. 1 uDash = 100 duffs.\n'
+               + '\n1 FIRO = 1000 mFIRO. 1 mFiro = 1000 bits. 1 bit = 100 satoshis.\n'
                + _('This setting affects the Send tab, and all balance related fields.'))
         unit_label = HelpLabel(_('Base unit') + ':', msg)
         unit_combo = QComboBox()
@@ -275,7 +275,7 @@ class SettingsDialog(WindowModalDialog):
         outrounding_cb.setToolTip(
             _('Set the value of the change output so that it has similar precision to the other outputs.') + '\n' +
             _('This might improve your privacy somewhat.') + '\n' +
-            _('If enabled, at most 100 duffs might be lost due to this, per transaction.'))
+            _('If enabled, at most 100 sats might be lost due to this, per transaction.'))
         outrounding_cb.setChecked(enable_outrounding)
         outrounding_cb.stateChanged.connect(on_outrounding)
         tx_widgets.append((outrounding_cb, None))

@@ -182,9 +182,9 @@ async def sweep(
         tx = PartialTransaction.from_io(inputs, outputs)
         fee = config.estimate_fee(tx.estimated_size())
     if total - fee < 0:
-        raise Exception(_('Not enough funds on address.') + '\nTotal: %d duffs\nFee: %d'%(total, fee))
+        raise Exception(_('Not enough funds on address.') + '\nTotal: %d sat\nFee: %d'%(total, fee))
     if total - fee < dust_threshold(network):
-        raise Exception(_('Not enough funds on address.') + '\nTotal: %d duffs\nFee: %d\nDust Threshold: %d'%(total, fee, dust_threshold(network)))
+        raise Exception(_('Not enough funds on address.') + '\nTotal: %d sat\nFee: %d\nDust Threshold: %d'%(total, fee, dust_threshold(network)))
 
     outputs = [PartialTxOutput(scriptpubkey=bfh(bitcoin.address_to_script(to_address)),
                                value=total - fee)]
@@ -1046,7 +1046,7 @@ class Abstract_Wallet(AddressSynchronizer, ABC):
             if fee is not None:
                 size = tx.estimated_size()
                 fee_per_kb = round(fee * 1000 / size)
-                extra.append(format_fee_satoshis(fee_per_kb) + ' duffs/kB')
+                extra.append(format_fee_satoshis(fee_per_kb) + ' sat/kB')
             if fee is not None and height in (TX_HEIGHT_UNCONF_PARENT, TX_HEIGHT_UNCONFIRMED) \
                and self.config.has_fee_mempool():
                 fee_per_byte = fee / size

@@ -258,7 +258,7 @@ class ConfirmTxDialog(TxEditor, WindowModalDialog):
             self.extra_fee_value.setText(self.main_window.format_amount_and_units(x_fee_amount))
 
         amount = tx.output_value() if self.output_value == '!' else self.output_value
-        feerate = Decimal(fee) / Decimal(tx.estimated_size() / 1000)  # duffs/kB
+        feerate = Decimal(fee) / Decimal(tx.estimated_size() / 1000)  # sat/kB
         fee_ratio = Decimal(fee) / amount if amount else 1
         if feerate < self.wallet.relayfee():
             msg = '\n'.join([
@@ -273,6 +273,6 @@ class ConfirmTxDialog(TxEditor, WindowModalDialog):
         elif feerate > FEERATE_WARNING_HIGH_FEE:
             self.toggle_send_button(True,
                                     message=_('Warning') + ': ' + _("The fee for this transaction seems unusually high.")
-                                            + f'\n(feerate: {feerate:.1f} duffs/kB)')
+                                            + f'\n(feerate: {feerate:.1f} sat/kB)')
         else:
             self.toggle_send_button(True)
