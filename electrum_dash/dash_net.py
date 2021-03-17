@@ -691,8 +691,8 @@ class DashNet(Logger):
         if base_height <= 1:
             if height > activation_height:
                 height = activation_height + 1
-        elif height - (base_height + llmq_offset) > CHUNK_SIZE:
-            height = mn_list.calc_max_height(base_height, height)
+        elif height - (base_height + llmq_offset) > CHUNK_SIZE // 4:
+            height = base_height + CHUNK_SIZE // 4
         elif height - base_height > llmq_offset:
             height = height - llmq_offset
 
