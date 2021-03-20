@@ -769,16 +769,12 @@ def time_difference(distance_in_time, include_seconds):
 mainnet_block_explorers = {
     'firo.org': ('https://explorer.firo.org/',
                  {'tx': 'tx/', 'addr': 'address/'}),
-    'explorer.zcoin.io': ('https://explorer.zcoin.io',
-                        {'tx': '/tx/', 'addr': '/address/'}),
-    'blockbook.zcoin.io': ('https://blockbook.zcoin.io',
+    'blockbook.firo.org': ('https://blockbook.firo.org',
                           {'tx': '/tx/', 'addr': '/address/'}),
-    'chainz.cryptoid.info': ('https://chainz.cryptoid.info/xzc',
+    'chainz.cryptoid.info': ('https://chainz.cryptoid.info/firo',
                         {'tx': '/tx.dws?', 'addr': '/address.dws?'}),
-    'CryptoCore': ('https://xzc.ccore.online',
+    'CryptoCore': ('https://firo.ccore.online',
                         {'tx': '/transaction/', 'addr': '/address/'}),
-    'bchain.info': ('https://bchain.info/XZC',
-                        {'tx': '/tx/', 'addr': '/addr/'}),
 
     #'Insight.dash.org': ('https://insight.dash.org/insight/',
     #                     {'tx': 'tx/', 'addr': 'address/'}),
@@ -826,7 +822,7 @@ def block_explorer_URL(config: 'SimpleConfig', kind: str, item: str) -> Optional
 # note: when checking against these, use .lower() to support case-insensitivity
 DASH_BIP21_URI_SCHEME = 'dash'
 PAY_BIP21_URI_SCHEME = 'pay'
-FIRO_BIP21_URI_SCHEME = 'zcoin'
+FIRO_BIP21_URI_SCHEME = 'firo'
 
 
 class InvalidBitcoinURI(Exception): pass
