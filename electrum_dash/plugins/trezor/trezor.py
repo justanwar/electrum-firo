@@ -376,10 +376,10 @@ class TrezorPlugin(HW_PluginBase):
             txinputtype = TxInputType()
             if txin.is_coinbase_input():
                 prev_hash = b"\x00"*32
-                if txin['scriptSig'].startswith('c4') and txin['prevout_n'] == 0xffffffff:
+                if txin.script_sig.startswith(b"\xc4") and txin.nsequence == 0xffffffff:
                     prev_index = 1
                 else:
-                    prev_index = txin['prevout_n']
+                    prev_index = txin.nsequence
             else:
                 if for_sig:
                     assert isinstance(tx, PartialTransaction)
