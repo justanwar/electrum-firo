@@ -844,6 +844,7 @@ def parse_URI(uri: str, on_pr: Callable = None, *, loop=None) -> dict:
 
     u = urllib.parse.urlparse(uri)
     if u.scheme not in [FIRO_BIP21_URI_SCHEME]:
+        print(uri)
         raise InvalidBitcoinURI("Not a Firo URI")
     address = u.path
 

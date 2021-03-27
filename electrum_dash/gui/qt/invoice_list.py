@@ -95,7 +95,7 @@ class InvoiceList(MyTreeView):
         self.update_headers(self.__class__.headers)
         for idx, item in enumerate(self.parent.wallet.get_invoices()):
             key = item.id
-            icon_name = 'dashcoin.png'
+            icon_name = 'firocoin.png'
             if item.bip70:
                 icon_name = 'seal.png'
             status = self.parent.wallet.get_invoice_status(item)

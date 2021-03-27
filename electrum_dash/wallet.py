@@ -347,7 +347,7 @@ class Abstract_Wallet(AddressSynchronizer, ABC):
             addr = str(addrs[0])
             if not bitcoin.is_address(addr):
                 neutered_addr = addr[:5] + '..' + addr[-2:]
-                raise WalletFileException(f'The addresses in this wallet are not Dash addresses.\n'
+                raise WalletFileException(f'The addresses in this wallet are not Firo addresses.\n'
                                           f'e.g. {neutered_addr} (length: {len(addr)})')
 
     def check_returned_address_for_corruption(func):
@@ -491,7 +491,7 @@ class Abstract_Wallet(AddressSynchronizer, ABC):
         if self.is_watching_only():
             raise Exception(_("This is a watching-only wallet"))
         if not is_address(address):
-            raise Exception(f"Invalid Dash address: {address}")
+            raise Exception(f"Invalid Firo address: {address}")
         if not self.is_mine(address):
             raise Exception(_('Address not in wallet.') + f' {address}')
         if self.psman.is_ps_ks(address):
@@ -1107,7 +1107,7 @@ class Abstract_Wallet(AddressSynchronizer, ABC):
                 addrs = [addr for addr in addrs if addr not in ps_addrs]
                 change_addrs = [random.choice(addrs[-limit:])] if addrs else []
         for addr in change_addrs:
-            assert is_address(addr), f"not valid Dash address: {addr}"
+            assert is_address(addr), f"not valid Firo address: {addr}"
             # note that change addresses are not necessarily ismine
             # in which case this is a no-op
             if self.psman.is_ps_ks(addr):
@@ -1676,7 +1676,7 @@ class Abstract_Wallet(AddressSynchronizer, ABC):
         assert isinstance(req, OnchainInvoice)
         addr = req.get_address()
         if not bitcoin.is_address(addr):
-            raise Exception(_('Invalid Dash address.'))
+            raise Exception(_('Invalid Firo address.'))
         if not self.is_mine(addr):
             raise Exception(_('Address not in wallet.'))
         ps_addrs = self.db.get_ps_addresses()
@@ -2577,8 +2577,8 @@ def restore_wallet_from_text(text, *, path, config: SimpleConfig,
                              passphrase=None, password=None, encrypt_file=True,
                              gap_limit=None) -> dict:
     """Restore a wallet from text. Text can be a seed phrase, a master
-    public key, a master private key, a list of Dash addresses
-    or Dash private keys."""
+    public key, a master private key, a list of Firo addresses
+    or Firo private keys."""
     storage = WalletStorage(path)
     if storage.file_exists():
         raise Exception("Remove the existing wallet first!")

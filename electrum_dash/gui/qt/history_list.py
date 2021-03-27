@@ -1129,7 +1129,7 @@ class HistoryList(MyTreeView, AcceptFileDragDrop):
             return False
         for column in self.filter_columns:
             txt_idx = idx.sibling(idx.row(), column)
-            txt = self.hm.data(txt_idx, Qt.DisplayRole).value().lower()
+            txt = str(self.hm.data(txt_idx, Qt.DisplayRole).value()).lower()
             if self.current_filter in txt:
                 # the filter matched, but the date filter might apply
                 self.setRowHidden(idx.row(), parent_idx, bool(should_hide))
