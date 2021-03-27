@@ -101,7 +101,7 @@ class InvoiceList(MyTreeView):
         for idx, item in enumerate(self.parent.wallet.get_unpaid_invoices()):
             key = self.parent.wallet.get_key_for_outgoing_invoice(item)
             invoice_ext = self.parent.wallet.get_invoice_ext(key)
-            icon_name = 'dashcoin.png'
+            icon_name = 'firocoin.png'
             if item.bip70:
                 icon_name = 'seal.png'
             status = self.parent.wallet.get_invoice_status(item)
