@@ -154,7 +154,7 @@ exe = EXE(pyz,
           strip=False,
           upx=False,
           console=False,
-          icon='electrum_dash/gui/icons/electrum-dash.ico',
+          icon='electrum_dash/gui/icons/electrum-firo.ico',
           name=os.path.join('build/electrum-dash/electrum-dash', cmdline_name))
 
 coll = COLLECT(exe,

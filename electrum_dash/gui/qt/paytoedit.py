@@ -114,7 +114,7 @@ class PayToEdit(CompletionTextEdit, ScanQRTextEdit, Logger):
             return bfh(script)
         except Exception:
             pass
-        raise Exception("Invalid address or script.")
+        raise Exception("Could not parse address.")
 
     def parse_script(self, x):
         script = ''

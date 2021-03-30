@@ -861,9 +861,9 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
         self.import_address_menu = wallet_menu.addAction(_("Import addresses"), self.import_addresses)
         wallet_menu.addSeparator()
 
-        addresses_menu = wallet_menu.addMenu(_("&Addresses"))
+        #addresses_menu = wallet_menu.addMenu(_("&Addresses"))
         #addresses_menu.addAction(_("&Filter"), lambda: self.address_list.toggle_toolbar(self.config))
-        addresses_menu = wallet_menu.addMenu(_("&Coins"))
+        #addresses_menu = wallet_menu.addMenu(_("&Coins"))
         #addresses_menu.addAction(_("&Filter"), lambda: self.utxo_list.toggle_toolbar(self.config))
         labels_menu = wallet_menu.addMenu(_("&Labels"))
         labels_menu.addAction(_("&Import"), self.do_import_labels)

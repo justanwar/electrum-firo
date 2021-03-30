@@ -48,6 +48,6 @@ pyinstaller --clean \
     --name electrum-dash-$DASH_ELECTRUM_VERSION.bin \
     osx.spec
 
-sudo hdiutil create -fs HFS+ -volname "Dash Electrum" \
-    -srcfolder dist/Dash\ Electrum.app \
-    dist/Dash-Electrum-$DASH_ELECTRUM_VERSION-macosx.dmg
+sudo hdiutil create -fs HFS+ -volname "Firo Electrum" \
+    -srcfolder dist/Firo\ Electrum.app \
+    dist/Firo-Electrum-$DASH_ELECTRUM_VERSION-macosx.dmg
