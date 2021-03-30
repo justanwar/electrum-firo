@@ -80,7 +80,7 @@
   !define MUI_ABORTWARNING
   !define MUI_ABORTWARNING_TEXT "Are you sure you wish to abort the installation of ${PRODUCT_NAME}?"
   
-  !define MUI_ICON "electrum_dash\gui\icons\electrum-dash.ico"
+  !define MUI_ICON "electrum_dash\gui\icons\electrum-firo.ico"
   
 ;--------------------------------
 ;Pages
@@ -160,7 +160,7 @@ Section "${PRODUCT_NAME}" SectionDE
 
   ;Files to pack into the installer
   File /r "dist\electrum-dash\*.*"
-  File "electrum_dash\gui\icons\electrum-dash.ico"
+  File "electrum_dash\gui\icons\electrum-firo.ico"
 
   ;Store installation folder
   WriteRegStr HKCU "Software\${PRODUCT_NAME}" "" $INSTDIR
@@ -181,11 +181,11 @@ Section "${PRODUCT_NAME}" SectionDE
   CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME} Testnet.lnk" "$INSTDIR\electrum-firo-${PRODUCT_VERSION}.exe" "--testnet" "$INSTDIR\electrum-firo-${PRODUCT_VERSION}.exe" 0
 
 
-  ;Links dash: URI's to Electrum
-  ;WriteRegStr HKCU "Software\Classes\dash" "" "URL:dash Protocol"
-  ;WriteRegStr HKCU "Software\Classes\dash" "URL Protocol" ""
-  ;WriteRegStr HKCU "Software\Classes\dash" "DefaultIcon" "$\"$INSTDIR\electrum-dash.ico, 0$\""
-  ;WriteRegStr HKCU "Software\Classes\dash\shell\open\command" "" "$\"$INSTDIR\electrum-dash-${PRODUCT_VERSION}.exe$\" $\"%1$\""
+  ;Links firo: URI's to Electrum
+  WriteRegStr HKCU "Software\Classes\firo" "" "URL:firo Protocol"
+  WriteRegStr HKCU "Software\Classes\firo" "URL Protocol" ""
+  WriteRegStr HKCU "Software\Classes\firo" "DefaultIcon" "$\"$INSTDIR\electrum-firo.ico, 0$\""
+  WriteRegStr HKCU "Software\Classes\firo\shell\open\command" "" "$\"$INSTDIR\electrum-firo-${PRODUCT_VERSION}.exe$\" $\"%1$\""
 
   ;Adds an uninstaller possibility to Windows Uninstall or change a program section
   WriteRegStr HKCU "${PRODUCT_UNINST_KEY}" "DisplayName" "$(^Name)"
@@ -193,7 +193,7 @@ Section "${PRODUCT_NAME}" SectionDE
   WriteRegStr HKCU "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_VERSION}"
   WriteRegStr HKCU "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
   WriteRegStr HKCU "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
-  WriteRegStr HKCU "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\electrum-dash.ico"
+  WriteRegStr HKCU "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\electrum-firo.ico"
 
   ;Fixes Windows broken size estimates
   ${GetSize} "$INSTDIR" "/S=0K" $0 $1 $2

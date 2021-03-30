@@ -25,7 +25,7 @@ from .logging import Logger
 
 DEFAULT_ENABLED = False
 DEFAULT_CURRENCY = "EUR"
-DEFAULT_EXCHANGE = "CryptoCompare"
+DEFAULT_EXCHANGE = "CoinGecko"
 
 
 # See https://en.wikipedia.org/wiki/ISO_4217
@@ -252,14 +252,14 @@ class CoinGecko(ExchangeBase):
 class CryptoCompare(ExchangeBase):
 
     async def get_rates(self,ccy):
-        json = await self.get_json('min-api.cryptocompare.com', '/data/price?fsym=XZC&tsyms=USD,EUR,THB,BTC,ETH')
+        json = await self.get_json('min-api.cryptocompare.com', '/data/price?fsym=FIRO&tsyms=USD,EUR,THB,BTC,ETH')
         return {'USD': Decimal(json['USD']), 'EUR': Decimal(json['EUR']), 'THB': Decimal(json['THB']), 'BTC': Decimal(json['BTC']), 'ETH': Decimal(json['ETH'])}
 
     def history_ccys(self):
         return ['USD', 'EUR', 'THB', 'BTC', 'ETH']
 
     async def request_history(self, ccy):
-        query = '/data/histoday?fsym=XZC&tsym=%s&limit=2000&aggregate=1' % ccy
+        query = '/data/histoday?fsym=FIRO&tsym=%s&limit=2000&aggregate=1' % ccy
         json = await self.get_json('min-api.cryptocompare.com', query)
         history = json['Data']
         return dict([(time.strftime('%Y-%m-%d', time.localtime(t['time'])), t['close'])
