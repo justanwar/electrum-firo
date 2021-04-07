@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./contrib/dash/travis/electrum_firo_version_env.sh;
+source ./contrib/dash/travis/electrum_dash_version_env.sh;
 echo wine build version is $DASH_ELECTRUM_VERSION
 
 mv $BUILD_DIR/zbarw $WINEPREFIX/drive_c/

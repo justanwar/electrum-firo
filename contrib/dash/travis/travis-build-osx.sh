@@ -3,7 +3,7 @@ set -ev
 
 export PY37BINDIR=/Library/Frameworks/Python.framework/Versions/3.7/bin/
 export PATH=$PATH:$PY37BINDIR
-source ./contrib/dash/travis/electrum_firo_version_env.sh;
+source ./contrib/dash/travis/electrum_dash_version_env.sh;
 echo osx build version is $DASH_ELECTRUM_VERSION
 
 

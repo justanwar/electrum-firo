@@ -45,7 +45,7 @@ export APP_ANDROID_ARCH=armeabi-v7a
 export APP_ANDROID_ARCH=arm64-v8a
 
 
-source contrib/dash/travis/electrum_firo_version_env.sh
+source contrib/dash/travis/electrum_dash_version_env.sh
 if [[ -n $IS_RELEASE ]]; then
     echo electrum-dash version is $DASH_ELECTRUM_VERSION, release build
 else
