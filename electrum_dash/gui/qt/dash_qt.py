@@ -28,7 +28,7 @@ class TorWarnDialog(WindowModalDialog):
         self.tor_detected = False
         self.setMinimumSize(600, 350)
 
-        app_name = 'Dash Electrum'
+        app_name = 'Firo Electrum'
         if constants.net.TESTNET:
             app_name += ' Testnet'
         app_name += f' {ELECTRUM_VERSION}'

@@ -38,4 +38,4 @@ override_dh_shlibdeps:
 	dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info --exclude=Qt
 
 override_dh_auto_test::
-	build/opt/venvs/$(DH_VIRTUALENV_MAINPACKAGE)/bin/python -m pytest electrum_dash/tests
+	build/opt/venvs/$(DH_VIRTUALENV_MAINPACKAGE)/bin/python -m pytest electrum_firo/tests

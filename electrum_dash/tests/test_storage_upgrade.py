@@ -4,9 +4,9 @@ import os
 import json
 from typing import Optional
 
-from electrum_dash.wallet_db import WalletDB
-from electrum_dash.wallet import Wallet
-from electrum_dash import constants
+from electrum_firo.wallet_db import WalletDB
+from electrum_firo.wallet import Wallet
+from electrum_firo import constants
 
 from .test_wallet import WalletTestCase
 
@@ -304,8 +304,8 @@ class TestStorageUpgrade(WalletTestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        from electrum_dash.plugin import Plugins
-        from electrum_dash.simple_config import SimpleConfig
+        from electrum_firo.plugin import Plugins
+        from electrum_firo.simple_config import SimpleConfig
 
         cls.__electrum_path = tempfile.mkdtemp()
         config = SimpleConfig({'electrum_path': cls.__electrum_path})

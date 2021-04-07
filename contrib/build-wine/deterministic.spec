@@ -54,7 +54,7 @@ hiddenimports += [
 datas = [
     ('electrum_firo/checkpoints*.*', 'electrum_firo'),
     ('electrum_firo/*.json', 'electrum_firo'),
-#    ('electrum_dash/locale', 'electrum_dash/locale'),
+#    ('electrum_firo/locale', 'electrum_firo/locale'),
     ('electrum_firo/wordlist', 'electrum_firo/wordlist'),
     ('electrum_firo/gui/icons', 'electrum_firo/gui/icons'),
     ('C:\\zbarw', '.'),

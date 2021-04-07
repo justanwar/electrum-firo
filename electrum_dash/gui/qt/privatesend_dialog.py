@@ -182,7 +182,7 @@ class WarnLabel(HelpLabel):
 class ShowPSKsSeedDlg(WindowModalDialog):
 
     def __init__(self, parent, seed, passphrase):
-        WindowModalDialog.__init__(self, parent, ('Dash Electrum - %s %s' %
+        WindowModalDialog.__init__(self, parent, ('Firo Electrum - %s %s' %
                                                   (_('PS Keystore'),
                                                    _('Seed'))))
         self.setMinimumWidth(600)

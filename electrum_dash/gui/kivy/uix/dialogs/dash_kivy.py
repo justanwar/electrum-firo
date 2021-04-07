@@ -4,8 +4,8 @@ from kivy.clock import Clock
 from kivy.factory import Factory
 from kivy.lang import Builder
 
-from electrum_dash.gui.kivy.i18n import _
-from electrum_dash.network import deserialize_proxy
+from electrum_firo.gui.kivy.i18n import _
+from electrum_firo.network import deserialize_proxy
 
 from kivy.properties import BooleanProperty
 from kivy.uix.button import Button
@@ -27,7 +27,7 @@ Builder.load_string('''
             orientation: 'horizontal'
             Image:
                 id: warn_img
-                source: 'atlas://electrum_dash/gui/kivy/theming/light/error'
+                source: 'atlas://electrum_firo/gui/kivy/theming/light/error'
                 size_hint: None, None
                 width: 64
                 height: 64
@@ -91,7 +91,7 @@ class TorWarnDialog(Factory.Popup):
         self.tor_detected = False
 
         Factory.Popup.__init__(self)
-        app_name = 'Dash Electrum'
+        app_name = 'Firo Electrum'
         w_basename = os.path.basename(w_path)
         self.title = f'{app_name}  -  {w_basename}'
 
@@ -139,7 +139,7 @@ class TorWarnDialog(Factory.Popup):
             self.title = _('Information')
             self.ids.warn_lbl.text = _('Tor proxy detected')
             w_img = self.ids.warn_img
-            w_img.source = 'atlas://electrum_dash/gui/kivy/theming/light/info'
+            w_img.source = 'atlas://electrum_firo/gui/kivy/theming/light/info'
             vbox = self.ids.vbox
             vbox.remove_widget(self.ids.tor_auto_on_hbox)
             vbox.remove_widget(self.ids.btns_vbox)

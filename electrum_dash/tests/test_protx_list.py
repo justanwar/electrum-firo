@@ -1,7 +1,7 @@
 import unittest
 
-from electrum_dash.protx_list import MNList
-from electrum_dash.constants import CHUNK_SIZE
+from electrum_firo.protx_list import MNList
+from electrum_firo.constants import CHUNK_SIZE
 
 
 class ProTxListTestCase(unittest.TestCase):

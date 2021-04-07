@@ -16,7 +16,7 @@ else:
 PY36BINDIR = os.environ.get('PY36BINDIR')
 TRAVIS_TAG = os.environ.get('TRAVIS_TAG')
 DASH_ELECTRUM_VERSION = os.environ.get('DASH_ELECTRUM_VERSION')
-ICONS_FILE = 'electrum_dash/gui/icons/electrum-dash.icns'
+ICONS_FILE = 'electrum_firo/gui/icons/electrum-dash.icns'
 
 hiddenimports = []
 hiddenimports += collect_submodules('pkg_resources')  # workaround for https://github.com/pypa/setuptools/issues/1963
@@ -31,40 +31,40 @@ hiddenimports += collect_submodules('websocket')
 hiddenimports.remove('safetlib.qt.pinmatrix')
 
 hiddenimports += [
-    'electrum_dash',
-    'electrum_dash.base_crash_reporter',
-    'electrum_dash.base_wizard',
-    'electrum_dash.plot',
-    'electrum_dash.qrscanner',
-    'electrum_dash.websockets',
-    'electrum_dash.gui.qt',
+    'electrum_firo',
+    'electrum_firo.base_crash_reporter',
+    'electrum_firo.base_wizard',
+    'electrum_firo.plot',
+    'electrum_firo.qrscanner',
+    'electrum_firo.websockets',
+    'electrum_firo.gui.qt',
     'PyQt5.sip',
     'PyQt5.QtPrintSupport',  # needed by Revealer
 
-    'electrum_dash.plugins',
+    'electrum_firo.plugins',
 
-    'electrum_dash.plugins.hw_wallet.qt',
+    'electrum_firo.plugins.hw_wallet.qt',
 
-    'electrum_dash.plugins.audio_modem.qt',
-    'electrum_dash.plugins.cosigner_pool.qt',
-    'electrum_dash.plugins.digitalbitbox.qt',
-    'electrum_dash.plugins.email_requests.qt',
-    'electrum_dash.plugins.keepkey.qt',
-    'electrum_dash.plugins.revealer.qt',
-    'electrum_dash.plugins.labels.qt',
-    'electrum_dash.plugins.trezor.qt',
-    'electrum_dash.plugins.safe_t.client',
-    'electrum_dash.plugins.safe_t.qt',
-    'electrum_dash.plugins.ledger.qt',
-    'electrum_dash.plugins.virtualkeyboard.qt',
+    'electrum_firo.plugins.audio_modem.qt',
+    'electrum_firo.plugins.cosigner_pool.qt',
+    'electrum_firo.plugins.digitalbitbox.qt',
+    'electrum_firo.plugins.email_requests.qt',
+    'electrum_firo.plugins.keepkey.qt',
+    'electrum_firo.plugins.revealer.qt',
+    'electrum_firo.plugins.labels.qt',
+    'electrum_firo.plugins.trezor.qt',
+    'electrum_firo.plugins.safe_t.client',
+    'electrum_firo.plugins.safe_t.qt',
+    'electrum_firo.plugins.ledger.qt',
+    'electrum_firo.plugins.virtualkeyboard.qt',
 ]
 
 datas = [
-    ('electrum_dash/checkpoints*.*', 'electrum_dash'),
-    ('electrum_dash/*.json', 'electrum_dash'),
-    ('electrum_dash/locale', 'electrum_dash/locale'),
-    ('electrum_dash/wordlist', 'electrum_dash/wordlist'),
-    ('electrum_dash/gui/icons', 'electrum_dash/gui/icons'),
+    ('electrum_firo/checkpoints*.*', 'electrum_firo'),
+    ('electrum_firo/*.json', 'electrum_firo'),
+    ('electrum_firo/locale', 'electrum_firo/locale'),
+    ('electrum_firo/wordlist', 'electrum_firo/wordlist'),
+    ('electrum_firo/gui/icons', 'electrum_firo/gui/icons'),
 ]
 
 datas += collect_data_files('trezorlib')
@@ -130,7 +130,7 @@ excludes += [
     'PyQt5.QtWinExtras',
 ]
 
-a = Analysis(['electrum-dash'],
+a = Analysis(['electrum-firo'],
              hiddenimports=hiddenimports,
              datas=datas,
              binaries=binaries,
@@ -161,8 +161,8 @@ exe = EXE(pyz,
           strip=False,
           upx=False,
           console=False,
-          icon='electrum_dash/gui/icons/electrum-firo.ico',
-          name=os.path.join('build/electrum-dash/electrum-dash', cmdline_name))
+          icon='electrum_firo/gui/icons/electrum-firo.ico',
+          name=os.path.join('build/electrum-dash/electrum-firo', cmdline_name))
 
 coll = COLLECT(exe,
                a.binaries,
@@ -179,7 +179,7 @@ app = BUNDLE(coll,
                     {'CFBundleURLName': 'dash', 'CFBundleURLSchemes': ['dash']}
                 ],
              },
-             name=os.path.join('dist', 'Dash Electrum.app'),
-             appname="Dash Electrum",
+             name=os.path.join('dist', 'Firo Electrum.app'),
+             appname="Firo Electrum",
 	         icon=ICONS_FILE,
              version=DASH_ELECTRUM_VERSION)

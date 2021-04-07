@@ -1,11 +1,11 @@
 from ipaddress import IPv6Address
 
-from electrum_dash.dash_msg import (DashVersionMsg, DashDsaMsg, DashDssuMsg,
+from electrum_firo.dash_msg import (DashVersionMsg, DashDsaMsg, DashDssuMsg,
                                     DashDsqMsg, DashDsiMsg, DashDsfMsg,
                                     DashDssMsg, DashDscMsg)
-from electrum_dash.dash_tx import TxOutPoint, CTxIn, CTxOut
-from electrum_dash.transaction import Transaction
-from electrum_dash.util import bfh, bh2u
+from electrum_firo.dash_tx import TxOutPoint, CTxIn, CTxOut
+from electrum_firo.transaction import Transaction
+from electrum_firo.util import bfh, bh2u
 
 from . import TestCaseForTestnet
 

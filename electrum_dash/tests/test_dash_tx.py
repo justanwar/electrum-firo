@@ -1,11 +1,11 @@
 import asyncio
 from pprint import pprint
 
-from electrum_dash import transaction
-from electrum_dash.dash_tx import DashTxError, TxOutPoint
-from electrum_dash.transaction import BCDataStream
-from electrum_dash.util import bfh, bh2u, create_and_start_event_loop
-from electrum_dash.commands import Commands
+from electrum_firo import transaction
+from electrum_firo.dash_tx import DashTxError, TxOutPoint
+from electrum_firo.transaction import BCDataStream
+from electrum_firo.util import bfh, bh2u, create_and_start_event_loop
+from electrum_firo.commands import Commands
 
 from . import SequentialTestCase
 

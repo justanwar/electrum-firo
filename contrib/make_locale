@@ -4,7 +4,7 @@ import os.path
 import tempfile
 
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-os.chdir(os.path.join('..', 'electrum_dash'))
+os.chdir(os.path.join('..', 'electrum_firo'))
 
 # Get fresh translations
 clonetmp = tempfile.mkdtemp()

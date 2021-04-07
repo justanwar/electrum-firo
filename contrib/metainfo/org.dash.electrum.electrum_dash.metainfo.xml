@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>org.dash.electrum.electrum_dash</id>
-  <name>Dash Electrum</name>
+  <id>org.dash.electrum.electrum_firo</id>
+  <name>Firo Electrum</name>
   <developer_name>Thomas Voegtlin, et al.</developer_name>
   <launchable type="desktop-id">
-    org.dash.electrum.electrum_dash.desktop
+    org.dash.electrum.electrum_firo.desktop
   </launchable>
   <content_rating type="oars-1.1"/>
   <summary>Lightweight Dash client</summary>
   <description>
     <p>
-      Dash Electrum's focus is speed and simplicity, with low resource
+      Firo Electrum's focus is speed and simplicity, with low resource
       usage. It uses remote servers that handle the most complicated
       parts of the Dash system, and it allows you to recover your
       wallet from a secret phrase.
@@ -18,7 +18,7 @@
     <p>
       Do not trust. Verify.
 
-      Dash Electrum verifies that your transactions
+      Firo Electrum verifies that your transactions
       are in the Dash blockchain.
 
       Because Dash is not about trust,
@@ -35,7 +35,7 @@
         Forgiving: Your funds can be recovered from a secret phrase
       </li>
       <li>
-        Instant On: Dash Electrum is fast, because it uses servers that
+        Instant On: Firo Electrum is fast, because it uses servers that
         index the Dash blockchain
       </li>
       <li>
@@ -43,11 +43,11 @@
         other Dash clients
       </li>
       <li>
-        No Downtimes: Dash Electrum servers are decentralized and
+        No Downtimes: Firo Electrum servers are decentralized and
         redundant. Your wallet is never down
       </li>
       <li>
-        Proof Checking: Dash Electrum Wallet verifies all the transactions
+        Proof Checking: Firo Electrum Wallet verifies all the transactions
         in your history using SPV
       </li>
       <li>
@@ -59,7 +59,7 @@
         several wallets
       </li>
       <li>
-        Add-ons: Dash Electrum supports third-party plugins: Multisig
+        Add-ons: Firo Electrum supports third-party plugins: Multisig
         services, Hardware wallets, etc
       </li>
     </ul>

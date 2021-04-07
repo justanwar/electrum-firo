@@ -28,29 +28,29 @@ from kivy.lang import Builder
 from kivy.factory import Factory
 from kivy.utils import platform
 
-from electrum_dash.util import profiler, parse_URI, format_time, InvalidPassword, NotEnoughFunds, Fiat
-from electrum_dash.invoices import (PR_TYPE_ONCHAIN, PR_DEFAULT_EXPIRATION_WHEN_CREATING,
+from electrum_firo.util import profiler, parse_URI, format_time, InvalidPassword, NotEnoughFunds, Fiat
+from electrum_firo.invoices import (PR_TYPE_ONCHAIN, PR_DEFAULT_EXPIRATION_WHEN_CREATING,
                                     PR_PAID, PR_UNKNOWN, PR_EXPIRED, PR_INFLIGHT,
                                     pr_expiration_values, Invoice, OnchainInvoice)
-from electrum_dash import bitcoin, constants
-from electrum_dash.transaction import Transaction, tx_from_any, PartialTransaction, PartialTxOutput
-from electrum_dash.util import parse_URI, InvalidBitcoinURI, TxMinedInfo
-from electrum_dash.plugin import run_hook
-from electrum_dash.wallet import InternalAddressCorruption
-from electrum_dash import simple_config
-from electrum_dash.simple_config import FEERATE_WARNING_HIGH_FEE, FEE_RATIO_HIGH_WARNING
-from electrum_dash.logging import Logger
-from electrum_dash.dash_tx import PSTxTypes, SPEC_TX_NAMES
+from electrum_firo import bitcoin, constants
+from electrum_firo.transaction import Transaction, tx_from_any, PartialTransaction, PartialTxOutput
+from electrum_firo.util import parse_URI, InvalidBitcoinURI, TxMinedInfo
+from electrum_firo.plugin import run_hook
+from electrum_firo.wallet import InternalAddressCorruption
+from electrum_firo import simple_config
+from electrum_firo.simple_config import FEERATE_WARNING_HIGH_FEE, FEE_RATIO_HIGH_WARNING
+from electrum_firo.logging import Logger
+from electrum_firo.dash_tx import PSTxTypes, SPEC_TX_NAMES
 
 from .dialogs.question import Question
 from .context_menu import ContextMenu
 
-from electrum_dash.gui.kivy import KIVY_GUI_PATH
-from electrum_dash.gui.kivy.i18n import _
+from electrum_firo.gui.kivy import KIVY_GUI_PATH
+from electrum_firo.gui.kivy.i18n import _
 
 if TYPE_CHECKING:
-    from electrum_dash.gui.kivy.main_window import ElectrumWindow
-    from electrum_dash.paymentrequest import PaymentRequest
+    from electrum_firo.gui.kivy.main_window import ElectrumWindow
+    from electrum_firo.paymentrequest import PaymentRequest
 
 
 class HistoryItem(RecycleDataViewBehavior, BoxLayout):
@@ -631,7 +631,7 @@ class ReceiveScreen(CScreen):
             self.status = _('Payment received') if status == PR_PAID else ''
 
     def get_URI(self):
-        from electrum_dash.util import create_bip21_uri
+        from electrum_firo.util import create_bip21_uri
         amount = self.amount
         if amount:
             a, u = self.amount.split()

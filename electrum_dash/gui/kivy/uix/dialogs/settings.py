@@ -3,23 +3,23 @@ from kivy.factory import Factory
 from kivy.properties import ObjectProperty
 from kivy.lang import Builder
 
-from electrum_dash.util import base_units_list
-from electrum_dash.i18n import languages
-from electrum_dash.gui.kivy.i18n import _
-from electrum_dash.plugin import run_hook
-from electrum_dash import coinchooser
+from electrum_firo.util import base_units_list
+from electrum_firo.i18n import languages
+from electrum_firo.gui.kivy.i18n import _
+from electrum_firo.plugin import run_hook
+from electrum_firo import coinchooser
 
-from electrum_dash.gui.kivy import KIVY_GUI_PATH
+from electrum_firo.gui.kivy import KIVY_GUI_PATH
 
 from .choice_dialog import ChoiceDialog
 
 Builder.load_string('''
 #:import partial functools.partial
-#:import _ electrum_dash.gui.kivy.i18n._
+#:import _ electrum_firo.gui.kivy.i18n._
 
 <SettingsDialog@Popup>
     id: settings
-    title: _('Dash Electrum Settings')
+    title: _('Firo Electrum Settings')
     has_pin_code: False
     use_encryption: False
     BoxLayout:

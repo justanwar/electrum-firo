@@ -8,24 +8,24 @@ from kivy.lang import Builder
 from decimal import Decimal
 from kivy.clock import Clock
 
-from electrum_dash.util import InvalidPassword
-from electrum_dash.wallet import WalletStorage, Wallet
-from electrum_dash.gui.kivy.i18n import _
-from electrum_dash.wallet_db import WalletDB
+from electrum_firo.util import InvalidPassword
+from electrum_firo.wallet import WalletStorage, Wallet
+from electrum_firo.gui.kivy.i18n import _
+from electrum_firo.wallet_db import WalletDB
 
 from .wallets import WalletDialog
 
 if TYPE_CHECKING:
     from ...main_window import ElectrumWindow
-    from electrum_dash.wallet import Abstract_Wallet
-    from electrum_dash.storage import WalletStorage
+    from electrum_firo.wallet import Abstract_Wallet
+    from electrum_firo.storage import WalletStorage
 
 Builder.load_string('''
-#:import KIVY_GUI_PATH electrum_dash.gui.kivy.KIVY_GUI_PATH
+#:import KIVY_GUI_PATH electrum_firo.gui.kivy.KIVY_GUI_PATH
 
 <PasswordDialog@Popup>
     id: popup
-    title: 'Dash Electrum'
+    title: 'Firo Electrum'
     message: ''
     basename:''
     is_change: False
@@ -106,7 +106,7 @@ Builder.load_string('''
 
 <PincodeDialog@Popup>
     id: popup
-    title: 'Dash Electrum'
+    title: 'Firo Electrum'
     message: ''
     basename:''
     BoxLayout:
@@ -185,7 +185,7 @@ class AbstractPasswordDialog(Factory.Popup):
         self.is_change = is_change
         self.pw = None
         self.new_password = None
-        self.title = 'Dash Electrum'
+        self.title = 'Firo Electrum'
         self.level = 1 if is_change and not has_password else 0
         self.basename = basename
         self.update_screen()
