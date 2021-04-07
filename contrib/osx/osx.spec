@@ -130,7 +130,7 @@ excludes += [
     'PyQt5.QtWinExtras',
 ]
 
-a = Analysis(['electrum-dash'],
+a = Analysis(['electrum-firo'],
              hiddenimports=hiddenimports,
              datas=datas,
              binaries=binaries,
@@ -162,7 +162,7 @@ exe = EXE(pyz,
           upx=False,
           console=False,
           icon='electrum_firo/gui/icons/electrum-firo.ico',
-          name=os.path.join('build/electrum-dash/electrum-dash', cmdline_name))
+          name=os.path.join('build/electrum-dash/electrum-firo', cmdline_name))
 
 coll = COLLECT(exe,
                a.binaries,

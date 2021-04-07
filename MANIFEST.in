@@ -1,8 +1,8 @@
 include LICENCE RELEASE-NOTES AUTHORS
 include README.rst
-include electrum-dash.desktop
+include electrum-firo.desktop
 include *.py
-include electrum-dash
+include electrum-firo
 recursive-include packages *.py
 recursive-include packages cacert.pem
 graft debian
