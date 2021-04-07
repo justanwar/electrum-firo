@@ -3162,7 +3162,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
         return raw_tx
 
     @protected_with_parent
-    def export_privkeys_dialog(self, parent, password, ps_ks_only=False):
+    def export_privkeys_dialog(self, parent, password=None, ps_ks_only=False):
         if self.wallet.is_watching_only():
             self.show_message(_("This is a watching-only wallet"))
             return
