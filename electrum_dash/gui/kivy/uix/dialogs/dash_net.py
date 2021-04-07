@@ -14,9 +14,9 @@ from electrum_firo.gui.kivy.uix.dialogs.question import Question
 
 
 Builder.load_string('''
-#:import _ electrum_dash.gui.kivy.i18n._
-#:import MIN_PEERS_LIMIT electrum_dash.dash_net.MIN_PEERS_LIMIT
-#:import MAX_PEERS_LIMIT electrum_dash.dash_net.MAX_PEERS_LIMIT
+#:import _ electrum_firo.gui.kivy.i18n._
+#:import MIN_PEERS_LIMIT electrum_firo.dash_net.MIN_PEERS_LIMIT
+#:import MAX_PEERS_LIMIT electrum_firo.dash_net.MAX_PEERS_LIMIT
 
 
 <DashNetStatItem@SettingsItem>

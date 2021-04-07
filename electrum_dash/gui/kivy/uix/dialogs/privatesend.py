@@ -18,8 +18,8 @@ from electrum_firo.gui.kivy.uix.dialogs.question import Question
 
 
 Builder.load_string('''
-#:import _ electrum_dash.gui.kivy.i18n._
-#:import SpinBox electrum_dash.gui.kivy.uix.spinbox.SpinBox
+#:import _ electrum_firo.gui.kivy.i18n._
+#:import SpinBox electrum_firo.gui.kivy.uix.spinbox.SpinBox
 
 
 <LineItem>

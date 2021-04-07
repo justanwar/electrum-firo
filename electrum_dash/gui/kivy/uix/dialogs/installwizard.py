@@ -33,8 +33,8 @@ if TYPE_CHECKING:
 
 Builder.load_string('''
 #:import Window kivy.core.window.Window
-#:import _ electrum_dash.gui.kivy.i18n._
-#:import KIVY_GUI_PATH electrum_dash.gui.kivy.KIVY_GUI_PATH
+#:import _ electrum_firo.gui.kivy.i18n._
+#:import KIVY_GUI_PATH electrum_firo.gui.kivy.KIVY_GUI_PATH
 
 
 <WizardTextInput@TextInput>

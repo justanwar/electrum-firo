@@ -15,7 +15,7 @@ from .choice_dialog import ChoiceDialog
 
 Builder.load_string('''
 #:import partial functools.partial
-#:import _ electrum_dash.gui.kivy.i18n._
+#:import _ electrum_firo.gui.kivy.i18n._
 
 <SettingsDialog@Popup>
     id: settings

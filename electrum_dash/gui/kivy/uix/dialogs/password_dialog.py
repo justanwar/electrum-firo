@@ -21,7 +21,7 @@ if TYPE_CHECKING:
     from electrum_firo.storage import WalletStorage
 
 Builder.load_string('''
-#:import KIVY_GUI_PATH electrum_dash.gui.kivy.KIVY_GUI_PATH
+#:import KIVY_GUI_PATH electrum_firo.gui.kivy.KIVY_GUI_PATH
 
 <PasswordDialog@Popup>
     id: popup

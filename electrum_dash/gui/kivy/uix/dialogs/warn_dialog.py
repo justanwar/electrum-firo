@@ -2,7 +2,7 @@ from kivy.factory import Factory
 from kivy.lang import Builder
 
 Builder.load_string('''
-#:import _ electrum_dash.gui.kivy.i18n._
+#:import _ electrum_firo.gui.kivy.i18n._
 
 <WarnDialog@Popup>
     id: popup
