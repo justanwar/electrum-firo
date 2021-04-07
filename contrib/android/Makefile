@@ -9,8 +9,8 @@ theming:
 prepare:
 	# running pre build setup
 	@cp buildozer.spec ../../buildozer.spec
-	# copy electrum-dash to main.py
-	@cp ../../electrum-dash ../../main.py
+	# copy electrum-firo to main.py
+	@cp ../../electrum-firo ../../main.py
 prepare-testnet:
 	@-cd ../..; sed -r "s:^(title =.*):\1 Testnet:" -i buildozer.spec
 	@-cd ../..; sed -r "s:^(package.nam.*):\1_Testnet:" -i buildozer.spec
