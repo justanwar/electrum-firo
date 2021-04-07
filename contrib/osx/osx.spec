@@ -155,7 +155,11 @@ exe = EXE(pyz,
           upx=False,
           console=False,
           icon='electrum_firo/gui/icons/electrum-firo.ico',
+<<<<<<< HEAD
           name=os.path.join('build/electrum-dash/electrum-firo', cmdline_name))
+=======
+          name=os.path.join('build/electrum-dash/electrum-dash', cmdline_name))
+>>>>>>> Changed package name to be electrum_firo
 
 coll = COLLECT(exe,
                a.binaries,
