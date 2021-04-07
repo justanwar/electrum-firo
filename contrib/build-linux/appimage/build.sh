@@ -18,7 +18,7 @@ SQUASHFSKIT_COMMIT="ae0d656efa2d0df2fcac795b6823b44462f19386"
 export GCC_STRIP_BINARIES="1"
 
 pushd $PROJECT_ROOT
-source $CONTRIB/dash/travis/electrum_dash_version_env.sh
+source $CONTRIB/dash/travis/electrum_firo_version_env.sh
 popd
 VERSION=$DASH_ELECTRUM_VERSION
 APPIMAGE="$DISTDIR/Firo-Electrum-$VERSION-x86_64.AppImage"
