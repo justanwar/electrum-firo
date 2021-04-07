@@ -5,7 +5,7 @@ PYTHON = python3
 .PHONY: theming prepare prepare-testnet apk apk-testnet release release-testnet clean
 
 theming:
-	$(PYTHON) -m kivy.atlas ../../electrum_dash/gui/kivy/theming/light 1024 ../../electrum_dash/gui/kivy/theming/light/*.png
+	$(PYTHON) -m kivy.atlas ../../electrum_firo/gui/kivy/theming/light 1024 ../../electrum_firo/gui/kivy/theming/light/*.png
 prepare:
 	# running pre build setup
 	@cp buildozer.spec ../../buildozer.spec

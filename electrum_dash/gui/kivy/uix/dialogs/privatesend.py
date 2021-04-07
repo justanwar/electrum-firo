@@ -115,7 +115,7 @@ Builder.load_string('''
         spacing: 10
         orientation: 'vertical'
         Image:
-            source:'atlas://electrum_dash/gui/kivy/theming/light/error'
+            source:'atlas://electrum_firo/gui/kivy/theming/light/error'
             size_hint_y: 0.1
         Label:
             size_hint_y: 0.4

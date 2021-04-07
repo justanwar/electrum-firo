@@ -6,7 +6,7 @@ import click
 import imp
 import re
 
-imp.load_module('electrum_dash', *imp.find_module('../../electrum_dash'))
+imp.load_module('electrum_firo', *imp.find_module('../../electrum_firo'))
 
 from electrum_firo import constants
 from electrum_firo.bitcoin import (b58_address_to_hash160, hash160_to_b58_address,

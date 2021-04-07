@@ -105,7 +105,7 @@ Run install (this should install dependencies)::
 Compile the protobuf description file::
 
     sudo apt-get install protobuf-compiler
-    protoc --proto_path=electrum_dash --python_out=electrum_dash electrum_dash/paymentrequest.proto
+    protoc --proto_path=electrum_firo --python_out=electrum_firo electrum_firo/paymentrequest.proto
 
 Create translations (optional)::
 

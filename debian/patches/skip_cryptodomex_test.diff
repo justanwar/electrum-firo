@@ -1,7 +1,7 @@
-Index: Dash-Electrum-4.0.4.0rc2/electrum_dash/tests/test_bitcoin.py
+Index: Dash-Electrum-4.0.4.0rc2/electrum_firo/tests/test_bitcoin.py
 ===================================================================
---- Dash-Electrum-4.0.4.0rc2.orig/electrum_dash/tests/test_bitcoin.py
-+++ Dash-Electrum-4.0.4.0rc2/electrum_dash/tests/test_bitcoin.py
+--- Dash-Electrum-4.0.4.0rc2.orig/electrum_firo/tests/test_bitcoin.py
++++ Dash-Electrum-4.0.4.0rc2/electrum_firo/tests/test_bitcoin.py
 @@ -1,5 +1,6 @@
  import base64
  import sys

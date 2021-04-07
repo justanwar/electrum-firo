@@ -3,7 +3,7 @@ set -ev
 
 export PY37BINDIR=/Library/Frameworks/Python.framework/Versions/3.7/bin/
 export PATH=$PATH:$PY37BINDIR
-source ./contrib/dash/travis/electrum_dash_version_env.sh;
+source ./contrib/dash/travis/electrum_firo_version_env.sh;
 echo osx build version is $DASH_ELECTRUM_VERSION
 
 
@@ -45,7 +45,7 @@ $PIP_CMD install --no-dependencies -I x11_hash>=1.4
 $PIP_CMD install --no-dependencies -I \
     -r contrib/deterministic-build/requirements-build-mac.txt
 
-pushd electrum_dash
+pushd electrum_firo
 git clone https://github.com/zebra-lucky/electrum-dash-locale/ locale-repo
 mv locale-repo/locale .
 rm -rf locale-repo

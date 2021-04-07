@@ -17,7 +17,7 @@ SQUASHFSKIT_COMMIT="ae0d656efa2d0df2fcac795b6823b44462f19386"
 export GCC_STRIP_BINARIES="1"
 
 pushd $PROJECT_ROOT
-source $CONTRIB/dash/travis/electrum_dash_version_env.sh
+source $CONTRIB/dash/travis/electrum_firo_version_env.sh
 popd
 VERSION=$DASH_ELECTRUM_VERSION
 APPIMAGE="$DISTDIR/Firo-Electrum-$VERSION-x86_64.AppImage"
@@ -95,7 +95,7 @@ cp "/usr/lib/x86_64-linux-gnu/libzbar.so.0" "$APPDIR/usr/lib/libzbar.so.0"
 
 info "desktop integration."
 cp "$PROJECT_ROOT/electrum-firo.desktop" "$APPDIR/electrum-firo.desktop"
-cp "$PROJECT_ROOT/electrum_dash/gui/icons/electrum-dash.png" "$APPDIR/electrum-firo.png"
+cp "$PROJECT_ROOT/electrum_firo/gui/icons/electrum-dash.png" "$APPDIR/electrum-firo.png"
 
 
 # add launcher

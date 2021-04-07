@@ -12,11 +12,11 @@ include contrib/deterministic-build/requirements*.txt
 include contrib/make_libsecp256k1.sh
 include contrib/build_tools_util.sh
 
-graft electrum_dash
+graft electrum_firo
 graft contrib/udev
 
-exclude electrum_dash/*.so
-exclude electrum_dash/*.so.0
+exclude electrum_firo/*.so
+exclude electrum_firo/*.so.0
 
 global-exclude __pycache__
 global-exclude *.py[co~]

@@ -19,7 +19,7 @@ except ImportError as e:
     sys.exit(1)
 
 try:
-    imp.load_module('electrum_dash', *imp.find_module('../electrum_dash'))
+    imp.load_module('electrum_firo', *imp.find_module('../electrum_firo'))
     from electrum_firo import constants, keystore, storage, SimpleConfig
     from electrum_firo.version import ELECTRUM_VERSION
     from electrum_firo.gui.qt import update_checker
