@@ -6,9 +6,9 @@ from kivy.core.clipboard import Clipboard
 from kivy.app import App
 from kivy.clock import Clock
 
-from electrum_dash.gui.kivy.i18n import _
-from electrum_dash.invoices import pr_tooltips, pr_color
-from electrum_dash.invoices import PR_UNKNOWN, PR_UNPAID, PR_FAILED
+from electrum_firo.gui.kivy.i18n import _
+from electrum_firo.invoices import pr_tooltips, pr_color
+from electrum_firo.invoices import PR_UNKNOWN, PR_UNPAID, PR_FAILED
 
 if TYPE_CHECKING:
     from ...main_window import ElectrumWindow

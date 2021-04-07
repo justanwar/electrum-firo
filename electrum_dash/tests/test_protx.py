@@ -1,7 +1,7 @@
 import unittest
 
-from electrum_dash.dash_tx import TxOutPoint
-from electrum_dash.protx import ProTxMN
+from electrum_firo.dash_tx import TxOutPoint
+from electrum_firo.protx import ProTxMN
 
 
 class ProTxTestCase(unittest.TestCase):

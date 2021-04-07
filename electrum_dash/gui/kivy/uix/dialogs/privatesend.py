@@ -1,6 +1,6 @@
 import time
 
-from electrum_dash.dash_ps import filter_log_line, PSLogSubCat, PSStates
+from electrum_firo.dash_ps import filter_log_line, PSLogSubCat, PSStates
 
 from kivy.clock import Clock
 from kivy.properties import (NumericProperty, StringProperty, BooleanProperty,
@@ -13,8 +13,8 @@ from kivy.uix.recycleview.layout import LayoutSelectionBehavior
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.recycleboxlayout import RecycleBoxLayout
 
-from electrum_dash.gui.kivy.i18n import _
-from electrum_dash.gui.kivy.uix.dialogs.question import Question
+from electrum_firo.gui.kivy.i18n import _
+from electrum_firo.gui.kivy.uix.dialogs.question import Question
 
 
 Builder.load_string('''

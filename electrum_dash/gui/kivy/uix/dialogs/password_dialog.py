@@ -8,17 +8,17 @@ from kivy.lang import Builder
 from decimal import Decimal
 from kivy.clock import Clock
 
-from electrum_dash.util import InvalidPassword
-from electrum_dash.wallet import WalletStorage, Wallet
-from electrum_dash.gui.kivy.i18n import _
-from electrum_dash.wallet_db import WalletDB
+from electrum_firo.util import InvalidPassword
+from electrum_firo.wallet import WalletStorage, Wallet
+from electrum_firo.gui.kivy.i18n import _
+from electrum_firo.wallet_db import WalletDB
 
 from .wallets import WalletDialog
 
 if TYPE_CHECKING:
     from ...main_window import ElectrumWindow
-    from electrum_dash.wallet import Abstract_Wallet
-    from electrum_dash.storage import WalletStorage
+    from electrum_firo.wallet import Abstract_Wallet
+    from electrum_firo.storage import WalletStorage
 
 Builder.load_string('''
 #:import KIVY_GUI_PATH electrum_dash.gui.kivy.KIVY_GUI_PATH

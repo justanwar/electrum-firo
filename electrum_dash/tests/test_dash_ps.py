@@ -9,11 +9,11 @@ import time
 from collections import defaultdict
 from pprint import pprint
 
-from electrum_dash import dash_ps, ecc
-from electrum_dash.address_synchronizer import (TX_HEIGHT_LOCAL,
+from electrum_firo import dash_ps, ecc
+from electrum_firo.address_synchronizer import (TX_HEIGHT_LOCAL,
                                                 TX_HEIGHT_UNCONF_PARENT,
                                                 TX_HEIGHT_UNCONFIRMED)
-from electrum_dash.dash_ps import (COLLATERAL_VAL, PSPossibleDoubleSpendError,
+from electrum_firo.dash_ps import (COLLATERAL_VAL, PSPossibleDoubleSpendError,
                                    CREATE_COLLATERAL_VAL, to_duffs, PSTxData,
                                    PSTxWorkflow, PSDenominateWorkflow,
                                    PSMinRoundsCheckFailed, PS_DENOMS_VALS,
@@ -22,15 +22,15 @@ from electrum_dash.dash_ps import (COLLATERAL_VAL, PSPossibleDoubleSpendError,
                                    KP_PS_CHANGE, PSStates, calc_tx_size,
                                    calc_tx_fee, FILTERED_TXID, FILTERED_ADDR,
                                    CREATE_COLLATERAL_VALS, MIN_DENOM_VAL)
-from electrum_dash.dash_tx import PSTxTypes, PSCoinRounds, SPEC_TX_NAMES
-from electrum_dash import keystore
-from electrum_dash.simple_config import SimpleConfig
-from electrum_dash.storage import WalletStorage
-from electrum_dash.transaction import (Transaction, PartialTxOutput,
+from electrum_firo.dash_tx import PSTxTypes, PSCoinRounds, SPEC_TX_NAMES
+from electrum_firo import keystore
+from electrum_firo.simple_config import SimpleConfig
+from electrum_firo.storage import WalletStorage
+from electrum_firo.transaction import (Transaction, PartialTxOutput,
                                        PartialTransaction)
-from electrum_dash.util import Satoshis, NotEnoughFunds, TxMinedInfo, bh2u
-from electrum_dash.wallet import Wallet
-from electrum_dash.wallet_db import WalletDB
+from electrum_firo.util import Satoshis, NotEnoughFunds, TxMinedInfo, bh2u
+from electrum_firo.wallet import Wallet
+from electrum_firo.wallet_db import WalletDB
 
 from . import TestCaseForTestnet
 

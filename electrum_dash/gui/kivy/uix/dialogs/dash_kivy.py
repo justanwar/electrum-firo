@@ -4,8 +4,8 @@ from kivy.clock import Clock
 from kivy.factory import Factory
 from kivy.lang import Builder
 
-from electrum_dash.gui.kivy.i18n import _
-from electrum_dash.network import deserialize_proxy
+from electrum_firo.gui.kivy.i18n import _
+from electrum_firo.network import deserialize_proxy
 
 from kivy.properties import BooleanProperty
 from kivy.uix.button import Button

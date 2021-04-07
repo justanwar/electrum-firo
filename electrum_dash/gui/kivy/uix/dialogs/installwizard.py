@@ -17,8 +17,8 @@ from kivy.core.window import Window
 from kivy.clock import Clock
 from kivy.utils import platform
 
-from electrum_dash.base_wizard import BaseWizard
-from electrum_dash.util import is_valid_email
+from electrum_firo.base_wizard import BaseWizard
+from electrum_firo.util import is_valid_email
 
 
 from . import EventsDialog
@@ -26,7 +26,7 @@ from ...i18n import _
 from .password_dialog import PasswordDialog
 
 if TYPE_CHECKING:
-    from electrum_dash.gui.kivy.main_window import ElectrumWindow
+    from electrum_firo.gui.kivy.main_window import ElectrumWindow
 
 
 # global Variables
@@ -874,8 +874,8 @@ class RestoreSeedDialog(WizardDialog):
     def __init__(self, wizard, **kwargs):
         super(RestoreSeedDialog, self).__init__(wizard, **kwargs)
         self._test = kwargs['test']
-        from electrum_dash.mnemonic import Mnemonic
-        from electrum_dash.old_mnemonic import wordlist as old_wordlist
+        from electrum_firo.mnemonic import Mnemonic
+        from electrum_firo.old_mnemonic import wordlist as old_wordlist
         self.words = set(Mnemonic('en').wordlist).union(set(old_wordlist))
         self.ids.text_input_seed.text = ''
         self.message = _('Please type your seed phrase using the virtual keyboard.')

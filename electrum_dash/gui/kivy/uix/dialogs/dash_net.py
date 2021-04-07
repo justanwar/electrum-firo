@@ -6,11 +6,11 @@ from kivy.properties import (NumericProperty, StringProperty, BooleanProperty,
 from kivy.lang import Builder
 from kivy.logger import Logger
 
-from electrum_dash import util
+from electrum_firo import util
 
-from electrum_dash.gui.kivy.i18n import _
+from electrum_firo.gui.kivy.i18n import _
 
-from electrum_dash.gui.kivy.uix.dialogs.question import Question
+from electrum_firo.gui.kivy.uix.dialogs.question import Question
 
 
 Builder.load_string('''

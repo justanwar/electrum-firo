@@ -6,7 +6,7 @@ from kivy.core.clipboard import Clipboard
 from kivy.app import App
 from kivy.clock import Clock
 
-from electrum_dash.gui.kivy.i18n import _
+from electrum_firo.gui.kivy.i18n import _
 
 if TYPE_CHECKING:
     from ...main_window import ElectrumWindow

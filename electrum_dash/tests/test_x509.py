@@ -1,6 +1,6 @@
 import unittest
 
-from electrum_dash.x509 import X509
+from electrum_firo.x509 import X509
 
 from . import ElectrumTestCase
 

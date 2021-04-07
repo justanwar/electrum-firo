@@ -10,10 +10,10 @@ from kivy.lang import Builder
 from kivy.uix.label import Label
 from kivy.utils import platform
 
-from electrum_dash.gui.kivy.i18n import _
+from electrum_firo.gui.kivy.i18n import _
 
-from electrum_dash.base_crash_reporter import BaseCrashReporter
-from electrum_dash.logging import Logger
+from electrum_firo.base_crash_reporter import BaseCrashReporter
+from electrum_firo.logging import Logger
 
 
 Builder.load_string('''
