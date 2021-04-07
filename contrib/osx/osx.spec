@@ -179,7 +179,7 @@ app = BUNDLE(coll,
                     {'CFBundleURLName': 'dash', 'CFBundleURLSchemes': ['dash']}
                 ],
              },
-             name=os.path.join('dist', 'Dash Electrum.app'),
-             appname="Dash Electrum",
+             name=os.path.join('dist', 'Firo Electrum.app'),
+             appname="Firo Electrum",
 	         icon=ICONS_FILE,
              version=DASH_ELECTRUM_VERSION)

@@ -19,7 +19,7 @@ Builder.load_string('''
 
 <SettingsDialog@Popup>
     id: settings
-    title: _('Dash Electrum Settings')
+    title: _('Firo Electrum Settings')
     has_pin_code: False
     use_encryption: False
     BoxLayout:

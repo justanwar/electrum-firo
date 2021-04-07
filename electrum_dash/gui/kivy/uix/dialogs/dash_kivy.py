@@ -91,7 +91,7 @@ class TorWarnDialog(Factory.Popup):
         self.tor_detected = False
 
         Factory.Popup.__init__(self)
-        app_name = 'Dash Electrum'
+        app_name = 'Firo Electrum'
         w_basename = os.path.basename(w_path)
         self.title = f'{app_name}  -  {w_basename}'
 
