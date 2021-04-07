@@ -58,11 +58,9 @@ def read_json_gz(filename, default):
     return r
 
 
-# Update to correct repo link
-GIT_REPO_URL = "https://github.com/zcoinofficial/electrum-xzc"
-GIT_REPO_ISSUES_URL = "https://github.com/zcoinofficial/electrum-xzc/issues"
-#GIT_REPO_URL = "https://github.com/akhavr/electrum-dash"
-#GIT_REPO_ISSUES_URL = f"{GIT_REPO_URL}/issues"
+GIT_REPO_URL = "https://github.com/firoorg/electrum-firo/"
+GIT_REPO_ISSUES_URL = "https://github.com/firoorg/electrum-firo/issues"
+
 BIP39_WALLET_FORMATS = read_json('bip39_wallet_formats.json', [])
 
 
