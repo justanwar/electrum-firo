@@ -16,26 +16,26 @@ from kivy.uix.recycleview.layout import LayoutSelectionBehavior
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.recycleboxlayout import RecycleBoxLayout
 
-from electrum_dash.invoices import (PR_TYPE_ONCHAIN, PR_DEFAULT_EXPIRATION_WHEN_CREATING,
+from electrum_firo.invoices import (PR_TYPE_ONCHAIN, PR_DEFAULT_EXPIRATION_WHEN_CREATING,
                                     PR_PAID, PR_UNKNOWN, PR_EXPIRED, PR_INFLIGHT,
                                     pr_expiration_values, Invoice, OnchainInvoice,
                                     InvoiceExt)
-from electrum_dash import bitcoin, constants
-from electrum_dash.transaction import tx_from_any, PartialTxOutput
-from electrum_dash.util import (parse_URI, InvalidBitcoinURI, TxMinedInfo,
+from electrum_firo import bitcoin, constants
+from electrum_firo.transaction import tx_from_any, PartialTxOutput
+from electrum_firo.util import (parse_URI, InvalidBitcoinURI, TxMinedInfo,
                                 profiler, InvoiceError)
-from electrum_dash.logging import Logger
-from electrum_dash.dash_tx import PSTxTypes, SPEC_TX_NAMES
+from electrum_firo.logging import Logger
+from electrum_firo.dash_tx import PSTxTypes, SPEC_TX_NAMES
 
 from .dialogs.confirm_tx_dialog import ConfirmTxDialog
 from .context_menu import ContextMenu
 
-from electrum_dash.gui.kivy import KIVY_GUI_PATH
-from electrum_dash.gui.kivy.i18n import _
+from electrum_firo.gui.kivy import KIVY_GUI_PATH
+from electrum_firo.gui.kivy.i18n import _
 
 if TYPE_CHECKING:
-    from electrum_dash.gui.kivy.main_window import ElectrumWindow
-    from electrum_dash.paymentrequest import PaymentRequest
+    from electrum_firo.gui.kivy.main_window import ElectrumWindow
+    from electrum_firo.paymentrequest import PaymentRequest
 
 
 class HistoryItem(RecycleDataViewBehavior, BoxLayout):
@@ -612,7 +612,7 @@ class ReceiveScreen(CScreen):
             self.status = _('Payment received') if status == PR_PAID else ''
 
     def get_URI(self):
-        from electrum_dash.util import create_bip21_uri
+        from electrum_firo.util import create_bip21_uri
         amount = self.amount
         if amount:
             a, u = self.amount.split()

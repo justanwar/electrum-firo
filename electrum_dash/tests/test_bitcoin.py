@@ -1,7 +1,7 @@
 import base64
 import sys
 
-from electrum_dash.bitcoin import (public_key_to_p2pkh, address_from_private_key,
+from electrum_firo.bitcoin import (public_key_to_p2pkh, address_from_private_key,
                                    is_address, is_private_key,
                                    var_int, _op_push, address_to_script,
                                    deserialize_privkey, serialize_privkey,
@@ -9,18 +9,18 @@ from electrum_dash.bitcoin import (public_key_to_p2pkh, address_from_private_key
                                    is_compressed_privkey, EncodeBase58Check, DecodeBase58Check,
                                    script_num_to_hex, push_script, add_number_to_script, int_to_hex,
                                    opcodes, base_encode, base_decode, BitcoinException)
-from electrum_dash import bip32
-from electrum_dash.bip32 import (BIP32Node, convert_bip32_intpath_to_strpath,
+from electrum_firo import bip32
+from electrum_firo.bip32 import (BIP32Node, convert_bip32_intpath_to_strpath,
                                  xpub_from_xprv, xpub_type, is_xprv, is_bip32_derivation,
                                  is_xpub, convert_bip32_path_to_list_of_uint32,
                                  normalize_bip32_derivation, is_all_public_derivation)
-from electrum_dash.crypto import sha256d, SUPPORTED_PW_HASH_VERSIONS
-from electrum_dash import ecc, crypto, constants
-from electrum_dash.util import bfh, bh2u, InvalidPassword, randrange
-from electrum_dash.storage import WalletStorage
-from electrum_dash.keystore import xtype_from_derivation, from_master_key
+from electrum_firo.crypto import sha256d, SUPPORTED_PW_HASH_VERSIONS
+from electrum_firo import ecc, crypto, constants
+from electrum_firo.util import bfh, bh2u, InvalidPassword, randrange
+from electrum_firo.storage import WalletStorage
+from electrum_firo.keystore import xtype_from_derivation, from_master_key
 
-from electrum_dash import ecc_fast
+from electrum_firo import ecc_fast
 
 from . import ElectrumTestCase
 from . import TestCaseForTestnet

@@ -362,7 +362,7 @@ class DashPeer(Logger):
         trans_ip = LOCAL_IP_ADDR
         trans_port = self.default_port
         nonce = random.getrandbits(64)
-        user_agent = '/Dash Electrum:%s/' % ELECTRUM_VERSION
+        user_agent = '/Firo Electrum:%s/' % ELECTRUM_VERSION
         start_height = self.dash_net.network.get_local_height()
         relay = 0
         msg = DashVersionMsg(version, services, timestamp,

@@ -1,4 +1,4 @@
-# Specific of using Dash Electrum on various operating systems
+# Specific of using Firo Electrum on various operating systems
 
 ## macOS
 

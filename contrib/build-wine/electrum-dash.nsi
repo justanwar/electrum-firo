@@ -80,7 +80,7 @@
   !define MUI_ABORTWARNING
   !define MUI_ABORTWARNING_TEXT "Are you sure you wish to abort the installation of ${PRODUCT_NAME}?"
   
-  !define MUI_ICON "electrum_dash\gui\icons\electrum-firo.ico"
+  !define MUI_ICON "electrum_firo\gui\icons\electrum-firo.ico"
   
 ;--------------------------------
 ;Pages
@@ -160,7 +160,7 @@ Section "${PRODUCT_NAME}" SectionDE
 
   ;Files to pack into the installer
   File /r "dist\electrum-dash\*.*"
-  File "electrum_dash\gui\icons\electrum-firo.ico"
+  File "electrum_firo\gui\icons\electrum-firo.ico"
 
   ;Store installation folder
   WriteRegStr HKCU "Software\${PRODUCT_NAME}" "" $INSTDIR

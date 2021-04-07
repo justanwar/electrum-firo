@@ -19,8 +19,8 @@ from kivy.core.window import Window
 from kivy.clock import Clock
 from kivy.utils import platform
 
-from electrum_dash.base_wizard import BaseWizard
-from electrum_dash.util import is_valid_email
+from electrum_firo.base_wizard import BaseWizard
+from electrum_firo.util import is_valid_email
 
 
 from . import EventsDialog
@@ -28,16 +28,16 @@ from ...i18n import _
 from .password_dialog import PasswordDialog
 
 if TYPE_CHECKING:
-    from electrum_dash.gui.kivy.main_window import ElectrumWindow
+    from electrum_firo.gui.kivy.main_window import ElectrumWindow
 
 
 # global Variables
 
 Builder.load_string('''
 #:import Window kivy.core.window.Window
-#:import _ electrum_dash.gui.kivy.i18n._
-#:import KIVY_GUI_PATH electrum_dash.gui.kivy.KIVY_GUI_PATH
-#:import ComboBox electrum_dash.gui.kivy.uix.combobox.ComboBox
+#:import _ electrum_firo.gui.kivy.i18n._
+#:import KIVY_GUI_PATH electrum_firo.gui.kivy.KIVY_GUI_PATH
+#:import ComboBox electrum_firo.gui.kivy.uix.combobox.ComboBox
 
 
 <WizardTextInput@TextInput>
@@ -104,7 +104,7 @@ Builder.load_string('''
                 size_hint: 1, None
                 height: self.texture_size[1] if self.opacity else 0
                 font_size: '33sp'
-                font_name: 'electrum_dash/gui/kivy/data/fonts/tron/Tr2n.ttf'
+                font_name: 'electrum_firo/gui/kivy/data/fonts/tron/Tr2n.ttf'
         GridLayout:
             cols: 1
             id: crcontent
@@ -940,8 +940,8 @@ class RestoreSeedDialog(WizardDialog):
     def __init__(self, wizard, **kwargs):
         super(RestoreSeedDialog, self).__init__(wizard, **kwargs)
         self._test = kwargs['test']
-        from electrum_dash.mnemonic import Mnemonic
-        from electrum_dash.old_mnemonic import wordlist as old_wordlist
+        from electrum_firo.mnemonic import Mnemonic
+        from electrum_firo.old_mnemonic import wordlist as old_wordlist
         self.words = set(Mnemonic('en').wordlist).union(set(old_wordlist))
         self.ids.text_input_seed.text = ''
         self.message = _('Please type your seed phrase using the virtual keyboard.')

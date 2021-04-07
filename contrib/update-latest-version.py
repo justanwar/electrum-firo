@@ -19,15 +19,15 @@ except ImportError as e:
     sys.exit(1)
 
 try:
-    imp.load_module('electrum_dash', *imp.find_module('../electrum_dash'))
-    from electrum_dash import constants, keystore, storage, SimpleConfig
-    from electrum_dash.version import ELECTRUM_VERSION
-    from electrum_dash.gui.qt import update_checker
-    from electrum_dash.plugin import Plugins
-    from electrum_dash.storage import WalletStorage
-    from electrum_dash.util import InvalidPassword
-    from electrum_dash.wallet import Wallet
-    from electrum_dash.wallet_db import WalletDB
+    imp.load_module('electrum_firo', *imp.find_module('../electrum_firo'))
+    from electrum_firo import constants, keystore, storage, SimpleConfig
+    from electrum_firo.version import ELECTRUM_VERSION
+    from electrum_firo.gui.qt import update_checker
+    from electrum_firo.plugin import Plugins
+    from electrum_firo.storage import WalletStorage
+    from electrum_firo.util import InvalidPassword
+    from electrum_firo.wallet import Wallet
+    from electrum_firo.wallet_db import WalletDB
 except ImportError as e:
     print('Import error:', e)
 

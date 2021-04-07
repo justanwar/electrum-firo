@@ -6,14 +6,14 @@ from typing import Sequence
 import asyncio
 import copy
 
-from electrum_dash import storage, bitcoin, keystore, bip32, slip39, wallet
-from electrum_dash import Transaction
-from electrum_dash import SimpleConfig
-from electrum_dash.address_synchronizer import TX_HEIGHT_UNCONFIRMED, TX_HEIGHT_UNCONF_PARENT
-from electrum_dash.wallet import sweep, Multisig_Wallet, Standard_Wallet, Imported_Wallet, restore_wallet_from_text, Abstract_Wallet
-from electrum_dash.util import bfh, bh2u, create_and_start_event_loop, NotEnoughFunds
-from electrum_dash.transaction import TxOutput, Transaction, PartialTransaction, PartialTxOutput, PartialTxInput, tx_from_any
-from electrum_dash.mnemonic import seed_type
+from electrum_firo import storage, bitcoin, keystore, bip32, slip39, wallet
+from electrum_firo import Transaction
+from electrum_firo import SimpleConfig
+from electrum_firo.address_synchronizer import TX_HEIGHT_UNCONFIRMED, TX_HEIGHT_UNCONF_PARENT
+from electrum_firo.wallet import sweep, Multisig_Wallet, Standard_Wallet, Imported_Wallet, restore_wallet_from_text, Abstract_Wallet
+from electrum_firo.util import bfh, bh2u, create_and_start_event_loop, NotEnoughFunds
+from electrum_firo.transaction import TxOutput, Transaction, PartialTransaction, PartialTxOutput, PartialTxInput, tx_from_any
+from electrum_firo.mnemonic import seed_type
 
 from . import TestCaseForTestnet
 from . import ElectrumTestCase

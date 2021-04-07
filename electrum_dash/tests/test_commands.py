@@ -2,13 +2,13 @@ import unittest
 from unittest import mock
 from decimal import Decimal
 
-from electrum_dash.util import create_and_start_event_loop
-from electrum_dash.commands import Commands, eval_bool
-from electrum_dash import storage, wallet
-from electrum_dash.wallet import restore_wallet_from_text
-from electrum_dash.address_synchronizer import TX_HEIGHT_UNCONFIRMED
-from electrum_dash.simple_config import SimpleConfig
-from electrum_dash.transaction import Transaction, TxOutput, tx_from_any
+from electrum_firo.util import create_and_start_event_loop
+from electrum_firo.commands import Commands, eval_bool
+from electrum_firo import storage, wallet
+from electrum_firo.wallet import restore_wallet_from_text
+from electrum_firo.address_synchronizer import TX_HEIGHT_UNCONFIRMED
+from electrum_firo.simple_config import SimpleConfig
+from electrum_firo.transaction import Transaction, TxOutput, tx_from_any
 
 from . import TestCaseForTestnet, ElectrumTestCase
 from .test_wallet_vertical import WalletIntegrityHelper

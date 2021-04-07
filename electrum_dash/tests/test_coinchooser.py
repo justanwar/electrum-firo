@@ -1,5 +1,5 @@
-from electrum_dash.coinchooser import CoinChooserPrivacy
-from electrum_dash.util import NotEnoughFunds
+from electrum_firo.coinchooser import CoinChooserPrivacy
+from electrum_firo.util import NotEnoughFunds
 
 from . import ElectrumTestCase
 

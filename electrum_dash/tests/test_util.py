@@ -1,6 +1,6 @@
 from decimal import Decimal
 
-from electrum_dash.util import (format_satoshis, format_fee_satoshis, parse_URI,
+from electrum_firo.util import (format_satoshis, format_fee_satoshis, parse_URI,
                                 is_hash256_str, chunks, InvalidBitcoinURI,
                                 is_ip_address, list_enabled_bits,
                                 format_satoshis_plain, is_private_netaddress,

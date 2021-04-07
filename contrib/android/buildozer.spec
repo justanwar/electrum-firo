@@ -1,7 +1,7 @@
 [app]
 
 # (str) Title of your application
-title = Dash Electrum
+title = Firo Electrum
 
 # (str) Package name
 package.name = Electrum_DASH
@@ -20,9 +20,9 @@ source.exclude_exts = spec
 
 # (list) List of directory to exclude (let empty to not exclude anything)
 source.exclude_dirs = bin, build, dist, contrib,
-    electrum_dash/tests,
-    electrum_dash/gui/qt,
-    electrum_dash/gui/kivy/theming/light,
+    electrum_firo/tests,
+    electrum_firo/gui/qt,
+    electrum_firo/gui/kivy/theming/light,
     packages/qtpy
 # (list) List of exclusions using pattern matching
 source.exclude_patterns = Makefile,setup*,
@@ -31,7 +31,7 @@ source.exclude_patterns = Makefile,setup*,
 
 # (str) Application versioning (method 1)
 version.regex = APK_VERSION = '(.*)'
-version.filename = %(source.dir)s/electrum_dash/version.py
+version.filename = %(source.dir)s/electrum_firo/version.py
 
 # (str) Application versioning (method 2)
 #version = 1.9.8
@@ -55,12 +55,12 @@ requirements =
 
 # (str) Presplash of the application
 #presplash.filename = %(source.dir)s/gui/kivy/theming/splash.png
-presplash.filename = %(source.dir)s/electrum_dash/gui/icons/electrum_presplash.png
+presplash.filename = %(source.dir)s/electrum_firo/gui/icons/electrum_presplash.png
 
 # (str) Icon of the application
-icon.filename = %(source.dir)s/electrum_dash/gui/icons/android_icon_legacy.png
-icon.adaptive_foreground.filename = %(source.dir)s/electrum_dash/gui/icons/android_icon_foreground.png
-icon.adaptive_background.filename = %(source.dir)s/electrum_dash/gui/icons/android_icon_background.png
+icon.filename = %(source.dir)s/electrum_firo/gui/icons/android_icon_legacy.png
+icon.adaptive_foreground.filename = %(source.dir)s/electrum_firo/gui/icons/android_icon_foreground.png
+icon.adaptive_background.filename = %(source.dir)s/electrum_firo/gui/icons/android_icon_background.png
 
 # (str) Supported orientation (one of landscape, portrait or all)
 orientation = portrait
@@ -124,7 +124,7 @@ android.accept_sdk_license = True
 
 # (list) List of Java files to add to the android project (can be java or a
 # directory containing the files)
-android.add_src = electrum_dash/gui/kivy/data/java-classes/
+android.add_src = electrum_firo/gui/kivy/data/java-classes/
 
 android.gradle_dependencies = me.dm7.barcodescanner:zxing:1.9.8
 

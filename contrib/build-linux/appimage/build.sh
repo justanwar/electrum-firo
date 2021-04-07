@@ -96,7 +96,7 @@ cp "/usr/lib/x86_64-linux-gnu/libzbar.so.0" "$APPDIR/usr/lib/libzbar.so.0"
 
 info "desktop integration."
 cp "$PROJECT_ROOT/electrum-firo.desktop" "$APPDIR/electrum-firo.desktop"
-cp "$PROJECT_ROOT/electrum_dash/gui/icons/electrum-dash.png" "$APPDIR/electrum-firo.png"
+cp "$PROJECT_ROOT/electrum_firo/gui/icons/electrum-dash.png" "$APPDIR/electrum-firo.png"
 
 
 # add launcher

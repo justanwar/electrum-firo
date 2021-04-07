@@ -1171,8 +1171,8 @@ class ElectrumWindow(App, Logger):
                 from plyer import notification
             icon = (os.path.dirname(os.path.realpath(__file__))
                     + '/../../' + self.icon)
-            notification.notify('Dash Electrum', message,
-                            app_icon=icon, app_name='Dash Electrum')
+            notification.notify('Firo Electrum', message,
+                            app_icon=icon, app_name='Firo Electrum')
         except ImportError:
             self.logger.Error('Notification: needs plyer; `sudo python3 -m pip install plyer`')
 

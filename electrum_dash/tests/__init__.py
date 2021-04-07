@@ -3,9 +3,9 @@ import threading
 import tempfile
 import shutil
 
-import electrum_dash
-import electrum_dash.logging
-from electrum_dash import constants
+import electrum_firo
+import electrum_firo.logging
+from electrum_firo import constants
 
 
 # Set this locally to make the test suite run faster.
@@ -15,7 +15,7 @@ from electrum_dash import constants
 FAST_TESTS = False
 
 
-electrum_dash.logging._configure_stderr_logging()
+electrum_firo.logging._configure_stderr_logging()
 
 
 # some unit tests are modifying globals...

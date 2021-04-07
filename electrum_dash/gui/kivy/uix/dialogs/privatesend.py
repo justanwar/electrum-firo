@@ -1,8 +1,8 @@
 import time
 from functools import partial
 
-from electrum_dash import util
-from electrum_dash.dash_ps_util import (filter_log_line, PSLogSubCat, PSStates,
+from electrum_firo import util
+from electrum_firo.dash_ps_util import (filter_log_line, PSLogSubCat, PSStates,
                                         PS_DENOMS_VALS)
 
 from kivy.clock import Clock
@@ -18,14 +18,14 @@ from kivy.uix.recycleview.layout import LayoutSelectionBehavior
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.recycleboxlayout import RecycleBoxLayout
 
-from electrum_dash.gui.kivy.i18n import _
-from electrum_dash.gui.kivy.uix.dialogs.question import Question
+from electrum_firo.gui.kivy.i18n import _
+from electrum_firo.gui.kivy.uix.dialogs.question import Question
 
 
 Builder.load_string('''
-#:import _ electrum_dash.gui.kivy.i18n._
-#:import SpinBox electrum_dash.gui.kivy.uix.spinbox.SpinBox
-#:import ComboBox electrum_dash.gui.kivy.uix.combobox.ComboBox
+#:import _ electrum_firo.gui.kivy.i18n._
+#:import SpinBox electrum_firo.gui.kivy.uix.spinbox.SpinBox
+#:import ComboBox electrum_firo.gui.kivy.uix.combobox.ComboBox
 
 
 <LineItem>
@@ -121,7 +121,7 @@ Builder.load_string('''
         spacing: 10
         orientation: 'vertical'
         Image:
-            source:'atlas://electrum_dash/gui/kivy/theming/atlas/light/error'
+            source:'atlas://electrum_firo/gui/kivy/theming/atlas/light/error'
             size_hint_y: 0.1
         Label:
             size_hint_y: 0.4

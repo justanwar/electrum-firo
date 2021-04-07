@@ -8,16 +8,16 @@ import time
 from io import StringIO
 import asyncio
 
-from electrum_dash.storage import WalletStorage
-from electrum_dash.wallet_db import FINAL_SEED_VERSION
-from electrum_dash.wallet import (Abstract_Wallet, Standard_Wallet, create_new_wallet,
+from electrum_firo.storage import WalletStorage
+from electrum_firo.wallet_db import FINAL_SEED_VERSION
+from electrum_firo.wallet import (Abstract_Wallet, Standard_Wallet, create_new_wallet,
                              restore_wallet_from_text, Imported_Wallet, Wallet)
-from electrum_dash.exchange_rate import ExchangeBase, FxThread
-from electrum_dash.util import TxMinedInfo, InvalidPassword
-from electrum_dash.bitcoin import COIN
-from electrum_dash.wallet_db import WalletDB
-from electrum_dash.simple_config import SimpleConfig
-from electrum_dash import util
+from electrum_firo.exchange_rate import ExchangeBase, FxThread
+from electrum_firo.util import TxMinedInfo, InvalidPassword
+from electrum_firo.bitcoin import COIN
+from electrum_firo.wallet_db import WalletDB
+from electrum_firo.simple_config import SimpleConfig
+from electrum_firo import util
 
 from . import ElectrumTestCase
 

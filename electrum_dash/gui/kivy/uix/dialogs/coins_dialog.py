@@ -7,10 +7,10 @@ from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.recycleboxlayout import RecycleBoxLayout
 from kivy.uix.behaviors import FocusBehavior
 
-from electrum_dash.dash_ps_util import (PSCoinRounds, ps_coin_rounds_str,
+from electrum_firo.dash_ps_util import (PSCoinRounds, ps_coin_rounds_str,
                                         sort_utxos_by_ps_rounds)
-from electrum_dash.gui.kivy.i18n import _
-from electrum_dash.gui.kivy.uix.context_menu import ContextMenu
+from electrum_firo.gui.kivy.i18n import _
+from electrum_firo.gui.kivy.uix.context_menu import ContextMenu
 
 
 Builder.load_string('''

@@ -338,7 +338,7 @@
  * Importing/sweeping WIF keys: stricter checks (#4638, #5290)
  * Electrum protocol: the client's "user agent" has been changed from
    "3.3.5" to "dash-electrum/3.3.5". Other libraries connecting to servers
-   can consider not "spoofing" to be Dash Electrum. (#5246)
+   can consider not "spoofing" to be Firo Electrum. (#5246)
  * Several other minor bugfixes and usability improvements.
 
 

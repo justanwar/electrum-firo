@@ -1,13 +1,13 @@
 from typing import NamedTuple, Union
 
-from electrum_dash import transaction, bitcoin
-from electrum_dash.transaction import (convert_raw_tx_to_hex, tx_from_any, Transaction,
+from electrum_firo import transaction, bitcoin
+from electrum_firo.transaction import (convert_raw_tx_to_hex, tx_from_any, Transaction,
                                        PartialTransaction, TxOutpoint, PartialTxInput,
                                        PartialTxOutput)
-from electrum_dash.util import bh2u, bfh
-from electrum_dash.bitcoin import (deserialize_privkey, opcodes,
+from electrum_firo.util import bh2u, bfh
+from electrum_firo.bitcoin import (deserialize_privkey, opcodes,
                                    construct_script)
-from electrum_dash.ecc import ECPrivkey
+from electrum_firo.ecc import ECPrivkey
 
 from . import ElectrumTestCase, TestCaseForTestnet
 
