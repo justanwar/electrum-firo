@@ -1,4 +1,4 @@
-Firo Electrum - Lightweight Dashpay client
+Firo Electrum - Lightweight Firo client
 =====================================
 
 ::
@@ -19,16 +19,6 @@ Firo Electrum - Lightweight Dashpay client
 
 Getting started
 ===============
-
-
-Use PPA setup
--------------
-
-On Ubuntu/Linux Mint you can try to install Firo Electrum with next commands::
-
-    sudo add-apt-repository ppa:akhavr/dash-electrum
-    sudo apt-get update
-    sudo apt-get install dash-electrum
 
 
 Use source distribution
@@ -58,7 +48,7 @@ To install precise tested version of pyqt5 run once::
 
 To run Firo Electrum from its root directory, just do::
 
-    ./electrum-dash
+    ./electrum-firo
 
 You can also install Firo Electrum on your system, by running this command::
 
@@ -94,8 +84,8 @@ Development version
 
 Check out the code from GitHub::
 
-    git clone https://github.com/akhavr/electrum-dash.git
-    cd electrum-dash
+    git clone https://github.com/firoorg/electrum-firo.git
+    cd electrum-firo
 
 Run install (this should install dependencies)::
 
