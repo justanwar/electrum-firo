@@ -6,7 +6,7 @@ class Coin(object):
         raise Exception('Not implemented')
 
 
-class Zcoin(Coin):
+class Firo(Coin):
     PRE_MTP_BLOCKS = 117564
     PRE_MTP_HEADER_SIZE = 80
     MTP_HEADER_SIZE = 180
@@ -36,5 +36,5 @@ class Zcoin(Coin):
         return False
 
 
-class ZcoinTestnet(Zcoin):
+class FiroTestnet(Firo):
     PRE_MTP_BLOCKS = 1
