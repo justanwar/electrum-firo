@@ -107,7 +107,7 @@ class BitcoinMainnet(AbstractNet):
         'p2wsh':       0x02aa7ed3,  # Zpub
     }
     BIP44_COIN_TYPE = 136
-    COIN = coins.Zcoin()
+    COIN = coins.Firo()
     XPUB_HEADERS_INV = inv_dict(XPUB_HEADERS)
     DIP3_ACTIVATION_HEIGHT = 5000
     # DRKV_HEADER = 0x02fe52f8  # drkv
@@ -146,7 +146,7 @@ class BitcoinTestnet(AbstractNet):
     # DRKV_HEADER = 0x3a8061a0  # DRKV
     # DRKP_HEADER = 0x3a805837  # DRKP
     BIP44_COIN_TYPE = 1
-    COIN = coins.ZcoinTestnet()
+    COIN = coins.FiroTestnet()
     DIP3_ACTIVATION_HEIGHT = 5000
 
 
