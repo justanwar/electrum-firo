@@ -207,7 +207,10 @@ class TrezorPlugin(HW_PluginBase):
             client.used()
         return client
 
-    def get_coin_name(self):
+    def get_coin_name(self, version):
+        if (version[0] == 1 and version[1] < 10) \
+        or (version[0] == 2 and version[1] <= 3 and version[2] <= 6):
+            return "Zcoin Testnet" if constants.net.TESTNET else "Zcoin"
         return "Firo Testnet" if constants.net.TESTNET else "Firo"
 
     def initialize_device(self, device_id, wizard, handler):
@@ -340,7 +343,7 @@ class TrezorPlugin(HW_PluginBase):
         inputs = self.tx_inputs(tx, for_sig=True, keystore=keystore)
         outputs = self.tx_outputs(tx, keystore=keystore)
         details = SignTx(lock_time=tx.locktime, version=tx.version)
-        signatures, _ = client.sign_tx(self.get_coin_name(), inputs, outputs, details=details, prev_txes=prev_tx)
+        signatures, _ = client.sign_tx(self.get_coin_name(client.client.version), inputs, outputs, details=details, prev_txes=prev_tx)
         signatures = [(bh2u(x) + '01') for x in signatures]
         tx.update_signatures(signatures)
 
