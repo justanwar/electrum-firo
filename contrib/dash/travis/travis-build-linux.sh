@@ -77,7 +77,6 @@ wget ${ZBARW_PATH}/${ZBARW_FILE}
 echo "$ZBARW_SHA  $ZBARW_FILE" > sha256.txt
 shasum -a256 -s -c sha256.txt
 unzip ${ZBARW_FILE} && rm ${ZBARW_FILE} sha256.txt
-
 rm ${TOR_DIST}
 TOR_FILE=${TOR_PROXY_VERSION}/tor-proxy-${TOR_PROXY_VERSION}-win64-setup.exe
 wget -O ${TOR_DIST} ${TOR_PROXY_PATH}/${TOR_FILE}
