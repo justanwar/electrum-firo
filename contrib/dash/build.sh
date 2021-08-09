@@ -31,6 +31,8 @@ function build_sdist {
         dist/
     cp ${BUILD_DIST_DIR}/${NAME}-${DASH_ELECTRUM_VERSION}-setup-win64.exe \
         dist/
+    cp ${BUILD_DIST_DIR}/portable-electrum-firo-${DASH_ELECTRUM_VERSION}.exe \
+        dist/${NAME}-${DASH_ELECTRUM_VERSION}-portable.exe
 }
 
 function build_ppa {
