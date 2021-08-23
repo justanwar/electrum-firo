@@ -34,15 +34,15 @@ if [[ -n $TRAVIS_TAG ]]; then
 fi
 
 
-$PIP_CMD install --no-dependencies -I \
+$PIP_CMD install --no-dependencies -U --no-cache-dir \
     -r contrib/deterministic-build/requirements.txt
-$PIP_CMD install --no-dependencies -I \
+$PIP_CMD install --no-dependencies -U --no-cache-dir \
     -r contrib/deterministic-build/requirements-hw.txt
-$PIP_CMD install --no-dependencies -I \
+$PIP_CMD install --no-dependencies -U --no-cache-dir \
     -r contrib/deterministic-build/requirements-binaries-mac.txt
-$PIP_CMD install --no-dependencies -I x11_hash>=1.4
+$PIP_CMD install --no-dependencies -U x11_hash>=1.4 --no-cache-dir
 
-$PIP_CMD install --no-dependencies -I \
+$PIP_CMD install --no-dependencies -U --no-cache-dir \
     -r contrib/deterministic-build/requirements-build-mac.txt
 
 pushd electrum_firo

@@ -16,9 +16,9 @@ fi
 cd build
 cp /usr/local/Cellar/libusb/1.0.*/lib/libusb-1.0.dylib .
 
-LSECP256K1_PATH=https://github.com/zebra-lucky/secp256k1/releases/download/0.1
-LSECP256K1_FILE=libsecp256k1-0.1-osx.tgz
-LIB_SHA256=4a064681a0e1a83a5692d88883978f025a8dda7772d1f963ac681b9e321b89bb
+LSECP256K1_PATH=https://github.com/zebra-lucky/secp256k1/releases/download/210521
+LSECP256K1_FILE=libsecp256k1-210521-osx.tgz
+LIB_SHA256=51c861bfb894ec520cc1ee0225fae00447aa86096782a1acd1fc6e338a576ea7
 echo "$LIB_SHA256  $LSECP256K1_FILE" > $LSECP256K1_FILE.sha256
 curl -O -L ${LSECP256K1_PATH}/${LSECP256K1_FILE}
 shasum -a256 -s -c $LSECP256K1_FILE.sha256
