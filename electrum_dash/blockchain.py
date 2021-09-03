@@ -313,11 +313,7 @@ class Blockchain(Logger):
         p = self.path()
         if os.path.exists(p):
             fileSize = os.path.getsize(p)
-            preMtpSize = constants.net.COIN.static_header_offset(constants.net.COIN.PRE_MTP_BLOCKS)
-            if fileSize > preMtpSize:
-                self._size = constants.net.COIN.PRE_MTP_BLOCKS + (fileSize - preMtpSize) // constants.net.COIN.MTP_HEADER_SIZE
-            else:
-                self._size = fileSize // constants.net.COIN.PRE_MTP_HEADER_SIZE
+            self._size = constants.net.COIN.file_size_to_height(fileSize)
         else:
             self._size = 0
 
