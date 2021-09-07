@@ -1400,18 +1400,6 @@ class Network(Logger, NetworkRetryManager[ServerAddr]):
         if not full_shutdown:
             util.trigger_callback('network_updated')
 
-<<<<<<< HEAD
-=======
-    def stop(self):
-        assert self._loop_thread != threading.current_thread(), 'must not be called from network thread'
-        self.mn_list.stop()
-        fut = asyncio.run_coroutine_threadsafe(self._stop(full_shutdown=True), self.asyncio_loop)
-        try:
-            fut.result(timeout=2)
-        except (concurrent.futures.TimeoutError, concurrent.futures.CancelledError): pass
-        # self.dash_net.stop()
-
->>>>>>> Masternodes and plugins
     async def _ensure_there_is_a_main_interface(self):
         if self.is_connected():
             return

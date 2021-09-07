@@ -1,7 +1,6 @@
 import time
 from functools import partial
 
-from electrum_firo import util
 from electrum_firo.dash_ps_util import (filter_log_line, PSLogSubCat, PSStates,
                                         PS_DENOMS_VALS)
 
