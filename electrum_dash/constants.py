@@ -79,7 +79,7 @@ class AbstractNet:
 
     @classmethod
     def max_checkpoint(cls) -> int:
-        return max(0, len(cls.CHECKPOINTS) * 2016 - 1)
+        return max(0, len(cls.CHECKPOINTS) * CHUNK_SIZE - 1)
 
     @classmethod
     def rev_genesis_bytes(cls) -> bytes:
@@ -173,9 +173,6 @@ NETS_LIST = tuple(all_subclasses(AbstractNet))
 # don't import net directly, import the module instead (so that net is singleton)
 net = BitcoinMainnet
 
-def set_simnet():
-    global net
-    net = BitcoinSimnet
 
 def set_mainnet():
     global net

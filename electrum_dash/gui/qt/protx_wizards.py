@@ -742,7 +742,7 @@ class BlsKeysWizardPage(QWizardPage):
                                       'line to ~/.firo/firo.conf and '
                                       'restart masternode:'))
         self.bls_info_label.show()
-        self.bls_info_edit.setText('znodeblsprivkey=%s' % bls_privk_hex)
+        self.bls_info_edit.setText('masternodeblsprivkey=%s' % bls_privk_hex)
         self.bls_info_edit.show()
         self.bls_pub.setText(bls_pubk_hex)
         self.bls_priv.setText(bls_privk_hex)

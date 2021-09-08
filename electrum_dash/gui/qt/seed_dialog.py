@@ -372,7 +372,6 @@ class KeysLayout(QVBoxLayout):
 
 class SeedDialog(WindowModalDialog):
 
-
     def __init__(self, parent, seed, passphrase, *, config: 'SimpleConfig'):
         WindowModalDialog.__init__(self, parent, ('Firo Electrum - ' + _('Seed')))
         self.setMinimumWidth(400)

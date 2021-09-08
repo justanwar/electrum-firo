@@ -27,7 +27,7 @@ Builder.load_string('''
             orientation: 'horizontal'
             Image:
                 id: warn_img
-                source: 'atlas://electrum_firo/gui/kivy/theming/light/error'
+                source: 'atlas://electrum_firo/gui/kivy/theming/atlas/light/error'
                 size_hint: None, None
                 width: 64
                 height: 64

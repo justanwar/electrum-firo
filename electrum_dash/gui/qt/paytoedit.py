@@ -32,7 +32,7 @@ from PyQt5.QtWidgets import QLineEdit
 from PyQt5.QtGui import QFontMetrics, QFont
 
 from electrum_firo import bitcoin
-from electrum_firo.util import bfh, DASH_BIP21_URI_SCHEME, PAY_BIP21_URI_SCHEME
+from electrum_firo.util import bfh, FIRO_BIP21_URI_SCHEME, PAY_BIP21_URI_SCHEME
 from electrum_firo.transaction import PartialTxOutput
 from electrum_firo.bitcoin import opcodes, construct_script
 from electrum_firo.logging import Logger
@@ -114,7 +114,7 @@ class PayToEdit(CompletionTextEdit, ScanQRTextEdit, Logger):
             return bfh(script)
         except Exception:
             pass
-        raise Exception("Could not parse address.")
+        raise Exception("Invalid address or script.")
 
     def parse_script(self, x):
         script = ''
@@ -161,7 +161,7 @@ class PayToEdit(CompletionTextEdit, ScanQRTextEdit, Logger):
             data = lines[0]
             # try bip21 URI
             data_l = data.lower()
-            if (data_l.startswith(DASH_BIP21_URI_SCHEME + ':')
+            if (data_l.startswith(FIRO_BIP21_URI_SCHEME + ':')
                     or data_l.startswith(PAY_BIP21_URI_SCHEME + ':')):
                 self.win.pay_to_URI(data)
                 return
@@ -256,7 +256,7 @@ class PayToEdit(CompletionTextEdit, ScanQRTextEdit, Logger):
     def qr_input(self, *, callback=None):
         def _on_qr_success(data):
             data_l = data.lower()
-            if (data_l.startswith(DASH_BIP21_URI_SCHEME + ':')
+            if (data_l.startswith(FIRO_BIP21_URI_SCHEME + ':')
                     or data_l.startswith(PAY_BIP21_URI_SCHEME + ':')):
                 self.win.pay_to_URI(data)
                 # TODO: update fee

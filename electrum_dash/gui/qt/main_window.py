@@ -65,7 +65,7 @@ from electrum_firo.util import (format_time,
                                 get_new_wallet_name, send_exception_to_crash_reporter,
                                 InvalidBitcoinURI, NotEnoughFunds, FILE_OWNER_MODE,
                                 NoDynamicFeeEstimates, MultipleSpendMaxTxOutputs,
-                                DASH_BIP21_URI_SCHEME, PAY_BIP21_URI_SCHEME,
+                                FIRO_BIP21_URI_SCHEME, PAY_BIP21_URI_SCHEME,
                                 InvoiceError)
 from electrum_firo.invoices import (PR_TYPE_ONCHAIN,
                                     PR_DEFAULT_EXPIRATION_WHEN_CREATING,
@@ -861,10 +861,10 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
         self.import_address_menu = wallet_menu.addAction(_("Import addresses"), self.import_addresses)
         wallet_menu.addSeparator()
 
-        #addresses_menu = wallet_menu.addMenu(_("&Addresses"))
-        #addresses_menu.addAction(_("&Filter"), lambda: self.address_list.toggle_toolbar(self.config))
-        #addresses_menu = wallet_menu.addMenu(_("&Coins"))
-        #addresses_menu.addAction(_("&Filter"), lambda: self.utxo_list.toggle_toolbar(self.config))
+        addresses_menu = wallet_menu.addMenu(_("&Addresses"))
+        addresses_menu.addAction(_("&Filter"), lambda: self.address_list.toggle_toolbar(self.config))
+        addresses_menu = wallet_menu.addMenu(_("&Coins"))
+        addresses_menu.addAction(_("&Filter"), lambda: self.utxo_list.toggle_toolbar(self.config))
         labels_menu = wallet_menu.addMenu(_("&Labels"))
         labels_menu.addAction(_("&Import"), self.do_import_labels)
         labels_menu.addAction(_("&Export"), self.do_export_labels)
@@ -3085,7 +3085,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
                 return
             # if the user scanned a dash URI
             data_l = data.lower()
-            if (data_l.startswith(DASH_BIP21_URI_SCHEME + ':')
+            if (data_l.startswith(FIRO_BIP21_URI_SCHEME + ':')
                     or data_l.startswith(PAY_BIP21_URI_SCHEME + ':')):
                 self.pay_to_URI(data)
                 return
@@ -3162,7 +3162,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
         return raw_tx
 
     @protected_with_parent
-    def export_privkeys_dialog(self, parent, password=None, ps_ks_only=False):
+    def export_privkeys_dialog(self, parent, password, ps_ks_only=False):
         if self.wallet.is_watching_only():
             self.show_message(_("This is a watching-only wallet"))
             return

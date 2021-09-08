@@ -324,7 +324,6 @@ class Network(Logger, NetworkRetryManager[ServerAddr]):
         # locks
         self.restart_lock = asyncio.Lock()
         self.bhi_lock = asyncio.Lock()
-        self.callback_lock = threading.Lock()
         self.recent_servers_lock = threading.RLock()       # <- re-entrant
         self.interfaces_lock = threading.Lock()            # for mutating/iterating self.interfaces
         # protx code locks

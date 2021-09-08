@@ -88,7 +88,7 @@ Label.register(
 
 
 from electrum_firo.util import (NoDynamicFeeEstimates, NotEnoughFunds,
-                                DASH_BIP21_URI_SCHEME, PAY_BIP21_URI_SCHEME,
+                                FIRO_BIP21_URI_SCHEME, PAY_BIP21_URI_SCHEME,
                                 UserFacingException)
 
 if TYPE_CHECKING:
@@ -219,7 +219,7 @@ class ElectrumWindow(App, Logger):
     def on_new_intent(self, intent):
         data = str(intent.getDataString())
         scheme = str(intent.getScheme()).lower()
-        if scheme in [DASH_BIP21_URI_SCHEME, PAY_BIP21_URI_SCHEME]:
+        if scheme in [FIRO_BIP21_URI_SCHEME, PAY_BIP21_URI_SCHEME]:
             self.set_URI(data)
 
     def on_language(self, instance, language):
@@ -442,7 +442,7 @@ class ElectrumWindow(App, Logger):
             self.set_URI(data)
             return
         data_l = data.lower()
-        if (data_l.startswith(DASH_BIP21_URI_SCHEME + ':')
+        if (data_l.startswith(FIRO_BIP21_URI_SCHEME + ':')
                 or data_l.startswith(PAY_BIP21_URI_SCHEME + ':')):
             self.set_URI(data)
             return
@@ -1156,7 +1156,7 @@ class ElectrumWindow(App, Logger):
 
     def format_fee_rate(self, fee_rate):
         # fee_rate is in duffs/kB
-        return format_fee_satoshis(fee_rate) + ' duffs/kB'
+        return format_fee_satoshis(fee_rate) + ' sat/kB'
 
     #@profiler
     def update_wallet(self, *dt):

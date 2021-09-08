@@ -859,9 +859,8 @@ def block_explorer_URL(config: 'SimpleConfig', kind: str, item: str) -> Optional
 
 
 # note: when checking against these, use .lower() to support case-insensitivity
-DASH_BIP21_URI_SCHEME = 'dash'
-PAY_BIP21_URI_SCHEME = 'pay'
 FIRO_BIP21_URI_SCHEME = 'firo'
+PAY_BIP21_URI_SCHEME = 'pay'
 
 
 class InvalidBitcoinURI(Exception): pass

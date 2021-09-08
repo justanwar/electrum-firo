@@ -77,13 +77,14 @@ class KeystoreFilter(IntEnum):
 
 
 class UTXOColumns(IntEnum):
-    OUTPOINT = 0
-    ADDRESS = 1
-    LABEL = 2
-    AMOUNT = 3
-    HEIGHT = 4
-    # PS_ROUNDS = 5
-    # KEYSTORE_TYPE = 6
+    DATE = 0
+    OUTPOINT = 1
+    ADDRESS = 2
+    LABEL = 3
+    AMOUNT = 4
+    HEIGHT = 5
+    #PS_ROUNDS = 6
+    #KEYSTORE_TYPE = 7
 
 
 UTXOHeaders = {

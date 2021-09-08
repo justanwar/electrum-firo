@@ -84,7 +84,7 @@ from electrum_firo.wallet_db import WalletDB
 from electrum_firo.wallet import Wallet
 from electrum_firo.storage import WalletStorage
 from electrum_firo.util import print_msg, print_stderr, json_encode, json_decode, UserCancelled
-from electrum_firo.util import (InvalidPassword, DASH_BIP21_URI_SCHEME,
+from electrum_firo.util import (InvalidPassword, FIRO_BIP21_URI_SCHEME,
                                 PAY_BIP21_URI_SCHEME)
 from electrum_firo.commands import get_parser, known_commands, Commands, config_variables
 from electrum_firo import daemon
@@ -370,7 +370,7 @@ def main():
     uri = config_options.get('url')
     if uri:
         uri_l = uri.lower()
-        if (not uri_l.startswith(DASH_BIP21_URI_SCHEME + ':')
+        if (not uri_l.startswith(FIRO_BIP21_URI_SCHEME + ':')
             and not uri_l.startswith(PAY_BIP21_URI_SCHEME + ':')):
             print_stderr('unknown command:', uri)
             sys.exit(1)
