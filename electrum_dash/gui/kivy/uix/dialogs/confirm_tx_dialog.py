@@ -10,15 +10,15 @@ from kivy.uix.label import Label
 from kivy.uix.widget import Widget
 from kivy.clock import Clock
 
-from electrum_dash.simple_config import FEERATE_WARNING_HIGH_FEE, FEE_RATIO_HIGH_WARNING
-from electrum_dash.gui.kivy.i18n import _
-from electrum_dash.plugin import run_hook
-from electrum_dash.util import NotEnoughFunds
+from electrum_firo.simple_config import FEERATE_WARNING_HIGH_FEE, FEE_RATIO_HIGH_WARNING
+from electrum_firo.gui.kivy.i18n import _
+from electrum_firo.plugin import run_hook
+from electrum_firo.util import NotEnoughFunds
 
 from .fee_dialog import FeeSliderDialog
 
 if TYPE_CHECKING:
-    from electrum_dash.gui.kivy.main_window import ElectrumWindow
+    from electrum_firo.gui.kivy.main_window import ElectrumWindow
 
 Builder.load_string('''
 <ConfirmTxDialog@Popup>

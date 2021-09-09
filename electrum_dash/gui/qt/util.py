@@ -34,7 +34,7 @@ from electrum_firo.invoices import PR_UNPAID, PR_PAID, PR_EXPIRED, PR_INFLIGHT, 
 if TYPE_CHECKING:
     from .main_window import ElectrumWindow
     from .installwizard import InstallWizard
-    from electrum_dash.simple_config import SimpleConfig
+    from electrum_firo.simple_config import SimpleConfig
 
 
 if platform.system() == 'Windows':

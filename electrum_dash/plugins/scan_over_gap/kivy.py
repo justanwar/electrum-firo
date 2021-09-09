@@ -12,11 +12,11 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.button import Button
 
-from electrum_dash.i18n import _
-from electrum_dash.logging import Logger
-from electrum_dash.network import Network
+from electrum_firo.i18n import _
+from electrum_firo.logging import Logger
+from electrum_firo.network import Network
 
-from electrum_dash.gui.kivy.uix.dialogs.question import Question
+from electrum_firo.gui.kivy.uix.dialogs.question import Question
 
 from .scan_over_gap import ScanOverGapPlugin
 

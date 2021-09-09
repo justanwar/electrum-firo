@@ -4,11 +4,11 @@ import json
 import shutil
 import tempfile
 
-from electrum_dash.base_wizard import BaseWizard
-from electrum_dash.keystore import BIP32_KeyStore
-from electrum_dash.simple_config import SimpleConfig
-from electrum_dash.storage import WalletStorage, StorageEncryptionVersion
-from electrum_dash.wallet_db import WalletDB, FINAL_SEED_VERSION
+from electrum_firo.base_wizard import BaseWizard
+from electrum_firo.keystore import BIP32_KeyStore
+from electrum_firo.simple_config import SimpleConfig
+from electrum_firo.storage import WalletStorage, StorageEncryptionVersion
+from electrum_firo.wallet_db import WalletDB, FINAL_SEED_VERSION
 
 from . import TestCaseForTestnet
 

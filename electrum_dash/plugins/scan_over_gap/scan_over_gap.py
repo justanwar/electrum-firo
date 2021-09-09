@@ -9,11 +9,11 @@ from enum import IntEnum
 
 from aiorpcx import TaskGroup
 
-from electrum_dash import bitcoin
-from electrum_dash.i18n import _
-from electrum_dash.logging import Logger
-from electrum_dash.network import Network
-from electrum_dash.plugin import BasePlugin
+from electrum_firo import bitcoin
+from electrum_firo.i18n import _
+from electrum_firo.logging import Logger
+from electrum_firo.network import Network
+from electrum_firo.plugin import BasePlugin
 
 
 def balance_total(*, confirmed, unconfirmed):

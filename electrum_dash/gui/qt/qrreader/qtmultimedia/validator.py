@@ -29,10 +29,10 @@ from abc import ABC, abstractmethod
 from PyQt5.QtGui import QColor
 from PyQt5.QtCore import Qt
 
-from electrum_dash.i18n import _
-from electrum_dash.qrreader import QrCodeResult
+from electrum_firo.i18n import _
+from electrum_firo.qrreader import QrCodeResult
 
-from electrum_dash.gui.qt.util import ColorScheme, QColorLerp
+from electrum_firo.gui.qt.util import ColorScheme, QColorLerp
 
 
 class QrReaderValidatorResult():

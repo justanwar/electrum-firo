@@ -52,7 +52,7 @@ from .exchange_rate import FxThread
 from .logging import get_logger, Logger
 
 if TYPE_CHECKING:
-    from electrum_dash import gui
+    from electrum_firo import gui
 
 
 _logger = get_logger(__name__)

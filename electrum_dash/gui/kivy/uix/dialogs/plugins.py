@@ -6,9 +6,9 @@ from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 
-from electrum_dash.gui.kivy.i18n import _
-from electrum_dash.logging import Logger
-from electrum_dash.plugin import run_hook
+from electrum_firo.gui.kivy.i18n import _
+from electrum_firo.logging import Logger
+from electrum_firo.plugin import run_hook
 
 
 Builder.load_string('''

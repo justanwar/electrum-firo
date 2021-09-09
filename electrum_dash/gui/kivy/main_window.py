@@ -568,7 +568,7 @@ class ElectrumWindow(App, Logger):
         PythonActivity.mActivity.startActivityForResult(intent, 0)
 
     def scan_qr_non_android(self, on_complete):
-        from electrum_dash import qrscanner
+        from electrum_firo import qrscanner
         try:
             video_dev = self.electrum_config.get_video_device()
             data = qrscanner.scan_barcode(video_dev)

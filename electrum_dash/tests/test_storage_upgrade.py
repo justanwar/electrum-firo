@@ -313,7 +313,7 @@ class TestStorageUpgrade(WalletTestCase):
 
 ##########
 
-    plugins: 'electrum_dash.plugin.Plugins'
+    plugins: 'electrum_firo.plugin.Plugins'
 
     @classmethod
     def setUpClass(cls):

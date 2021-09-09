@@ -1,6 +1,6 @@
 import json
 
-from electrum_dash.wallet_db import WalletDB, FINAL_SEED_VERSION
+from electrum_firo.wallet_db import WalletDB, FINAL_SEED_VERSION
 
 from . import SequentialTestCase
 

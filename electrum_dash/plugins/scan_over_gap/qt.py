@@ -10,9 +10,9 @@ from PyQt5.QtWidgets import (QGridLayout, QLabel, QSpinBox, QPushButton,
                              QTreeWidget, QTreeWidgetItem, QHeaderView,
                              QProgressBar, QHBoxLayout)
 
-from electrum_dash.network import Network
+from electrum_firo.network import Network
 
-from electrum_dash.gui.qt.util import (EnterButton, WindowModalDialog, WWLabel,
+from electrum_firo.gui.qt.util import (EnterButton, WindowModalDialog, WWLabel,
                                        CloseButton)
 
 from .scan_over_gap import ScanOverGapPlugin

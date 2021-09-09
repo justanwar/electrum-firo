@@ -966,7 +966,7 @@ class RestoreSeedDialog(WizardDialog):
                 yield w
 
     def update_next_button(self):
-        from electrum_dash.keystore import bip39_is_checksum_valid
+        from electrum_firo.keystore import bip39_is_checksum_valid
         text = self.get_text()
         if self.is_bip39:
             is_seed, is_wordlist = bip39_is_checksum_valid(text)

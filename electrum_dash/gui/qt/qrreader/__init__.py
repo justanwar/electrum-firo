@@ -26,15 +26,15 @@ from typing import Callable, Optional, TYPE_CHECKING, Mapping
 
 from PyQt5.QtWidgets import QMessageBox, QWidget
 
-from electrum_dash.i18n import _
-from electrum_dash.util import UserFacingException
-from electrum_dash.logging import get_logger
+from electrum_firo.i18n import _
+from electrum_firo.util import UserFacingException
+from electrum_firo.logging import get_logger
 
-from electrum_dash.gui.qt.util import MessageBoxMixin, custom_message_box
+from electrum_firo.gui.qt.util import MessageBoxMixin, custom_message_box
 
 
 if TYPE_CHECKING:
-    from electrum_dash.simple_config import SimpleConfig
+    from electrum_firo.simple_config import SimpleConfig
 
 
 _logger = get_logger(__name__)
@@ -62,7 +62,7 @@ def find_system_cameras() -> Mapping[str, str]:
         else:
             return find_system_cameras()
     else:  # desktop Linux and similar
-        from electrum_dash import qrscanner
+        from electrum_firo import qrscanner
         return qrscanner.find_system_cameras()
 
 
@@ -74,7 +74,7 @@ def _scan_qrcode_using_zbar(
         config: 'SimpleConfig',
         callback: Callable[[bool, str, Optional[str]], None],
 ) -> None:
-    from electrum_dash import qrscanner
+    from electrum_firo import qrscanner
     data = None
     try:
         data = qrscanner.scan_barcode(config.get_video_device())

@@ -34,12 +34,12 @@ from PyQt5.QtWidgets import QDialog, QVBoxLayout, QHBoxLayout, QCheckBox, QPushB
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtCore import QSize, QRect, Qt, pyqtSignal, PYQT_VERSION
 
-from electrum_dash.simple_config import SimpleConfig
-from electrum_dash.i18n import _
-from electrum_dash.qrreader import get_qr_reader, QrCodeResult
-from electrum_dash.logging import Logger
+from electrum_firo.simple_config import SimpleConfig
+from electrum_firo.i18n import _
+from electrum_firo.qrreader import get_qr_reader, QrCodeResult
+from electrum_firo.logging import Logger
 
-from electrum_dash.gui.qt.util import MessageBoxMixin, FixedAspectRatioLayout, ImageGraphicsEffect
+from electrum_firo.gui.qt.util import MessageBoxMixin, FixedAspectRatioLayout, ImageGraphicsEffect
 
 from .video_widget import QrReaderVideoWidget
 from .video_overlay import QrReaderVideoOverlay

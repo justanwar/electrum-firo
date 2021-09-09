@@ -2,7 +2,7 @@ import os
 
 from unittest.mock import patch
 
-from electrum_dash.storage import WalletStorage
+from electrum_firo.storage import WalletStorage
 
 from . import ElectrumTestCase
 
