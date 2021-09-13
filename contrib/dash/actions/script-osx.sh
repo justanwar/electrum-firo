@@ -17,15 +17,15 @@ else
 fi
 
 
-$PIP_CMD install --no-dependencies --no-warn-script-location -I \
+$PIP_CMD install --no-dependencies --no-warn-script-location -U \
     -r contrib/deterministic-build/requirements.txt
-$PIP_CMD install --no-dependencies --no-warn-script-location -I \
+$PIP_CMD install --no-dependencies --no-warn-script-location -U \
     -r contrib/deterministic-build/requirements-hw.txt
-$PIP_CMD install --no-dependencies --no-warn-script-location -I \
+$PIP_CMD install --no-dependencies --no-warn-script-location -U \
     -r contrib/deterministic-build/requirements-binaries-mac.txt
-$PIP_CMD install --no-dependencies --no-warn-script-location -I x11_hash>=1.4
+$PIP_CMD install --no-dependencies --no-warn-script-location -U x11_hash>=1.4
 
-$PIP_CMD install --no-dependencies --no-warn-script-location -I \
+$PIP_CMD install --no-dependencies --no-warn-script-location -U \
     -r contrib/deterministic-build/requirements-build-mac.txt
 
 export PATH="/usr/local/opt/gettext/bin:$PATH"
@@ -39,9 +39,9 @@ cp contrib/dash/pyi_tctl_runtimehook.py .
 
 pyinstaller --clean \
     -y \
-    --name electrum-dash-$DASH_ELECTRUM_VERSION.bin \
+    --name electrum-firo-$DASH_ELECTRUM_VERSION.bin \
     osx.spec
 
-sudo hdiutil create -fs HFS+ -volname "Dash Electrum" \
-    -srcfolder dist/Dash\ Electrum.app \
-    dist/Dash-Electrum-$DASH_ELECTRUM_VERSION-macosx.dmg
+sudo hdiutil create -fs HFS+ -volname "Firo Electrum" \
+    -srcfolder dist/Firo\ Electrum.app \
+    dist/Firo-Electrum-$DASH_ELECTRUM_VERSION-macosx.dmg

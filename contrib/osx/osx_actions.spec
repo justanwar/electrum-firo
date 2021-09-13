@@ -123,7 +123,7 @@ excludes += [
     'PyQt5.QtWinExtras',
 ]
 
-a = Analysis(['electrum-dash'],
+a = Analysis(['electrum-firo'],
              hiddenimports=hiddenimports,
              datas=datas,
              binaries=binaries,
@@ -154,15 +154,15 @@ exe = EXE(pyz,
           strip=False,
           upx=False,
           console=False,
-          icon='electrum_firo/gui/icons/electrum-dash.ico',
-          name=os.path.join('electrum-dash', cmdline_name))
+          icon='electrum_firo/gui/icons/electrum-firo.ico',
+          name=os.path.join('electrum-firo', cmdline_name))
 
 coll = COLLECT(exe,
                a.binaries,
                a.datas,
                strip=False,
                upx=False,
-               name=os.path.join('dist', 'electrum-dash'))
+               name=os.path.join('dist', 'electrum-firo'))
 
 app = BUNDLE(coll,
              info_plist={
@@ -172,7 +172,7 @@ app = BUNDLE(coll,
                     {'CFBundleURLName': 'dash', 'CFBundleURLSchemes': ['dash']}
                 ],
              },
-             name=os.path.join('dist', 'Dash Electrum.app'),
-             appname="Dash Electrum",
+             name=os.path.join('dist', 'Firo Electrum.app'),
+             appname="Firo Electrum",
 	         icon=ICONS_FILE,
              version=DASH_ELECTRUM_VERSION)
