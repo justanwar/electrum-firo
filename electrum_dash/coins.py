@@ -10,14 +10,14 @@ class Firo(Coin):
     PRE_MTP_BLOCKS = 117564
     PRE_MTP_HEADER_SIZE = 80
     MTP_HEADER_SIZE = 180
-    PRE_PROGPOW_BLOCKS = 3000000000
+    AFTER_PROGPOW_BLOCK_HEIGHT = 419264
     PROGPOW_HEADER_SIZE = 120
-    PROGPOW_START_TIME = 3333333333
+    PROGPOW_START_TIME = 1635228000
 
     @classmethod
     def static_header_offset(cls, height):
-        if height > cls.PRE_PROGPOW_BLOCKS:
-            return cls.static_header_offset(cls.PRE_PROGPOW_BLOCKS) + (height - cls.PRE_PROGPOW_BLOCKS) * cls.PROGPOW_HEADER_SIZE
+        if height > cls.AFTER_PROGPOW_BLOCK_HEIGHT:
+            return cls.static_header_offset(cls.AFTER_PROGPOW_BLOCK_HEIGHT) + (height - cls.AFTER_PROGPOW_BLOCK_HEIGHT) * cls.PROGPOW_HEADER_SIZE
         if height > cls.PRE_MTP_BLOCKS:
             return cls.static_header_offset(cls.PRE_MTP_BLOCKS) + (height - cls.PRE_MTP_BLOCKS) * cls.MTP_HEADER_SIZE
         return cls.PRE_MTP_HEADER_SIZE * height
@@ -32,7 +32,7 @@ class Firo(Coin):
 
     @classmethod
     def get_header_size_height(cls, height: int):
-        if height >= cls.PRE_PROGPOW_BLOCKS:
+        if height >= cls.AFTER_PROGPOW_BLOCK_HEIGHT:
             return cls.PROGPOW_HEADER_SIZE
         if height >= cls.PRE_MTP_BLOCKS:
             return cls.MTP_HEADER_SIZE
@@ -54,13 +54,13 @@ class Firo(Coin):
         preMtpSize = cls.static_header_offset(cls.PRE_MTP_BLOCKS)
         if fileSize <= preMtpSize:
             return fileSize // cls.PRE_MTP_HEADER_SIZE
-        preProgpowSize = cls.static_header_offset(cls.PRE_PROGPOW_BLOCKS)
+        preProgpowSize = cls.static_header_offset(cls.AFTER_PROGPOW_BLOCK_HEIGHT)
         if fileSize <= preProgpowSize:
             return cls.PRE_MTP_BLOCKS + (fileSize - preMtpSize) // cls.MTP_HEADER_SIZE
-        return cls.PRE_PROGPOW_BLOCKS + (fileSize - preProgpowSize) // cls.PROGPOW_HEADER_SIZE
+        return cls.AFTER_PROGPOW_BLOCK_HEIGHT + (fileSize - preProgpowSize) // cls.PROGPOW_HEADER_SIZE
 
 
 class FiroTestnet(Firo):
     PRE_MTP_BLOCKS = 1
-    PRE_PROGPOW_BLOCKS = 37305
+    AFTER_PROGPOW_BLOCK_HEIGHT = 37305
     PROGPOW_START_TIME = 1630069200
