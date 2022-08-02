@@ -1,7 +1,7 @@
 #!/bin/bash
 set -ev
 
-export MACOSX_DEPLOYMENT_TARGET=10.13
+export MACOSX_DEPLOYMENT_TARGET=10.12
 
 export PY37BINDIR=/Library/Frameworks/Python.framework/Versions/3.7/bin/
 export PATH=$PATH:$PY37BINDIR
@@ -17,15 +17,28 @@ else
 fi
 
 
-$PIP_CMD install --no-dependencies --no-warn-script-location -U \
-    -r contrib/deterministic-build/requirements.txt
-$PIP_CMD install --no-dependencies --no-warn-script-location -U \
-    -r contrib/deterministic-build/requirements-hw.txt
-$PIP_CMD install --no-dependencies --no-warn-script-location -U \
-    -r contrib/deterministic-build/requirements-binaries-mac.txt
-$PIP_CMD install --no-dependencies --no-warn-script-location -U x11_hash>=1.4
+if [[ -n $GITHUB_REF ]]; then
+    git submodule init
+    git submodule update
 
-$PIP_CMD install --no-dependencies --no-warn-script-location -U \
+    echo "Building CalinsQRReader..."
+    d=contrib/CalinsQRReader
+    pushd $d
+    rm -fr build
+    xcodebuild || fail "Could not build CalinsQRReader"
+    popd
+fi
+
+
+$PIP_CMD install --no-dependencies --no-warn-script-location -I \
+    -r contrib/deterministic-build/requirements.txt
+$PIP_CMD install --no-dependencies --no-warn-script-location -I \
+    -r contrib/deterministic-build/requirements-hw.txt
+$PIP_CMD install --no-dependencies --no-warn-script-location -I \
+    -r contrib/deterministic-build/requirements-binaries-mac.txt
+$PIP_CMD install --no-dependencies --no-warn-script-location -I x11_hash>=1.4
+
+$PIP_CMD install --no-dependencies --no-warn-script-location -I \
     -r contrib/deterministic-build/requirements-build-mac.txt
 
 export PATH="/usr/local/opt/gettext/bin:$PATH"

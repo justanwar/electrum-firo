@@ -30,7 +30,6 @@ hiddenimports += [
     'electrum_firo.qrscanner',
     'electrum_firo.websockets',
     'electrum_firo.gui.qt',
-    'electrum_firo.gui.qt.qrreader.qtmultimedia.camera_dialog',
     'PyQt5.sip',
     'PyQt5.QtPrintSupport',  # needed by Revealer
 
@@ -54,9 +53,9 @@ hiddenimports += [
 ]
 
 datas = [
-    ('electrum_firo/checkpoints*.*', 'electrum_firo'),
+#    ('electrum_firo/checkpoints*.*', 'electrum_firo'),
     ('electrum_firo/*.json', 'electrum_firo'),
-#    ('electrum_firo/locale', 'electrum_firo/locale'),
+    ('electrum_firo/locale', 'electrum_firo/locale'),
     ('electrum_firo/wordlist', 'electrum_firo/wordlist'),
     ('electrum_firo/gui/icons', 'electrum_firo/gui/icons'),
     ('C:\\zbarw', '.'),
@@ -89,8 +88,10 @@ excludes += [
     'PyQt5.QtDesignerComponents',
     'PyQt5.QtHelp',
     'PyQt5.QtLocation',
+    'PyQt5.QtMultimedia',
     'PyQt5.QtMultimediaQuick_p',
     'PyQt5.QtMultimediaWidgets',
+    'PyQt5.QtNetwork',
     'PyQt5.QtNetworkAuth',
     'PyQt5.QtNfc',
     'PyQt5.QtOpenGL',
@@ -163,18 +164,6 @@ exe = EXE(pyz,
           console=False,
           icon='electrum_firo/gui/icons/electrum-firo.ico',
           name=os.path.join('build\\pyi.win32\\electrum', cmdline_name))
-
-exe_portable = EXE(
-    pyz,
-    a.scripts,
-    a.binaries,
-    a.datas,
-    name=os.path.join('build\\pyi.win32\\electrum-firo', 'portable-%s' % cmdline_name),
-    debug=False,
-    strip=None,
-    upx=False,
-    icon='electrum_firo/gui/icons/electrum-firo.ico',
-    console=False)
 
 # exe with console output
 conexe = EXE(pyz,

@@ -1,9 +1,9 @@
 #!/bin/bash
 
+
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 REPO_DIR="$(realpath $SCRIPT_DIR/../../)"
 ACTIONS_DIR="$SCRIPT_DIR/actions"
-TRAVIS_DIR="$SCRIPT_DIR/travis"
 BUILD_DIST_DIR="$REPO_DIR/dist"
 BUILD_BIN_DIR="$REPO_DIR/bin"
 NAME=Firo-Electrum
@@ -20,18 +20,6 @@ function build_sdist {
     mkdir -p build
     $ACTIONS_DIR/install-linux.sh
     $ACTIONS_DIR/script-linux.sh
-    cp ${BUILD_DIST_DIR}/${NAME}-${DASH_ELECTRUM_VERSION}.tar.gz \
-        dist/
-    cp ${BUILD_DIST_DIR}/${NAME}-${DASH_ELECTRUM_VERSION}.zip \
-        dist/
-    cp ${BUILD_DIST_DIR}/${NAME}-${DASH_ELECTRUM_VERSION}-x86_64.AppImage \
-        dist/
-    cp ${BUILD_DIST_DIR}/${NAME}-${DASH_ELECTRUM_VERSION}-setup-win32.exe \
-        dist/
-    cp ${BUILD_DIST_DIR}/${NAME}-${DASH_ELECTRUM_VERSION}-setup-win64.exe \
-        dist/
-    cp ${BUILD_DIST_DIR}/portable-electrum-firo-${DASH_ELECTRUM_VERSION}.exe \
-        dist/${NAME}-${DASH_ELECTRUM_VERSION}-portable.exe
 }
 
 function build_ppa {
@@ -115,7 +103,6 @@ function read_jks_storepass {
 
 
 function build_apk {
-    exit 0
     ./build/contrib/actions/before_install-linux-apk.sh
     export APP_ANDROID_ARCH=armeabi-v7a
     #export APP_ANDROID_ARCH=arm64-v8a
@@ -123,18 +110,19 @@ function build_apk {
     # Build mainnet release apk
     if [[ -n $IS_RELEASE ]]; then
         sudo rm -rf build
-        mkdir -p build && cp contrib/dash/travis/* ./build/
+        mkdir -p build && cp contrib/dash/actions/* ./build/
         export ELECTRUM_MAINNET=true
-        ./build/travis-build-linux-apk.sh
-        cp ${BUILD_BIN_DIR}/${APK_NAME}-$DASH_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$UAPK_TAIL \
+        ./build/script-linux-apk.sh
+        cp ${BUILD_BIN_DIR}/${APK_NAME}-$ZCASH_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$UAPK_TAIL \
             ${BUILD_DIST_DIR}
     fi
 
+    # Build testnet release apk
     sudo rm -rf build
-    mkdir -p build && cp contrib/dash/travis/* ./build/
+    mkdir -p build && cp contrib/dash/actions/* ./build/
     export ELECTRUM_MAINNET=false
-    ./build/travis-build-linux-apk.sh
-    cp ${BUILD_BIN_DIR}/${APK_TNAME}-$DASH_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$UAPK_TAIL \
+    ./build/script-linux-apk.sh
+    cp ${BUILD_BIN_DIR}/${APK_TNAME}-$ZCASH_ELECTRUM_APK_VERSION-$APP_ANDROID_ARCH-$UAPK_TAIL \
         ${BUILD_DIST_DIR}
 }
 
@@ -190,7 +178,7 @@ function build_linux {
 }
 
 
-source contrib/dash/travis/electrum_dash_version_env.sh
+source contrib/dash/electrum_dash_version_env.sh
 if [[ -n $IS_RELEASE ]]; then
     echo electrum-dash version is $DASH_ELECTRUM_VERSION, release build
 else
