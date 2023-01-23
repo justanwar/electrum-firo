@@ -47,8 +47,7 @@ if platform.system() in ['Linux', 'FreeBSD', 'DragonFly']:
             usr_share = os.path.expanduser('~/.local/share')
     data_files += [
         (os.path.join(usr_share, 'applications/'), ['electrum-firo.desktop']),
-        (os.path.join(usr_share, icons_dirname),
-            ['electrum_firo/gui/icons/electrum-dash.png']),
+        (os.path.join(usr_share, icons_dirname), ['electrum_firo/gui/icons/electrum-firo.png']),
     ]
 
 extras_require = {
@@ -73,6 +72,7 @@ setup(
     extras_require=extras_require,
     packages=[
         'electrum_firo',
+        'electrum_firo.qrreader',
         'electrum_firo.gui',
         'electrum_firo.gui.qt',
         'electrum_firo.gui.qt.qrreader',
@@ -88,10 +88,10 @@ setup(
     include_package_data=True,
     scripts=['electrum_firo/electrum-firo'],
     data_files=data_files,
-    description="Lightweight Dashpay Wallet",
-    maintainer="akhavr",
-    maintainer_email="akhavr@khavr.com",
-    license="MIT License",
-    url="https://electrum.dash.org",
-    long_description="""Lightweight Dashpay Wallet""",
+    description="Lightweight Firo Wallet",
+    author="Firo",
+    author_email="thomasv@electrum.org",
+    license="MIT Licence",
+    url="https://electrum.org",
+    long_description="""Lightweight Firo Wallet""",
 )

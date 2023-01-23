@@ -88,8 +88,7 @@ from electrum_firo.wallet_db import WalletDB
 from electrum_firo.wallet import Wallet
 from electrum_firo.storage import WalletStorage
 from electrum_firo.util import print_msg, print_stderr, json_encode, json_decode, UserCancelled
-from electrum_firo.util import (InvalidPassword, FIRO_BIP21_URI_SCHEME,
-                                PAY_BIP21_URI_SCHEME)
+from electrum_firo.util import InvalidPassword, FIRO_BIP21_URI_SCHEME, PAY_BIP21_URI_SCHEME
 from electrum_firo.commands import get_parser, known_commands, Commands, config_variables
 from electrum_firo import daemon
 from electrum_firo import keystore
@@ -170,7 +169,7 @@ def init_cmdline(config_options, wallet_path, server, *, config: 'SimpleConfig')
         use_encryption = True
 
     # commands needing password
-    if  ( (cmd.requires_wallet and storage.is_encrypted() and server is False)\
+    if ((cmd.requires_wallet and storage.is_encrypted() and server is False)\
        or (cmdname == 'load_wallet' and storage.is_encrypted())\
        or (cmd.requires_password and use_encryption)):
         if storage.is_encrypted_with_hw_device():
@@ -188,7 +187,7 @@ def init_cmdline(config_options, wallet_path, server, *, config: 'SimpleConfig')
 
     config_options['password'] = config_options.get('password') or password
 
-    if cmd.name == 'password':
+    if cmd.name == 'password' and 'new_password' not in config_options:
         new_password = prompt_password('New password:')
         config_options['new_password'] = new_password
 
@@ -375,12 +374,12 @@ def main():
 
     # check uri
     uri = config_options.get('url')
-    if uri:
-        uri_l = uri.lower()
-        if (not uri_l.startswith(FIRO_BIP21_URI_SCHEME + ':')
-            and not uri_l.startswith(PAY_BIP21_URI_SCHEME + ':')):
-            print_stderr('unknown command:', uri)
-            sys.exit(1)
+    if uri and not (
+        uri.lower().startswith(FIRO_BIP21_URI_SCHEME + ':') or
+        uri.lower().startswith(PAY_BIP21_URI_SCHEME + ':')
+    ):
+        print_stderr('unknown command:', uri)
+        sys.exit(1)
 
     config = SimpleConfig(config_options)
 
