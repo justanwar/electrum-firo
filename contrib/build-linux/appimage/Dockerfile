@@ -30,6 +30,7 @@ RUN apt-get update -q && \
         libudev-dev=237-3ubuntu10.56 \
         libudev1=237-3ubuntu10.56 \
         gettext=0.19.8.1-6ubuntu0.3 \
+        libgmp3-dev \
         libzbar0=0.10+doc-10.1build2  \
         libdbus-1-3=1.12.2-1ubuntu1.4 \
         libxkbcommon0=0.8.0-1ubuntu0.1 \

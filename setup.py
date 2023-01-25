@@ -47,7 +47,7 @@ if platform.system() in ['Linux', 'FreeBSD', 'DragonFly']:
             usr_share = os.path.expanduser('~/.local/share')
     data_files += [
         (os.path.join(usr_share, 'applications/'), ['electrum-firo.desktop']),
-        (os.path.join(usr_share, icons_dirname), ['electrum_firo/gui/icons/electrum-firo.png']),
+        (os.path.join(usr_share, icons_dirname), ['electrum_firo/gui/icons/electrum-dash.png']),
     ]
 
 extras_require = {
@@ -65,7 +65,7 @@ extras_require['fast'] = extras_require['crypto']
 
 
 setup(
-    name="Firo-Electrum",
+    name="Electrum-Firo",
     version=version.ELECTRUM_VERSION,
     python_requires='>={}'.format(MIN_PYTHON_VERSION),
     install_requires=requirements,

@@ -6,7 +6,7 @@ PROJECT_ROOT="$(dirname "$(readlink -e "$0")")/../../.."
 CONTRIB="$PROJECT_ROOT/contrib"
 CONTRIB_SDIST="$CONTRIB/build-linux/sdist"
 DISTDIR="$PROJECT_ROOT/dist"
-LOCALE="$PROJECT_ROOT/electrum_firo/locale/"
+LOCALE="$PROJECT_ROOT/electrum_dash/locale/"
 
 . "$CONTRIB"/build_tools_util.sh
 
@@ -16,18 +16,29 @@ python3 --version || fail "python interpreter not found"
 break_legacy_easy_install
 
 # upgrade to modern pip so that it knows the flags we need.
-# we will then install a pinned version of pip as part of requirements-build-sdist
+# (make_packages will later install a pinned version of pip in a venv)
 python3 -m pip install --upgrade pip
-
-info "Installing pinned requirements."
-python3 -m pip install --no-dependencies --no-warn-script-location -r "$CONTRIB"/deterministic-build/requirements-build-sdist.txt
-
 
 "$CONTRIB"/make_packages || fail "make_packages failed"
 
-info "preparing electrum-locale."
+git submodule update --init
+
 (
-    ./contrib/make_locale
+    cd "$CONTRIB/deterministic-build/electrum-locale/"
+    if ! which msgfmt > /dev/null 2>&1; then
+        echo "Please install gettext"
+        exit 1
+    fi
+    # We include both source (.po) and compiled (.mo) locale files in the source dist.
+    # Maybe we should exclude the compiled locale files? see https://askubuntu.com/a/144139
+    # (also see MANIFEST.in)
+    rm -rf "$LOCALE"
+    for i in ./locale/*; do
+        dir="$PROJECT_ROOT/electrum/$i/LC_MESSAGES"
+        mkdir -p "$dir"
+        msgfmt --output-file="$dir/electrum.mo" "$i/electrum.po" || true
+        cp $i/electrum.po "$PROJECT_ROOT/electrum/$i/electrum.po"
+    done
 )
 
 (
