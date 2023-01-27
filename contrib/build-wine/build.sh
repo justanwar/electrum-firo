@@ -13,6 +13,9 @@ CONTRIB_WINE="$CONTRIB/build-wine"
 
 . "$CONTRIB"/build_tools_util.sh
 
+info "Clearing $CONTRIB_WINE/dist..."
+rm -rf "$CONTRIB_WINE"/dist/*
+
 
 DOCKER_BUILD_FLAGS=""
 if [ ! -z "$ELECBUILD_NOCACHE" ] ; then
@@ -43,9 +46,9 @@ fi
 info "building binary..."
 docker run -it \
     --name electrum-wine-builder-cont \
-    -v "$PROJECT_ROOT_OR_FRESHCLONE_ROOT":/opt/wine64/drive_c/electrum \
+    -v "$PROJECT_ROOT_OR_FRESHCLONE_ROOT":/opt/wine64/drive_c/electrum-firo \
     --rm \
-    --workdir /opt/wine64/drive_c/electrum/contrib/build-wine \
+    --workdir /opt/wine64/drive_c/electrum-firo/contrib/build-wine \
     electrum-wine-builder-img \
     ./make_win.sh
 

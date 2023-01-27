@@ -14,12 +14,13 @@ PIP_CACHE_DIR="$CACHEDIR/pip_cache"
 export GCC_STRIP_BINARIES="1"
 
 # pinned versions
-PYTHON_VERSION=3.9.10
-PKG2APPIMAGE_COMMIT="eb8f3acdd9f11ab19b78f5cb15daa772367daf15"
+PYTHON_VERSION=3.9.11
+PY_VER_MAJOR="3.9"  # as it appears in fs paths
+PKG2APPIMAGE_COMMIT="a9c85b7e61a3a883f4a35c41c5decb5af88b6b5d"
 
 
 VERSION=`git describe --tags --dirty --always`
-APPIMAGE="$DISTDIR/electrum-firo-$VERSION-x86_64.AppImage"
+APPIMAGE="$DISTDIR/electrum-$VERSION-x86_64.AppImage"
 
 . "$CONTRIB"/build_tools_util.sh
 
@@ -32,13 +33,13 @@ rm -rf "$PROJECT_ROOT/build"
 
 info "downloading some dependencies."
 download_if_not_exist "$CACHEDIR/functions.sh" "https://raw.githubusercontent.com/AppImage/pkg2appimage/$PKG2APPIMAGE_COMMIT/functions.sh"
-verify_hash "$CACHEDIR/functions.sh" "78b7ee5a04ffb84ee1c93f0cb2900123773bc6709e5d1e43c37519f590f86918"
+verify_hash "$CACHEDIR/functions.sh" "8f67711a28635b07ce539a9b083b8c12d5488c00003d6d726c7b134e553220ed"
 
 download_if_not_exist "$CACHEDIR/appimagetool" "https://github.com/AppImage/AppImageKit/releases/download/13/appimagetool-x86_64.AppImage"
 verify_hash "$CACHEDIR/appimagetool" "df3baf5ca5facbecfc2f3fa6713c29ab9cefa8fd8c1eac5d283b79cab33e4acb"
 
 download_if_not_exist "$CACHEDIR/Python-$PYTHON_VERSION.tar.xz" "https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSION.tar.xz"
-verify_hash "$CACHEDIR/Python-$PYTHON_VERSION.tar.xz" "0a8fbfb5287ebc3a13e9baf3d54e08fa06778ffeccf6311aef821bb3a6586cc8"
+verify_hash "$CACHEDIR/Python-$PYTHON_VERSION.tar.xz" "66767a35309d724f370df9e503c172b4ee444f49d62b98bc4eca725123e26c49"
 
 
 
@@ -63,7 +64,7 @@ tar xf "$CACHEDIR/Python-$PYTHON_VERSION.tar.xz" -C "$BUILDDIR"
     # to result in a different output on macOS compared to Linux. We simply patch
     # sysconfigdata to remove the extension.
     # Some more info: https://bugs.python.org/issue27631
-    sed -i -e 's/\.exe//g' "$APPDIR"/usr/lib/python3.9/_sysconfigdata*
+    sed -i -e 's/\.exe//g' "${APPDIR}/usr/lib/python${PY_VER_MAJOR}"/_sysconfigdata*
 )
 
 
@@ -75,7 +76,7 @@ appdir_python() {
   env \
     PYTHONNOUSERSITE=1 \
     LD_LIBRARY_PATH="$APPDIR/usr/lib:$APPDIR/usr/lib/x86_64-linux-gnu${LD_LIBRARY_PATH+:$LD_LIBRARY_PATH}" \
-    "$APPDIR/usr/bin/python3.9" "$@"
+    "$APPDIR/usr/bin/python${PY_VER_MAJOR}" "$@"
 }
 
 python='appdir_python'
@@ -92,38 +93,36 @@ info "preparing electrum-locale."
     cd "$PROJECT_ROOT"
     git submodule update --init
 
-    pushd "$CONTRIB"/deterministic-build/electrum-locale
-    if ! which msgfmt > /dev/null 2>&1; then
-        fail "Please install gettext"
-    fi
+    LOCALE="$PROJECT_ROOT/electrum_firo/locale/"
     # we want the binary to have only compiled (.mo) locale files; not source (.po) files
-    rm -rf "$PROJECT_ROOT/electrum_dash/locale/"
-    for i in ./locale/*; do
-        dir="$PROJECT_ROOT/electrum_dash/$i/LC_MESSAGES"
-        mkdir -p $dir
-        msgfmt --output-file="$dir/electrum.mo" "$i/electrum.po" || true
-    done
-    popd
+    rm -rf "$LOCALE"
+    "$CONTRIB/build_locale.sh" "$CONTRIB/deterministic-build/electrum-locale/locale/" "$LOCALE"
 )
 
 
 info "Installing build dependencies."
-"$python" -m pip install --no-dependencies --no-binary :all: --no-warn-script-location \
+# note: re pip installing from PyPI,
+#       we prefer compiling C extensions ourselves, instead of using binary wheels,
+#       hence "--no-binary :all:" flags. However, we specifically allow
+#       - PyQt5, as it's harder to build from source
+#       - cryptography, as it's harder to build from source
+#       - the whole of "requirements-build-base.txt", which includes pip and friends, as it also includes "wheel",
+#         and I am not quite sure how to break the circular dependence there (I guess we could introduce
+#         "requirements-build-base-base.txt" with just wheel in it...)
+"$python" -m pip install --no-build-isolation --no-dependencies --no-warn-script-location \
+    --cache-dir "$PIP_CACHE_DIR" -r "$CONTRIB/deterministic-build/requirements-build-base.txt"
+"$python" -m pip install --no-build-isolation --no-dependencies --no-binary :all: --no-warn-script-location \
     --cache-dir "$PIP_CACHE_DIR" -r "$CONTRIB/deterministic-build/requirements-build-appimage.txt"
 
 info "installing electrum and its dependencies."
-# note: we prefer compiling C extensions ourselves, instead of using binary wheels,
-#       hence "--no-binary :all:" flags. However, we specifically allow
-#       - PyQt5, as it's harder to build from source
-#       - cryptography, as building it would need openssl 1.1, not available on ubuntu 16.04
-"$python" -m pip install --no-dependencies --no-binary :all: --no-warn-script-location \
+"$python" -m pip install --no-build-isolation --no-dependencies --no-binary :all: --no-warn-script-location \
     --cache-dir "$PIP_CACHE_DIR" -r "$CONTRIB/deterministic-build/requirements.txt"
-"$python" -m pip install --no-dependencies --no-binary :all: --only-binary PyQt5,PyQt5-Qt5,cryptography --no-warn-script-location \
+"$python" -m pip install --no-build-isolation --no-dependencies --no-binary :all: --only-binary PyQt5,PyQt5-Qt5,cryptography --no-warn-script-location \
     --cache-dir "$PIP_CACHE_DIR" -r "$CONTRIB/deterministic-build/requirements-binaries.txt"
-"$python" -m pip install --no-dependencies --no-binary :all: --no-warn-script-location \
+"$python" -m pip install --no-build-isolation --no-dependencies --no-binary :all: --no-warn-script-location \
     --cache-dir "$PIP_CACHE_DIR" -r "$CONTRIB/deterministic-build/requirements-hw.txt"
 
-"$python" -m pip install --no-dependencies --no-warn-script-location \
+"$python" -m pip install --no-build-isolation --no-dependencies --no-warn-script-location \
     --cache-dir "$PIP_CACHE_DIR" "$PROJECT_ROOT"
 
 # was only needed during build time, not runtime
@@ -153,7 +152,7 @@ info "finalizing AppDir."
     move_lib
 
     # apply global appimage blacklist to exclude stuff
-    # move usr/include out of the way to preserve usr/include/python3.9m.
+    # move usr/include out of the way to preserve usr/include/python${PY_VER_MAJOR}.
     mv usr/include usr/include.tmp
     delete_blacklisted
     mv usr/include.tmp usr/include
@@ -176,7 +175,7 @@ strip_binaries()
 {
   chmod u+w -R "$APPDIR"
   {
-    printf '%s\0' "$APPDIR/usr/bin/python3.9"
+    printf '%s\0' "$APPDIR/usr/bin/python${PY_VER_MAJOR}"
     find "$APPDIR" -type f -regex '.*\.so\(\.[0-9.]+\)?$' -print0
   } | xargs -0 --no-run-if-empty --verbose strip -R .note.gnu.build-id -R .comment
 }
@@ -191,11 +190,11 @@ remove_emptydirs
 
 info "removing some unneeded stuff to decrease binary size."
 rm -rf "$APPDIR"/usr/{share,include}
-PYDIR="$APPDIR"/usr/lib/python3.9
+PYDIR="$APPDIR/usr/lib/python${PY_VER_MAJOR}"
 rm -rf "$PYDIR"/{test,ensurepip,lib2to3,idlelib,turtledemo}
 rm -rf "$PYDIR"/{ctypes,sqlite3,tkinter,unittest}/test
 rm -rf "$PYDIR"/distutils/{command,tests}
-rm -rf "$PYDIR"/config-3.9m-x86_64-linux-gnu
+rm -rf "$PYDIR"/config-3.*-x86_64-linux-gnu
 rm -rf "$PYDIR"/site-packages/{opt,pip,setuptools,wheel}
 rm -rf "$PYDIR"/site-packages/Cryptodome/SelfTest
 rm -rf "$PYDIR"/site-packages/{psutil,qrcode,websocket}/tests

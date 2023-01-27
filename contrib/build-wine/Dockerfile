@@ -7,8 +7,8 @@ RUN dpkg --add-architecture i386 && \
     apt-get update -q && \
     apt-get install -qy \
         wget=1.20.3-1ubuntu1 \
-        gnupg2=2.2.19-3ubuntu2.1 \
-        dirmngr=2.2.19-3ubuntu2.1 \
+        gnupg2=2.2.19-3ubuntu2.2 \
+        dirmngr=2.2.19-3ubuntu2.2 \
         python3-software-properties=0.98.9.2 \
         software-properties-common=0.98.9.2 \
         && \
@@ -45,10 +45,10 @@ RUN wget -nc https://dl.winehq.org/wine-builds/Release.key && \
     apt-add-repository https://dl.winehq.org/wine-builds/ubuntu/ && \
     apt-get update -q && \
     apt-get install -qy \
-        wine-stable-amd64:amd64=6.0.2~focal-1 \
-        wine-stable-i386:i386=6.0.2~focal-1 \
-        wine-stable:amd64=6.0.2~focal-1 \
-        winehq-stable:amd64=6.0.2~focal-1 \
+        wine-stable-amd64:amd64=7.0.0.0~focal-1 \
+        wine-stable-i386:i386=7.0.0.0~focal-1 \
+        wine-stable:amd64=7.0.0.0~focal-1 \
+        winehq-stable:amd64=7.0.0.0~focal-1 \
         && \
     rm -rf /var/lib/apt/lists/* && \
     apt-get autoremove -y && \
@@ -67,4 +67,4 @@ RUN chown --recursive ${USER} ${WORK_DIR}
 RUN chown ${USER} /opt
 USER ${USER}
 
-RUN mkdir --parents "/opt/wine64/drive_c/electrum"
+RUN mkdir --parents "/opt/wine64/drive_c/electrum-firo"
