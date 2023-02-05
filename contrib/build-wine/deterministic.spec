@@ -10,7 +10,7 @@ for i, x in enumerate(sys.argv):
 else:
     raise Exception('no name')
 
-home = 'C:\\electrum\\'
+home = 'C:\\electrum-firo\\'
 
 # see https://github.com/pyinstaller/pyinstaller/issues/2005
 hiddenimports = []
@@ -63,7 +63,6 @@ a = Analysis([home+'electrum-firo',
               home+'electrum_firo/plugins/safe_t/qt.py',
               home+'electrum_firo/plugins/keepkey/qt.py',
               home+'electrum_firo/plugins/ledger/qt.py',
-              home+'electrum_firo/plugins/coldcard/qt.py',
               #home+'packages/requests/utils.py'
               ],
              binaries=binaries,
@@ -131,7 +130,7 @@ exe_portable = EXE(
     pyz,
     a.scripts,
     a.binaries,
-    a.datas + [('is_portable', 'README.md', 'DATA')],
+    a.datas,
     name=os.path.join('build\\pyi.win32\\electrum', cmdline_name + "-portable.exe"),
     debug=False,
     strip=None,
@@ -150,7 +149,7 @@ exe_inside_setup_noconsole = EXE(
     debug=False,
     strip=None,
     upx=False,
-    icon=home+'electrum/gui/icons/electrum.ico',
+    icon=home+'electrum_firo/gui/icons/electrum-firo.ico',
     console=False)
 
 exe_inside_setup_console = EXE(
@@ -173,6 +172,6 @@ coll = COLLECT(
     strip=None,
     upx=True,
     debug=False,
-    icon=home+'electrum_frio/gui/icons/electrum-firo.ico',
+    icon=home+'electrum_firo/gui/icons/electrum-firo.ico',
     console=False,
     name=os.path.join('dist', 'electrum-dash'))
