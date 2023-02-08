@@ -59,6 +59,12 @@ else
     "$CONTRIB"/make_libusb.sh || fail "Could not build libusb"
 fi
 
+if [ -f "$DLL_TARGET_DIR/libx11hash-0.dll" ]; then
+    info "libx11hash already built, skipping"
+else
+    "$CONTRIB"/make_x11_hash.sh || fail "Could not build x11hash"
+fi
+
 "$here/prepare-wine.sh" || fail "prepare-wine failed"
 
 info "Resetting modification time in C:\Python..."
