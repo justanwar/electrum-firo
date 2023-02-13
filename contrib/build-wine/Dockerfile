@@ -22,6 +22,7 @@ RUN apt-get update -q && \
         p7zip-full=16.02+dfsg-7build1 \
         make=4.2.1-1.2 \
         mingw-w64=7.0.0-2 \
+        unzip \
         mingw-w64-tools=7.0.0-2 \
         win-iconv-mingw-w64-dev=0.0.8-3 \
         autotools-dev=20180224.1 \
@@ -45,10 +46,10 @@ RUN wget -nc https://dl.winehq.org/wine-builds/Release.key && \
     apt-add-repository https://dl.winehq.org/wine-builds/ubuntu/ && \
     apt-get update -q && \
     apt-get install -qy \
-        wine-stable-amd64:amd64=7.0.0.0~focal-1 \
-        wine-stable-i386:i386=7.0.0.0~focal-1 \
-        wine-stable:amd64=7.0.0.0~focal-1 \
-        winehq-stable:amd64=7.0.0.0~focal-1 \
+        wine-stable-amd64:amd64=8.0.0.0~focal-1 \
+        wine-stable-i386:i386=8.0.0.0~focal-1 \
+        wine-stable:amd64=8.0.0.0~focal-1 \
+        winehq-stable:amd64=8.0.0.0~focal-1 \
         && \
     rm -rf /var/lib/apt/lists/* && \
     apt-get autoremove -y && \

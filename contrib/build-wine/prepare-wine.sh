@@ -9,7 +9,7 @@ PYINSTALLER_REPO="https://github.com/pyinstaller/pyinstaller.git"
 PYINSTALLER_COMMIT="0fe956a2c6157e1b276819de1a050c242de70a29"
 # ^ latest commit from "v4" branch, somewhat after "4.10" tag
 
-PYTHON_VERSION=3.9.11
+PYTHON_VERSION=3.8.6
 
 
 # Let's begin!
@@ -49,6 +49,24 @@ for msifile in core dev exe lib pip tools; do
 done
 
 break_legacy_easy_install
+
+# info "install c++ compiler"
+# {
+#     rm vsyasm-1.3.0-win64.zip
+#     wget http://www.tortall.net/projects/yasm/releases/vsyasm-1.3.0-win64.zip
+#     mkdir "$WINEPREFIX/drive_c/Program Files/yasm"
+#     wine unzip vsyasm-1.3.0-win64.zip -d "$WINEPREFIX/drive_c/Program Files/yasm"
+#     rm vsyasm-1.3.0-win64.zip
+#     export PATH="$WINEPREFIX/drive_c/Program Files/yasm:$PATH"
+
+#     git clone https://github.com/BrianGladman/mpir/
+#     cd mpir
+#     echo "1" | python ./msvc/mpir_config.py 15
+#     cd ./msvc/vs19
+
+#     ./msbuild.bat gc lib Win32 Release
+#     ./msbuild.bat gc lib x64 Release
+# }
 
 info "Installing build dependencies."
 $WINE_PYTHON -m pip install --no-build-isolation --no-dependencies --no-warn-script-location \

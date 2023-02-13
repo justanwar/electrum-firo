@@ -53,6 +53,7 @@ RUN apt-get update -q && \
         libc6-dev=2.27-3ubuntu1.5 \
         libc6=2.27-3ubuntu1.5 \
         libc-dev-bin=2.27-3ubuntu1.5 \
+        unzip=6.0-21ubuntu1.2 \
         && \
     rm -rf /var/lib/apt/lists/* && \
     apt-get autoremove -y && \
