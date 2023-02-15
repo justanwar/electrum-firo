@@ -50,23 +50,23 @@ done
 
 break_legacy_easy_install
 
-# info "install c++ compiler"
-# {
-#     rm vsyasm-1.3.0-win64.zip
-#     wget http://www.tortall.net/projects/yasm/releases/vsyasm-1.3.0-win64.zip
-#     mkdir "$WINEPREFIX/drive_c/Program Files/yasm"
-#     wine unzip vsyasm-1.3.0-win64.zip -d "$WINEPREFIX/drive_c/Program Files/yasm"
-#     rm vsyasm-1.3.0-win64.zip
-#     export PATH="$WINEPREFIX/drive_c/Program Files/yasm:$PATH"
+info "install c++ compiler"
+{
+    if [ "$WIN_ARCH" = "win32" ] ; then
+        VSVERSION="x86"
+    elif [ "$WIN_ARCH" = "win64" ] ; then
+        VSVERSION="x64"
+    else
+        fail "unexpected WIN_ARCH: $WIN_ARCH"
+    fi
 
-#     git clone https://github.com/BrianGladman/mpir/
-#     cd mpir
-#     echo "1" | python ./msvc/mpir_config.py 15
-#     cd ./msvc/vs19
-
-#     ./msbuild.bat gc lib Win32 Release
-#     ./msbuild.bat gc lib x64 Release
-# }
+    rm vc_redist.$VSVERSION.exe
+    mkdir $WINEPREFIX/drive_c/vscompiler
+    wget https://aka.ms/vs/17/release/vc_redist.$VSVERSION.exe
+    wine vc_redist.$VSVERSION.exe /install /quiet /norestart /installpath "$WINEPREFIX/drive_c/vscompiler"
+    rm vc_redist.$VSVERSION.exe
+    export PATH=$WINEPREFIX/drive_c/vscompiler:$PATH
+}
 
 info "Installing build dependencies."
 $WINE_PYTHON -m pip install --no-build-isolation --no-dependencies --no-warn-script-location \
