@@ -23,7 +23,7 @@ tar -xzvf ${LIBUSB_FILE}
 shasum -a256 -s -c ${LIBUSB_FILE}.sha256
 pushd libusb-${LIBUSB_VER}
 ./configure --disable-dependency-tracking --prefix=/opt/libusb
-sudo env MACOSX_DEPLOYMENT_TARGET=10.13 make install
+sudo env MACOSX_DEPLOYMENT_TARGET=10.15 make install
 popd
 sudo rm -rf libusb-${LIBUSB_VER}*
 cp /opt/libusb/lib/libusb-1.*.dylib .
@@ -45,7 +45,7 @@ echo 'Do not forget to run "brew install gettext libtool automake pkg-config"'
 #if [[ -n $GITHUB_REF ]]; then
     echo "Building ZBar dylib..."
     rm -f libzbar.0.dylib
-    export MACOSX_DEPLOYMENT_TARGET=10.13
+    export MACOSX_DEPLOYMENT_TARGET=10.15
     ./contrib/make_zbar.sh
     rm -rf contrib/zbar/
 #fi

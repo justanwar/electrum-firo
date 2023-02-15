@@ -32,7 +32,7 @@ brew install gettext libtool automake pkg-config
 if [[ -n $TRAVIS_TAG ]]; then
     echo "Building ZBar dylib..."
     rm -f libzbar.0.dylib
-    export MACOSX_DEPLOYMENT_TARGET=10.13
+    export MACOSX_DEPLOYMENT_TARGET=10.15
     ./contrib/make_zbar.sh
     rm -rf contrib/zbar/
 fi

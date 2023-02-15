@@ -174,7 +174,7 @@
  * The API of several CLI/RPC commands have changed, and several new
    commands have been introduced (mainly for LN).
  * Distributables:
-   - Apple. Min macOS version is 10.13.
+   - Apple. Min macOS version is 10.15.
  * Transactions:
    - we now grind low R for ECDSA signatures to match bitcoind (#5820)
  * Lots and lots of other minor bugfixes and improvements.
