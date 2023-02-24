@@ -1,36 +1,14 @@
 #!/bin/bash
 set -ev
 
-cd build
-if [[ -n $TRAVIS_TAG ]]; then
-    BUILD_REPO_URL=https://github.com/firoorg/electrum-firo.git
-    git clone --branch $TRAVIS_TAG $BUILD_REPO_URL electrum-firo
-else
-    git clone .. electrum-firo
-fi
+source contrib/build-wine/docker_env.sh
 
-
-mkdir -p electrum-firo/dist
-docker run --rm \
-    -v $(pwd):/opt \
-    -w /opt/electrum-firo \
-    -t zebralucky/electrum-dash-winebuild:Linux40x \
-    /opt/electrum-firo/contrib/build-linux/sdist/build.sh
-
-
-sudo find . -name '*.po' -delete
-sudo find . -name '*.pot' -delete
-
-
-docker run --rm \
-    -v $(pwd):/opt \
-    -w /opt/electrum-firo/contrib/build-linux/appimage \
-    -t zebralucky/electrum-dash-winebuild:AppImage40x ./build.sh
+mkdir -p dist
 
 BUILD_DIR=/root/build
 TOR_PROXY_VERSION=0.4.5.7
-TOR_PROXY_PATH=https://github.com/zebra-lucky/tor-proxy/releases/download
-TOR_DIST=electrum-firo/dist/tor-proxy-setup.exe
+TOR_PROXY_PATH=https://github.com/Bertrand256/tor-proxy/releases/download
+TOR_DIST=dist/tor-proxy-setup.exe
 
 TOR_FILE=${TOR_PROXY_VERSION}/tor-proxy-${TOR_PROXY_VERSION}-win32-setup.exe
 wget -O ${TOR_DIST} ${TOR_PROXY_PATH}/${TOR_FILE}
@@ -44,7 +22,7 @@ export WINEPREFIX=/root/.wine-32
 export PYHOME=$WINEPREFIX/drive_c/Python38
 
 
-ZBARW_PATH=https://github.com/zebra-lucky/zbarw/releases/download/20180620
+ZBARW_PATH=https://github.com/Bertrand256/zbarw/releases/download/20180620
 ZBARW_FILE=zbarw-zbarcam-0.10-win32.zip
 ZBARW_SHA=eed1af99d68a1f9eab975843071bf088735cb79bf3188d511d06a3f1b4e10243
 wget ${ZBARW_PATH}/${ZBARW_FILE}
@@ -59,10 +37,10 @@ docker run --rm \
     -e PYHOME=$PYHOME \
     -e BUILD_DIR=$BUILD_DIR \
     -v $(pwd):$BUILD_DIR \
-    -v $(pwd)/electrum-firo/:$WINEPREFIX/drive_c/electrum-firo \
-    -w $BUILD_DIR/electrum-firo \
-    -t zebralucky/electrum-dash-winebuild:Wine41x \
-    $BUILD_DIR/electrum-firo/contrib/build-wine/build.sh
+    -v $(pwd):$WINEPREFIX/drive_c/electrum-dash \
+    -w $BUILD_DIR \
+    -t $DOCKER_IMG_BUILD_WINE \
+    $BUILD_DIR/contrib/build-wine/build.sh
 
 
 export WINEARCH=win64
@@ -76,6 +54,7 @@ wget ${ZBARW_PATH}/${ZBARW_FILE}
 echo "$ZBARW_SHA  $ZBARW_FILE" > sha256.txt
 shasum -a256 -s -c sha256.txt
 unzip ${ZBARW_FILE} && rm ${ZBARW_FILE} sha256.txt
+
 rm ${TOR_DIST}
 TOR_FILE=${TOR_PROXY_VERSION}/tor-proxy-${TOR_PROXY_VERSION}-win64-setup.exe
 wget -O ${TOR_DIST} ${TOR_PROXY_PATH}/${TOR_FILE}
@@ -91,7 +70,7 @@ docker run --rm \
     -e PYHOME=$PYHOME \
     -e BUILD_DIR=$BUILD_DIR \
     -v $(pwd):$BUILD_DIR \
-    -v $(pwd)/electrum-firo/:$WINEPREFIX/drive_c/electrum-firo \
-    -w $BUILD_DIR/electrum-firo \
-    -t zebralucky/electrum-dash-winebuild:Wine41x \
-    $BUILD_DIR/electrum-firo/contrib/build-wine/build.sh
+    -v $(pwd):$WINEPREFIX/drive_c/electrum-dash \
+    -w $BUILD_DIR \
+    -t $DOCKER_IMG_BUILD_WINE \
+    $BUILD_DIR/contrib/build-wine/build.sh

@@ -3,6 +3,8 @@
 source ./contrib/dash/travis/electrum_dash_version_env.sh;
 echo wine build version is $DASH_ELECTRUM_VERSION
 
+./contrib/make_locale
+
 export ELECTRUM_COMMIT_HASH=$(git rev-parse HEAD)
 if [ "$WINEARCH" = "win32" ] ; then
     export GCC_TRIPLET_HOST="i686-w64-mingw32"
@@ -27,9 +29,6 @@ rm -rf dist/electrum-dash
 cp contrib/build-wine/deterministic.spec .
 cp contrib/dash/pyi_runtimehook.py .
 cp contrib/dash/pyi_tctl_runtimehook.py .
-
-wine python -m pip install --no-warn-script-location dist/pyinstaller/
-rm -rf dist/pyinstaller/
 
 wine python -m pip install --no-dependencies --no-warn-script-location \
     -r contrib/deterministic-build/requirements.txt
