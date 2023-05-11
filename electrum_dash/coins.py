@@ -16,9 +16,6 @@ class Firo(Coin):
 
     @classmethod
     def static_header_offset(cls, height):
-        if (cls.__name__== 'FiroRegtest'):
-            return cls.PRE_MTP_HEADER_SIZE * height
-        #
         if height > cls.AFTER_PROGPOW_BLOCK_HEIGHT:
             return cls.static_header_offset(cls.AFTER_PROGPOW_BLOCK_HEIGHT) + (height - cls.AFTER_PROGPOW_BLOCK_HEIGHT) * cls.PROGPOW_HEADER_SIZE
         if height > cls.PRE_MTP_BLOCKS:
@@ -35,9 +32,6 @@ class Firo(Coin):
 
     @classmethod
     def get_header_size_height(cls, height: int):
-        if (cls.__name__== 'FiroRegtest'):
-            return cls.PRE_MTP_HEADER_SIZE # always 80
-        #
         if height >= cls.AFTER_PROGPOW_BLOCK_HEIGHT:
             return cls.PROGPOW_HEADER_SIZE
         if height >= cls.PRE_MTP_BLOCKS:
@@ -57,9 +51,6 @@ class Firo(Coin):
 
     @classmethod
     def file_size_to_height(cls, fileSize: int):
-        if (cls.__name__== 'FiroRegtest'):
-            return fileSize // cls.PRE_MTP_HEADER_SIZE
-        #
         preMtpSize = cls.static_header_offset(cls.PRE_MTP_BLOCKS)
         if fileSize <= preMtpSize:
             return fileSize // cls.PRE_MTP_HEADER_SIZE
@@ -75,8 +66,8 @@ class FiroTestnet(Firo):
     PROGPOW_START_TIME = 1630069200
 
 class FiroRegtest(Firo):
-    PRE_MTP_BLOCKS = 2147483647             # INT_MAX 0xefffffff
-    AFTER_PROGPOW_BLOCK_HEIGHT = 2147483647 # INT_MAX 0xefffffff
-    PROGPOW_START_TIME = 2147483647         # INT_MAX 0xefffffff -- same as electrumX.coins.firo.regtest
+    PRE_MTP_BLOCKS = 2147483647             # INT_MAX 0x7fffffff
+    AFTER_PROGPOW_BLOCK_HEIGHT = 2147483647 # INT_MAX 0x7fffffff
+    PROGPOW_START_TIME = 2147483647         # INT_MAX 0x7fffffff -- same as electrumX.coins.firo.regtest
 
 
