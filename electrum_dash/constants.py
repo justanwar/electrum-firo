@@ -155,17 +155,55 @@ class BitcoinTestnet(AbstractNet):
     XPUB_HEADERS_INV = inv_dict(XPUB_HEADERS)
     # DRKV_HEADER = 0x3a8061a0  # DRKV
     # DRKP_HEADER = 0x3a805837  # DRKP
-    BIP44_COIN_TYPE = 1
+    BIP44_COIN_TYPE = 136
     COIN = coins.FiroTestnet()
     DIP3_ACTIVATION_HEIGHT = 5000
 
 
-class BitcoinRegtest(BitcoinTestnet):
+class BitcoinRegtest(AbstractNet):
 
     NET_NAME = "regtest"
-    GENESIS = "000008ca1832a4baf228eb1553c03d3a2c8e02399550dd6ea8d65cec3ef23d2e"
+    TESTNET = False
+    WIF_PREFIX = 239
+    ADDRTYPE_P2PKH = 65
+    ADDRTYPE_P2SH = 178
+    SEGWIT_HRP = "txzc" 
+    GENESIS = "a42b98f04cc2916e8adfb5d9db8a2227c4629bc205748ed2f33180b636ee885b"
+    DEFAULT_PORTS = {'t': '50001', 's': '50002'}
     DEFAULT_SERVERS = read_json('servers_regtest.json', {})
     CHECKPOINTS = []
+
+    XPRV_HEADERS = {
+        'standard':    0x04358394,  # tprv
+        # 'p2wpkh-p2sh': 0x044a4e28,  # uprv
+        # 'p2wsh-p2sh':  0x024285b5,  # Uprv
+        # 'p2wpkh':      0x045f18bc,  # vprv
+        # 'p2wsh':       0x02575048,  # Vprv
+    }
+    XPRV_HEADERS_INV = inv_dict(XPRV_HEADERS)
+    XPUB_HEADERS = {
+        'standard':    0x043587cf,  # tpub
+        # 'p2wpkh-p2sh': 0x044a5262,  # upub
+        # 'p2wsh-p2sh':  0x024289ef,  # Upub
+        # 'p2wpkh':      0x045f1cf6,  # vpub
+        # 'p2wsh':       0x02575483,  # Vpub
+    }
+    XPUB_HEADERS_INV = inv_dict(XPUB_HEADERS)
+    # DRKV_HEADER = 0x3a8061a0  # DRKV
+    # DRKP_HEADER = 0x3a805837  # DRKP
+    BIP44_COIN_TYPE = 136
+    COIN = coins.FiroRegtest()
+    DIP3_ACTIVATION_HEIGHT = 5000
+
+
+# class BitcoinRegtest(BitcoinTestnet):
+
+#     NET_NAME = "regtest"
+#     GENESIS = "000008ca1832a4baf228eb1553c03d3a2c8e02399550dd6ea8d65cec3ef23d2e" # Dash regtest genesis
+#     DEFAULT_SERVERS = read_json('servers_regtest.json', {})
+#     COIN = coins.FiroTestnet()
+#     DIP3_ACTIVATION_HEIGHT = 5000
+#     CHECKPOINTS = []
 
 
 NETS_LIST = tuple(all_subclasses(AbstractNet))

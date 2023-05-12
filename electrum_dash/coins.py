@@ -64,3 +64,10 @@ class FiroTestnet(Firo):
     PRE_MTP_BLOCKS = 1
     AFTER_PROGPOW_BLOCK_HEIGHT = 37305
     PROGPOW_START_TIME = 1630069200
+
+class FiroRegtest(Firo):
+    PRE_MTP_BLOCKS = 2147483647             # INT_MAX 0x7fffffff
+    AFTER_PROGPOW_BLOCK_HEIGHT = 2147483647 # INT_MAX 0x7fffffff
+    PROGPOW_START_TIME = 2147483647         # INT_MAX 0x7fffffff -- same as electrumX.coins.firo.regtest
+
+
