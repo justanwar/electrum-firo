@@ -75,6 +75,7 @@ jobs:
           path: |
             dist/Firo-Electrum-${{ steps.set_vars.outputs.pkg_ver }}-setup-win64.exe
             dist/Firo-Electrum-${{ steps.set_vars.outputs.pkg_ver }}-setup-win32.exe
+            dist/Firo-Electrum-${{ steps.set_vars.outputs.pkg_ver }}-portable.exe
 
   build_osx:
     runs-on: macos-12
