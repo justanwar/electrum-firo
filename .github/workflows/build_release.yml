@@ -15,37 +15,6 @@ on:
 
 jobs:
 
-  build_linux:
-    runs-on: ubuntu-22.04
-    if: ${{ inputs.target_os == 'all' || inputs.target_os == 'linux' }}
-    name: create release for Linux
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: Set outputs for pkg_ver
-        id: set_vars
-        run: |
-          source ./contrib/dash/travis/electrum_dash_version_env.sh
-          echo "pkg_ver=$(echo $DASH_ELECTRUM_VERSION)" >> $GITHUB_OUTPUT
-      - name: Prepare build
-        env:
-          DASH_ELECTRUM_VERSION: ${{ steps.set_vars.outputs.pkg_ver }}
-        run: |
-          ./contrib/dash/actions/install-linux.sh
-      - name: Build Linux
-        env:
-          DASH_ELECTRUM_VERSION: ${{ steps.set_vars.outputs.pkg_ver }}
-        run: |
-          ./contrib/dash/actions/script-linux.sh
-      - name: Upload Artifact
-        if: success()
-        uses: actions/upload-artifact@v3
-        with:
-          path: |
-            dist/Firo-Electrum-${{ steps.set_vars.outputs.pkg_ver }}-x86_64.AppImage
-            dist/Firo-Electrum-${{ steps.set_vars.outputs.pkg_ver }}.tar.gz
-            dist/Firo-Electrum-${{ steps.set_vars.outputs.pkg_ver }}.zip
-
   build_windows:
     runs-on: ubuntu-22.04
     if: ${{ inputs.target_os == 'all' || inputs.target_os == 'windows' }}
@@ -76,34 +45,3 @@ jobs:
             dist/Firo-Electrum-${{ steps.set_vars.outputs.pkg_ver }}-setup-win64.exe
             dist/Firo-Electrum-${{ steps.set_vars.outputs.pkg_ver }}-setup-win32.exe
             dist/Firo-Electrum-${{ steps.set_vars.outputs.pkg_ver }}-portable.exe
-
-  build_osx:
-    runs-on: macos-12
-    if: ${{ inputs.target_os == 'all' || inputs.target_os == 'osx' }}
-    name: create release for macOS
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: Set outputs for pkg_ver
-        id: set_vars
-        run: |
-          source ./contrib/dash/travis/electrum_dash_version_env.sh
-          echo "pkg_ver=$(echo $DASH_ELECTRUM_VERSION)" >> $GITHUB_OUTPUT
-      - name: Prepare build
-        env:
-          DASH_ELECTRUM_VERSION: ${{ steps.set_vars.outputs.pkg_ver }}
-        run: |
-          ./contrib/dash/actions/install-osx.sh
-      - name: Build dmg
-        env:
-          DASH_ELECTRUM_VERSION: ${{ steps.set_vars.outputs.pkg_ver }}
-        run: |
-          # For troubleshooting
-          echo $DASH_ELECTRUM_VERSION
-          ./contrib/dash/actions/script-osx.sh
-      - name: Upload Artifact
-        if: success()
-        uses: actions/upload-artifact@v3
-        with:
-          path: |
-            dist/Firo-Electrum-${{ steps.set_vars.outputs.pkg_ver }}-macosx.dmg
