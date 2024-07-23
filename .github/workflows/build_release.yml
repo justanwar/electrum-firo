@@ -37,6 +37,9 @@ jobs:
           DASH_ELECTRUM_VERSION: ${{ steps.set_vars.outputs.pkg_ver }}
         run: |
           ./contrib/dash/actions/script-wine.sh
+      - name: Sanity check, see what's in dist dir
+        run: |
+          ls dist
       - name: Upload Artifact
         if: success()
         uses: actions/upload-artifact@v3
