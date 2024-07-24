@@ -37,8 +37,9 @@ jobs:
           DASH_ELECTRUM_VERSION: ${{ steps.set_vars.outputs.pkg_ver }}
         run: |
           ./contrib/dash/actions/script-wine.sh
-      - name: Sanity check, see what's in dist dir
+      - name: Rename portable bin
         run: |
+          mv dist/portable-electrum-firo-${{ steps.set_vars.outputs.pkg_ver }}.exe dist/Firo-Electrum-${{ steps.set_vars.outputs.pkg_ver }}-portable.exe
           ls dist
       - name: Upload Artifact
         if: success()
@@ -46,5 +47,5 @@ jobs:
         with:
           path: |
             dist/Firo-Electrum-${{ steps.set_vars.outputs.pkg_ver }}-setup-win64.exe
-            dist/Firo-Electrum-${{ steps.set_vars.outputs.pkg_ver }}-setup-win32.exe
+            dist/Firo-Electrum-${{ steps.set_vars.outputs.pkg_ver }}-setup-win32.exe            
             dist/Firo-Electrum-${{ steps.set_vars.outputs.pkg_ver }}-portable.exe
