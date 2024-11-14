@@ -18,15 +18,15 @@ fi
 
 
 $PIP_CMD install --no-dependencies --no-warn-script-location -U \
-    -r contrib/deterministic-build/requirements.txt
+    -r contrib/deterministic-build/requirements.txt --break-system-packages
 $PIP_CMD install --no-dependencies --no-warn-script-location -U \
-    -r contrib/deterministic-build/requirements-hw.txt
+    -r contrib/deterministic-build/requirements-hw.txt --break-system-packages
 $PIP_CMD install --no-dependencies --no-warn-script-location -U \
-    -r contrib/deterministic-build/requirements-binaries-mac.txt
+    -r contrib/deterministic-build/requirements-binaries-mac.txt --break-system-packages
 $PIP_CMD install --no-dependencies --no-warn-script-location -U x11_hash>=1.4
 
 $PIP_CMD install --no-dependencies --no-warn-script-location -U \
-    -r contrib/deterministic-build/requirements-build-mac.txt
+    -r contrib/deterministic-build/requirements-build-mac.txt --break-system-packages
 
 export PATH="/usr/local/opt/gettext/bin:$PATH"
 ./contrib/make_locale
